@@ -188,23 +188,23 @@ class Navigation(MergeRule):
     # keyboard shortcuts
         'save':
             R(Key("c-s"), rspec="save"),
-        'shock [<nnavi50>]':
+        'slap [<nnavi50>]':
             R(Key("enter"), rspec="shock")* Repeat(extra="nnavi50"),
         "(<mtn_dir> | <mtn_mode> [<mtn_dir>]) [(<nnavi500> | <extreme>)]":
             R(Function(text_utils.master_text_nav)),
         "shift click":
             R(Key("shift:down") + Mouse("left") + Key("shift:up")),
-        "stoosh [<nnavi500>]":
+        "copy [<nnavi500>]":
             R(Function(navigation.stoosh_keep_clipboard, nexus=_NEXUS), rspec="stoosh"),
         "cut [<nnavi500>]":
             R(Function(navigation.cut_keep_clipboard, nexus=_NEXUS), rspec="cut"),
         "spark [<nnavi500>] [(<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]]":
             R(Function(navigation.drop_keep_clipboard, nexus=_NEXUS), rspec="spark"),
-        "splat [<splatdir>] [<nnavi10>]":
+        "whack [<splatdir>] [<nnavi10>]":
             R(Key("c-%(splatdir)s"), rspec="splat") * Repeat(extra="nnavi10"),
-        "deli [<nnavi50>]":
+        "chuck [<nnavi50>]":
             R(Key("del/5"), rspec="deli") * Repeat(extra="nnavi50"),
-        "clear [<nnavi50>]":
+        "scratch [<nnavi50>]":
             R(Key("backspace/5:%(nnavi50)d"), rspec="clear"),
         SymbolSpecs.CANCEL:
             R(Key("escape"), rspec="cancel"),
@@ -265,9 +265,9 @@ class Navigation(MergeRule):
         Choice("enclosure", double_text_punc_dict),
         Choice("capitalization", {
             "yell": 1,
-            "tie": 2,
-            "Gerrish": 3,
-            "sing": 4,
+            "pascal": 2,
+            "camel": 3,
+            "speak": 4,
             "laws": 5
         }),
         Choice(
@@ -300,7 +300,7 @@ class Navigation(MergeRule):
             "fly": "c",
         }),
         Choice("extreme", {
-            "Wally": "way",
+            "end": "way",
         }),
         Choice("big", {
             "big": True,
