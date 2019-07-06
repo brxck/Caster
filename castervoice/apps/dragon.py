@@ -82,8 +82,9 @@ class DragonRule(MergeRule):
                 Mimic("choose", "one")),
         "make that <text>":
             R(Mimic("scratch", "that") + Mimic(extra="text")),
-        "scratch [<n10>]":
-            R(Playback([(["scratch", "that"], 0.03)])),
+        # Scratch used for backspace
+        # "scratch [<n10>]":
+        #     R(Playback([(["scratch", "that"], 0.03)])),
         "train word":
             R(Mimic("train", "that") + Key("a-r/200, s")),
         "word train":
