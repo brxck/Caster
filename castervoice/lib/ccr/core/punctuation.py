@@ -7,56 +7,60 @@ from castervoice.lib.dfplus.merge.ccrmerger import CCRMerger
 from castervoice.lib.dfplus.merge.mergerule import MergeRule
 from castervoice.lib.dfplus.state.short import R
 
-double_text_punc_dict = {
-    "quotes":                            "\"\"",
-    "smotes":                              "''",
-    "tickris":                             "``",
-    "parens":                              "()",
-    "brax":                                "[]",
-    "curl":                                "{}",
-    "angle":                               "<>",
-}
+# double_text_punc_dict = {
+#     "quotes":                            "\"\"",
+#     "smotes":                              "''",
+#     "tickris":                             "``",
+#     "parens":                              "()",
+#     "brax":                                "[]",
+#     "curl":                                "{}",
+#     "angle":                               "<>",
+# }
 
-inv_dtpb = {v: k for k, v in double_text_punc_dict.iteritems()}
+# inv_dtpb = {v: k for k, v in double_text_punc_dict.iteritems()}
 
 text_punc_dict = {
     "ace":                                                " ",
     "bang":                                               "!",
-    "chocky":                                             "\"",
+    "quote":                                             "\"",
+    "ampersand":                                          "&",
     "pound":                                              "#",
     "Dolly":                                              "$",
-    "modulo":                                             "%",
-    "ampersand":                                          "&",
-    "apostrophe | single quote | chicky":                 "'",
-    "left " + inv_dtpb["()"]:                             "(",
-    "right " + inv_dtpb["()"]:                            ")",
+    "percy":                                              "%",
+    "smote":                                              "'",
     "splat":                                              "*",
     "cross":                                              "+",
+    "equit":                                             "=",
     "drip":                                               ",",
     "dash":                                               "-",
     "period | dot":                                       ".",
     "slash":                                              "/",
     "cat":                                                ":",
     "semi":                                               ";",
-    "[is] less than | left " + inv_dtpb["<>"]:            "<",
-    "[is] less [than] [or] equal [to]":                  "<=",
-    "equals":                                             "=",
-    "[is] equal to":                                     "==",
-    "strict":                                           "===",
-    "[is] greater than | right " + inv_dtpb["<>"]:        ">",
-    "[is] greater [than] [or] equal [to]":               ">=",
     "quest":                                             "?",
     "(atty | at symbol)":                                 "@",
-    "left " + inv_dtpb["[]"]:                             "[",
     "backslash":                                         "\\",
-    "right " + inv_dtpb["[]"]:                            "]",
     "carrot":                                             "^",
     "flat":                                               "_",
-    "ticky | ((left | right) " +  inv_dtpb["``"] + " )":  "`",
-    "left " + inv_dtpb["{}"]:                             "{",
+    "ticky":                                              "`",
     "pipe (sim | symbol)":                                "|",
-    "right " + inv_dtpb["{}"]:                            "}",
     "tilde":                                              "~",
+
+    "[left] paren":                                       "(",
+    "right paren":                                        ")",
+    "[left] angle":                                       "<",
+    "right angle":                                        ">",
+    "[left] brax":                                        "[",
+    "right brax":                                         "]",
+    "[left] curl":                                        "{",
+    "right curl":                                         "}",
+
+    "[is] less than": " < ",
+    "[is] less [than] [or] equal [to]":                " <= ",
+    "strict":                                         " === ",
+    "[is] equal to":                                   " == ",
+    "[is] greater than":                                " > ",
+    "[is] greater [than] [or] equal [to]":             " >= ",
 }
 
 class Punctuation(MergeRule):
@@ -68,8 +72,8 @@ class Punctuation(MergeRule):
         # For some reason, this one doesn't work through the other function
         "[<long>] backslash [<npunc>]":
             R(Text("%(long)s" + "\\" + "%(long)s")),
-        "<double_text_punc> [<npunc>]":
-            R(Text("%(double_text_punc)s") + Key("left"))*Repeat(extra="npunc"),
+        # "<double_text_punc> [<npunc>]":
+        #     R(Text("%(double_text_punc)s") + Key("left"))*Repeat(extra="npunc"),
         "tabby [<npunc>]":
             R(Key("tab")),
         "(back | shin) tabby [<npunc>]":
@@ -90,9 +94,7 @@ class Punctuation(MergeRule):
                 "long": " ",
             }),
         Choice(
-            "text_punc", text_punc_dict),
-        Choice(
-            "double_text_punc", double_text_punc_dict)
+            "text_punc", text_punc_dict)
     ]
     defaults = {
         "npunc": 1,
