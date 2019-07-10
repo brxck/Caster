@@ -105,25 +105,25 @@ class NavigationNon(MergeRule):
             R(Function(alphanumeric.elite_text)),
 
         # Workspace management
-        "show work [spaces]":
-            R(Key("w-tab")),
-        "(create | new) work [space]":
-            R(Key("wc-d")),
-        "close work [space]":
-            R(Key("wc-f4")),
-        "close all work [spaces]":
-            R(Function(utilities.close_all_workspaces)),
+        # "show work [spaces]":
+        #     R(Key("w-tab")),
+        # "(create | new) work [space]":
+        #     R(Key("wc-d")),
+        # "close work [space]":
+        #     R(Key("wc-f4")),
+        # "close all work [spaces]":
+        #     R(Function(utilities.close_all_workspaces)),
         "next work [space] [<n>]":
-            R(Key("wc-right"))*Repeat(extra="n"),
+            R(Key("w-pagedown"))*Repeat(extra="n"),
         "(previous | prior) work [space] [<n>]":
-            R(Key("wc-left"))*Repeat(extra="n"),
+            R(Key("w-pageup"))*Repeat(extra="n"),
 
-        "go work [space] <n>":
-            R(Function(lambda n: utilities.go_to_desktop_number(n))),
-        "send work [space] <n>":
-            R(Function(lambda n: utilities.move_current_window_to_desktop(n))),
-        "move work [space] <n>":
-            R(Function(lambda n: utilities.move_current_window_to_desktop(n, True))),
+        "go work <n>":
+            R(Key("w-%(n)d")),
+        "send work <n>":
+            R(Key("sw-%(n)d")),
+        "move work <n>":
+            R(Key("sw-%(n)d + w-%(n)d")),
     }
 
     extras = [
