@@ -10,13 +10,13 @@ class TextFormat():
 
     Commands for capitalization:
     1 yell - ALLCAPS
-    2 tie - TitleCase
-    3 Gerrish - camelCase
-    4 sing - Sentencecase
-    5 laws (default) - alllower
+    2 title - TitleCase
+    3 camel - camelCase
+    4 speak - Sentencecase
+    5 say (default) - alllower
     Commands for word spacing:
-    0 (default except Gerrish) - words with spaces
-    1 gum (default for Gerrish)  - wordstogether
+    0 (default except camel) - words with spaces
+    1 gum (default for camel)  - wordstogether
     2 spine - words-with-hyphens
     3 snake - words_with_underscores
     4 pebble - words.with.fullstops
@@ -53,7 +53,7 @@ class TextFormat():
 
     @classmethod
     def get_text_format_description(cls, capitalization, spacing):
-        caps = {0: "<none>", 1: "yell", 2: "tie", 3: "gerrish", 4: "sing", 5: "laws"}
+        caps = {0: "<none>", 1: "yell", 2: "title", 3: "camel", 4: "speak", 5: "say"}
         spaces = {
             0: "<none>",
             1: "gum",
