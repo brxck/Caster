@@ -168,27 +168,27 @@ class Navigation(MergeRule):
     mapping = {
     # "periodic" repeats whatever comes next at 1-second intervals until "terminate"
     # or "escape" (or your SymbolSpecs.CANCEL) is spoken or 100 tries occur
-        "periodic":
-            ContextSeeker(forward=[L(S(["cancel"], lambda: None),
-            S(["*"], lambda fnparams: UntilCancelled(Mimic(*filter(lambda s: s != "periodic", fnparams)), 1).execute(),
-            use_spoken=True))]),
+        # "periodic":
+        #     ContextSeeker(forward=[L(S(["cancel"], lambda: None),
+        #     S(["*"], lambda fnparams: UntilCancelled(Mimic(*filter(lambda s: s != "periodic", fnparams)), 1).execute(),
+        #     use_spoken=True))]),
     # VoiceCoder-inspired -- these should be done at the IDE level
-        "fill <target>":
-            R(Key("escape, escape, end"), show=False) +
-            AsynchronousAction([L(S(["cancel"], Function(context.fill_within_line, nexus=_NEXUS)))],
-            time_in_seconds=0.2, repetitions=50 ),
-        "jump in":
-            AsynchronousAction([L(S(["cancel"], context.nav, ["right", "(~[~{~<"]))],
-            time_in_seconds=0.1, repetitions=50),
-        "jump out":
-            AsynchronousAction([L(S(["cancel"], context.nav, ["right", ")~]~}~>"]))],
-            time_in_seconds=0.1, repetitions=50),
-        "jump back":
-            AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
-            time_in_seconds=0.1, repetitions=50),
-        "jump back in":
-            AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
-            finisher=Key("right"), time_in_seconds=0.1, repetitions=50 ),
+        # "fill <target>":
+        #     R(Key("escape, escape, end"), show=False) +
+        #     AsynchronousAction([L(S(["cancel"], Function(context.fill_within_line, nexus=_NEXUS)))],
+        #     time_in_seconds=0.2, repetitions=50 ),
+        # "jump in":
+        #     AsynchronousAction([L(S(["cancel"], context.nav, ["right", "(~[~{~<"]))],
+        #     time_in_seconds=0.1, repetitions=50),
+        # "jump out":
+        #     AsynchronousAction([L(S(["cancel"], context.nav, ["right", ")~]~}~>"]))],
+        #     time_in_seconds=0.1, repetitions=50),
+        # "jump back":
+        #     AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
+        #     time_in_seconds=0.1, repetitions=50),
+        # "jump back in":
+        #     AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
+        #     finisher=Key("right"), time_in_seconds=0.1, repetitions=50 ),
 
     # keyboard shortcuts
         'save':
