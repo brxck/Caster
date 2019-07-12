@@ -200,7 +200,7 @@ class Navigation(MergeRule):
         "shift click":
             R(Key("shift:down") + Mouse("left") + Key("shift:up")),
         "copy [<nnavi500>]":
-            R(Function(navigation.stoosh_keep_clipboard, nexus=_NEXUS), rspec="stoosh"),
+            R(Function(navigation.stoosh_keep_clipboard, nexus=_NEXUS), rspec="copy"),
         "cut [<nnavi500>]":
             R(Function(navigation.cut_keep_clipboard, nexus=_NEXUS), rspec="cut"),
         "spark [<nnavi500>] [(<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]]":
