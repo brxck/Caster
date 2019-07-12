@@ -344,7 +344,7 @@ class Navigation(MergeRule):
         
         Choice("capitalization", {
             "yell": 1,
-            "pascal": 2,
+            "tie": 2,
             "camel": 3,
             "speak": 4,
             "laws": 5
