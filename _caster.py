@@ -101,10 +101,10 @@ class MainRule(MergeRule):
 
     mapping = {
         # update management
-        "update caster":
-            R(DependencyUpdate([pip_path, "install", "--upgrade", "castervoice"])),
-        "update dragonfly":
-            R(DependencyUpdate([pip_path, "install", "--upgrade", "dragonfly2"])),
+        # "update caster":
+        #     R(DependencyUpdate([pip_path, "install", "--upgrade", "castervoice"])),
+        # "update dragonfly":
+        #     R(DependencyUpdate([pip_path, "install", "--upgrade", "dragonfly2"])),
 
         # hardware management
         "volume <volume_mode> [<n>]":
