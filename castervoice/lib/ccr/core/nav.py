@@ -6,19 +6,19 @@ Created on Sep 1, 2015
 from castervoice.lib.imports import *
 from dragonfly.actions.action_mimic import Mimic
 from castervoice.lib.ccr.standard import SymbolSpecs
-from castervoice.lib.ccr.core.punctuation import text_punc_dict, double_text_punc_dict
+from castervoice.lib.ccr.core.punctuation import text_punc_dict
 from castervoice.lib.alphanumeric import caster_alphabet
 
 
 _NEXUS = control.nexus()
 
-for key, value in double_text_punc_dict.items():
-    if len(value) == 2:
-        double_text_punc_dict[key] = value[0] + "~" + value[1]
-    elif len(value) == 4:
-        double_text_punc_dict[key] = value[0:1] + "~" + value[2:3]
-    else:
-        raise Exception("Need to deal with nonstandard pair length in double_text_punc_dict.")
+# for key, value in double_text_punc_dict.items():
+#     if len(value) == 2:
+#         double_text_punc_dict[key] = value[0] + "~" + value[1]
+#     elif len(value) == 4:
+#         double_text_punc_dict[key] = value[0:1] + "~" + value[2:3]
+#     else:
+#         raise Exception("Need to deal with nonstandard pair length in double_text_punc_dict.")
 
 class NavigationNon(MergeRule): 
     mapping = {
@@ -242,8 +242,8 @@ class Navigation(MergeRule):
         "<word_limit> [<big>] format <textnv>":
             R(Function(textformat.partial_format_text)),
 
-        "hug <enclosure>":
-            R(Function(text_utils.enclose_selected)),
+        # "hug <enclosure>":
+        #     R(Function(text_utils.enclose_selected)),
         "dredge [<nnavi10>]":
             R(Key("alt:down, tab/20:%(nnavi10)d, alt:up"),
                rdescript="Core: switch to most recent Windows"),
@@ -329,7 +329,7 @@ class Navigation(MergeRule):
         IntegerRefST("nnavi50", 1, 50),
         IntegerRefST("nnavi500", 1, 500),
         Dictation("textnv"),
-        Choice("enclosure", double_text_punc_dict),
+        # Choice("enclosure", double_text_punc_dict),
         Choice("direction", {
             "dunce": "down",
             "sauce": "up",
