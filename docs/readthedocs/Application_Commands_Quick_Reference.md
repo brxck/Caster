@@ -37,7 +37,7 @@
 |:-----------------------------------|:-----------------------------|:-----------------------------------------|
 | `[go to] page <n>`                 | `set zoom <n>`               | `open file`                              |
 | `duplicate tab`                    | `enable scrolling`           | `(disable scrolling / single page mode)` |
-| `next tab [<n>]`                   | `prior tab [<n>]`            | `home button`                            |
+| `nexta [<n>]`                   | `prexta [<n>]`            | `home button`                            |
 | `add note [<dict>]`                | `fast [add] note [<dict>]`   | `open blank note`                        |
 | `add blank note`                   | `delete note`                | `go back [<n>]`                          |
 | `save as`                          | `fast save`                  | `down it [<n>]`                          |
@@ -134,7 +134,7 @@
 |:---------------------------------------|:-------------------------------------|:-----------------------------|
 | `new window`                           | `(new incognito window / incognito)` | `new tab [<n>]`              |
 | `reopen tab [<n>]`                     | `close tab [<n>]`                    | `close all tabs`             |
-| `next tab [<n>]`                       | `previous tab [<n>]`                 | `new tab that`               |
+| `nexta [<n>]`                       | `prexta [<n>]`                 | `new tab that`               |
 | `<nth> tab`                            | `last tab`                           | `second last tab`            |
 | `go back [<n>]`                        | `go forward [<n>]`                   | `zoom in [<n>]`              |
 | `zoom out [<n>]`                       | `zoom reset`                         | `super refresh`              |
@@ -187,10 +187,10 @@
 | `build it`                             | `format code`                      | `split view horizontal` |
 | `comment line`                         | `jump to source`                   | `split view vertical`   |
 | `do imports`                           | `mark occurrences`                 | `step into`             |
-| `editor select`                        | `next tab [<n>]`                   | `step out [of]`         |
+| `editor select`                        | `nexta [<n>]`                   | `step out [of]`         |
 | `find <a> [<b> [<c>]] [<back>] [<go>]` | `open resource`                    | `step over [<n>]`       |
 | `find <punctuation> [<back>] [<go>]`   | `open type`                        | `symbol next [<n>]`     |
-| `find everywhere`                      | `prior tab [<n>]`                  | `symbol prior [<n>]`    |
+| `find everywhere`                      | `prexta [<n>]`                  | `symbol prior [<n>]`    |
 | `find regex <text> [<back>] [<go>]`    | `refractor symbol`                 | `terminate`             |
 
 # Emacs
@@ -244,7 +244,7 @@
 |:---------------------------------------|:-------------------------------------|:-----------------------------|
 | `new window`                           | `(new incognito window / incognito)` | `new tab [<n>]`              |
 | `reopen tab [<n>]`                     | `close tab [<n>]`                    | `close all tabs`             |
-| `next tab [<n>]`                       | `previous tab [<n>]`                 | `new tab that`               |
+| `nexta [<n>]`                       | `prexta [<n>]`                 | `new tab that`               |
 | `<nth> tab`                            | `last tab`                           | `second last tab`            |
 | `go back [<n>]`                        | `go forward [<n>]`                   | `zoom in [<n>]`              |
 | `zoom out [<n>]`                       | `zoom reset`                         | `super refresh`              |
@@ -273,9 +273,9 @@
 |:---------------------|:-------------------|:------------------------|
 | `(debug / run) last` | `jump away`        | `split view horizontal` |
 | `auto complete`      | `jump to source`   | `step into`             |
-| `build it`           | `next tab [<n>]`   | `step out [of]`         |
+| `build it`           | `nexta [<n>]`   | `step out [of]`         |
 | `clean it`           | `open resource`    | `step over [<n>]`       |
-| `comment line`       | `prior tab [<n>]`  | `symbol next [<n>]`     |
+| `comment line`       | `prexta [<n>]`  | `symbol next [<n>]`     |
 | `find everywhere`    | `refractor symbol` | `symbol prior [<n>]`    |
 | `format code`        | `resume`           | `terminate`             |
 
@@ -296,7 +296,7 @@
 # Foxit Reader
 | Command           | Command          | Command           |
 |:------------------|:-----------------|:------------------|
-| `close tab [<n>]` | `next tab [<n>]` | `prior tab [<n>]` |
+| `close tab [<n>]` | `nexta [<n>]` | `prexta [<n>]` |
 
 # Git Bash
 
@@ -347,8 +347,8 @@
 | `auto file`                            | `format class`                       | `[find] usage`               |
 | `build`                                | `go to line`                         | `select ex`                  |
 | `build and run`                        | `jump to source`                     | `select ex down`             |
-| `comment [line]`                       | `next tab`                           | `show doc`                   |
-| `delete line`                          | `prior tab`                          | `show param`                 |
+| `comment [line]`                       | `nexta`                           | `show doc`                   |
+| `delete line`                          | `prexta`                          | `show param`                 |
 | `duplicate`                            | `quickfix`                           | `uncomment line`             |
 | `expand [selection] [<n>]`             | `smart auto complete`                | `quickfix`                   |
 | `split right`                          | `pane left`                          | `pane right`                 |
@@ -431,10 +431,10 @@
 | Command                             | Command      | Command          |
 |:------------------------------------|:-------------|:-----------------|
 | `[go to] line <n>`                  | `focus main` | `previous plot`  |
-| `close tab`                         | `last tab`   | `previous tab`   |
+| `close tab`                         | `last tab`   | `prexta`   |
 | `comment (line / selected)`         | `new file`   | `run document`   |
 | `find`                              | `next plot`  | `run line`       |
-| `first tab`                         | `next tab`   | `save all`       |
+| `first tab`                         | `nexta`   | `save all`       |
 | `focus console`                     | `open file`  | `select all`     |
 | `help that`                         | `head that`  | `vee table that` |
 | `<action>* [line] <ln1> [by <ln2>]` | ` `          | ` `              |
@@ -451,11 +451,11 @@
 
 | Command                   | Command          | Command           |
 |:--------------------------|:-----------------|:------------------|
-| `(set / toggle) bookmark` | `comment block`  | `prior tab [<n>]` |
+| `(set / toggle) bookmark` | `comment block`  | `prexta [<n>]` |
 | `(un / on) comment block` | `comment line`   | `resume`          |
 | `(un / on) comment line`  | `go to line`     | `step into`       |
 | `[toggle] breakpoint`     | `next bookmark`  | `step out [of]`   |
-| `[toggle] full screen`    | `next tab [<n>]` | `step over [<n>]` |
+| `[toggle] full screen`    | `nexta [<n>]` | `step over [<n>]` |
 | `close tab [<n>]`         | `prior bookmark` |                   |
 
 # Sublime
@@ -478,8 +478,8 @@
 | `zoom in [<n2>]`               | `zoom out [<n2>]`                 | `(set / add) bookmark`        |
 | `next bookmark`                | `previous bookmark`               | `clear bookmarks`             |
 | `build it`                     | `record macro`                    | `play [back] macro [<n3>]`    |
-| `(new / create) snippet`       | `close tab`                       | `next tab`                    |
-| `previous tab`                 | `<nth> tab`                       | `column <cols>`               |
+| `(new / create) snippet`       | `close tab`                       | `nexta`                    |
+| `prexta`                 | `<nth> tab`                       | `column <cols>`               |
 | `focus <panel>`                | `move <panel>`                    | `open terminal`               |
     
 \* select / copy / cut / paste / delete
@@ -516,9 +516,9 @@
 | `(un / on) comment line`           | `get latest [version]`       | `step into`                         |
 | `[add] [new] linked work item`     | `go to line`                 | `step out [of]`                     |
 | `[focus] document (window / pane)` | `next bookmark`              | `step over [<n>]`                   |
-| `[open] [go to] work item`         | `next tab [<n>]`             | `team explorer`                     |
+| `[open] [go to] work item`         | `nexta [<n>]`             | `team explorer`                     |
 | `[toggle] breakpoint`              | `prior bookmark`             | `toggle [section] outlining`        |
-| `[toggle] full screen`             | `prior tab [<n>]`            | `toggle all outlining`              |
+| `[toggle] full screen`             | `prexta [<n>]`            | `toggle all outlining`              |
 | `build solution`                   | `quick launch`               | `undo (checkout / pending changes)` |
 | `close tab [<n>]`                  | `resume`                     |                                     |
 
@@ -550,7 +550,7 @@
 | `(Open [file] / Go to [tab]) [<text>]` | `Save and close`                      | `new file`                               |
 | `new window`                           | `close window`                        | `close workspace`                        |
 | `close editor`                         | `save as`                             | `save all`                               |
-| `next tab [<n>]`                       | `previous tab [<n>]`                  | `close tab [<n>]`                        |
+| `nexta [<n>]`                       | `prexta [<n>]`                  | `close tab [<n>]`                        |
 | `(recent / R) tab [<n>]`               | `reopen tab [<n>]`                    | `Exit preview`                           |
 | `keep preview open`                    | `copy path`                           | `windows explorer here`                  |
 | `show active file in new window`       | `(search / find)`                     | `replace`                                |

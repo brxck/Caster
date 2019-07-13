@@ -29,11 +29,11 @@ class RStudioRule(MergeRule):
     "focus main":
         R(Key("c-1")),
 
-    "next tab":
+    "nexta":
         R(Key("c-f12")),
     "first tab":
         R(Key("cs-f11")),
-    "previous tab":
+    "prexta":
         R(Key("c-f11")),
     "last tab":
         R(Key("cs-f12")),

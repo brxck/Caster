@@ -95,9 +95,9 @@ class NavigationNon(MergeRule):
             R(Key("ca-tab, enter")),
         "switch (window | windows)":
             R(Key("ca-tab"))*Repeat(extra="n"),
-        "next tab [<n>]":
+        "nexta [<n>]":
             R(Key("c-pgdown"))*Repeat(extra="n"),
-        "prior tab [<n>]":
+        "prexta [<n>]":
             R(Key("c-pgup"))*Repeat(extra="n"),
         "close tab [<n>]":
             R(Key("c-w/20"))*Repeat(extra="n"),

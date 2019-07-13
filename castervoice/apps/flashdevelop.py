@@ -5,8 +5,8 @@ class FlashDevelopRule(MergeRule):
     pronunciation = "flash develop"
 
     mapping = {
-        "prior tab [<n>]": R(Key("c-pgup"))*Repeat(extra="n"),
-        "next tab [<n>]": R(Key("c-pgdown"))*Repeat(extra="n"),
+        "prexta [<n>]": R(Key("c-pgup"))*Repeat(extra="n"),
+        "nexta [<n>]": R(Key("c-pgdown"))*Repeat(extra="n"),
         "open resource": R(Key("c-r")),
         "jump to source": R(Key("f4")),
         "jump away": R(Key("s-f4")),

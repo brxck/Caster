@@ -18,9 +18,9 @@ class AcrobatRule(MergeRule):
             R(Key("a-v, p, c")),
         "(disable scrolling | single page mode)":
             R(Key("a-v, p, s")),
-        "next tab [<n>]":
+        "nexta [<n>]":
             R(Key("c-tab"))*Repeat(extra="n"),
-        "prior tab [<n>]":
+        "prexta [<n>]":
             R(Key("cs-tab"))*Repeat(extra="n"),
         "home button":
             R(Mouse("[100, 101], left")),  # coordinates may be user dependent

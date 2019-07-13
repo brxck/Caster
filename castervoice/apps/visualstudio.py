@@ -4,9 +4,9 @@ class VisualStudioRule(MergeRule):
     pronunciation = "visual studio"
 
     mapping = {
-        "next tab [<n>]":
+        "nexta [<n>]":
             R(Key("ca-pgdown"))*Repeat(extra="n"),
-        "prior tab [<n>]":
+        "prexta [<n>]":
             R(Key("ca-pgup"))*Repeat(extra="n"),
         "close tab [<n>]":
             R(Key("c-f4/20"))*Repeat(extra="n"),

@@ -87,10 +87,10 @@ class EclipseRule(MergeRule):
     pronunciation = "eclipse"
 
     mapping = {
-        "prior tab [<n>]":
+        "prexta [<n>]":
             R(Key("cs-f6"))*
             Repeat(extra="n"),  # these two must be set up in the eclipse preferences
-        "next tab [<n>]":
+        "nexta [<n>]":
             R(Key("c-f6"))*Repeat(extra="n"),
         "open resource":
             R(Key("cs-r")),

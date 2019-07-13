@@ -6,8 +6,8 @@ class SSMSRule(MergeRule):
 
     mapping = {
         # There doesn't seem to be a hotkey for sequential tab navigation in SSMS, but something is better than nothing...
-        "next tab [<n>]": R(Key("c-tab"))*Repeat(extra="n"),
-        "prior tab [<n>]": R(Key("cs-tab"))*Repeat(extra="n"),
+        "nexta [<n>]": R(Key("c-tab"))*Repeat(extra="n"),
+        "prexta [<n>]": R(Key("cs-tab"))*Repeat(extra="n"),
         "close tab [<n>]": R(Key("c-f4/20"))*Repeat(extra="n"),
         "go to line": R(Key("c-g")),
         "comment line": R(Key("c-k, c-c")),

@@ -91,9 +91,9 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("cs-s")),
         "save all":
             R(Key("c-k, s")),
-        "next tab [<n>]":
+        "nexta [<n>]":
             R(Key("c-pgdown") * Repeat(extra='n')),
-        "previous tab [<n>]":
+        "prexta [<n>]":
             R(Key("c-pgup") * Repeat(extra='n')),
         "close tab [<n>]":
             R(Key("c-f4/20") * Repeat(extra='n')),

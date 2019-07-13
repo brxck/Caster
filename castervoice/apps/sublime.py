@@ -123,9 +123,9 @@ class SublimeRule(MergeRule):
         #
         "close tab":
             R(Key("c-w")),
-        "next tab":
+        "nexta":
             R(Key("c-pgdown")),
-        "previous tab":
+        "prexta":
             R(Key("c-pgup")),
         "<nth> tab":
             R(Key("a-%(nth)s")),
