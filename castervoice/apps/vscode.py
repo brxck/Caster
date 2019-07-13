@@ -393,11 +393,21 @@ class VSCodeCcrRule(MergeRule):
         "match bracket":
             R(Key("cs-backslash"), rdescript="VS Code: Jump to Matching Bracket"),
 
-        # brxck
+        # Emmet
         "rip":
-            R(Key("s-space"), rdescript="VS Code: Expand Emmet Abbreviation"),
-        "toggle centered":
-            R(Key("c-k, c-l"), rdescript="VS Code: Toggle Centered Layout")
+            R(Key("s-space"), rdescript="VS Code: Emmet Expand Abbreviation"),
+        "wrap tag":
+            R(Key("c-e, w"), rdescript="VS Code: Emmet Wrap Tag"),
+        "update tag":
+            R(Key("c-e, e"), rdescript="VS Code: Emmet Update Tag"),
+        "remove tag":
+            R(Key("c-e, r"), rdescript="VS Code: Emmet Remove Tag"),
+        "(split|join) tag":
+            R(Key("c-e, s"), rdescript="VS Code: Emmet Split/Join Tag"),
+        "next edit":
+            R(Key("c-e, v"), rdescript="VS Code: Emmet Next Edit Point"),
+        "prior edit":
+            R(Key("c-e, c"), rdescript="VS Code: Emmet Previous Edit Point"),
 
     }
     extras = [
