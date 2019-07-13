@@ -52,6 +52,8 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("a-f, p, s:2, enter"), rdescript="VS Code: User Snippets"),
         "extensions":
             R(Key("cs-x")),
+        "outline":
+            R(Key("cs-o")),
         "search details":
             R(Key("cs-j")),
         "output panel":
@@ -63,6 +65,8 @@ class VSCodeNonCcrRule(MergeRule):
         "Zen mode":
             # note: use esc esc to exit
             R(Key("c-k, z")),
+        "toggle centered":
+            R(Key("c-k, c-l"), rdescript="VS Code: Toggle Centered Layout"),
 
         # File Management
         "copy path":
@@ -155,6 +159,8 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("c-k, c-right")),
         "(prior | previous | un) pane":
             R(Key("c-k, c-right")),
+        "<nth> pane":
+            R(Key("c-%(nth)s")),
         "shift group left":
             R(Key("c-k, left"),
               rdescript="VS Code: Shift Current Group of Tabs to the Left E.g. Swap with Pane to the Left"),
@@ -163,7 +169,7 @@ class VSCodeNonCcrRule(MergeRule):
               rdescript="VS Code: Shift Current Group of Tabs to the Right E.g. Swap with Pane to the Right"
               ),
         "<nth> tab":
-            R(Key("c-%(nth)s")),
+            R(Key("a-%(nth)s")),
 
         # Languages Editing
         "go to definition":
@@ -230,6 +236,12 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("s-pgup")),
         "terminal page down":
             R(Key("s-pgdown")),
+        "next terminal":
+            R(Key("cs-0")),
+        "prior terminal":
+            R(Key("cs-9")),
+        "split terminal":
+            R(Key("c-backslash")),
 
         # Collapsing
         "(fold | collapse) region":
