@@ -43,7 +43,7 @@ text_punc_dict = {
     "carrot":                                             "^",
     "flat":                                               "_",
     "ticky":                                              "`",
-    "pipe (sim | symbol)":                                "|",
+    "bar":                                                "|",
     "tilde":                                              "~",
 
     "[left] paren":                                       "(",
