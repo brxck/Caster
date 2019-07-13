@@ -25,7 +25,7 @@ caster_alphabet = {
             "Rome"    : "r",
             "Soy"     : "s",
             "tango"   : "t",
-            "uni"     : "u",
+            "ubiq"    : "u",
             "victor"  : "v",
             "whiskey" : "w",
             "x-ray"   : "x",
