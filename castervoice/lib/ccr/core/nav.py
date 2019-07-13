@@ -347,7 +347,7 @@ class Navigation(MergeRule):
             "tie": 2,
             "camel": 3,
             "speak": 4,
-            "laws": 5
+            "say": 5
         }),
         Choice(
             "spacing", {
