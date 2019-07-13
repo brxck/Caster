@@ -115,6 +115,8 @@ jetbrains_context = AppContext(executable="idea", title="IntelliJ") \
           | AppContext(executable="studio64") \
           | AppContext(executable="pycharm")
 
-context = terminal_context | jetbrains_context
+vs_code_context = AppContext(title="Visual Studio Code", executable="code")
+
+context = terminal_context | jetbrains_context | vs_code_context
 
 control.ccr_app_rule(GitBashRule(), context)
