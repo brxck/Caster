@@ -46,8 +46,8 @@ text_punc_dict = {
     "bar":                                                "|",
     "tilde":                                              "~",
 
-    "[open] paren":                                       "(",
-    "close paren":                                        ")",
+    "[open] bend":                                       "(",
+    "close bend":                                        ")",
     "[open] angle":                                       "<",
     "close angle":                                        ">",
     "[open] brax":                                        "[",
