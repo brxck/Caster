@@ -1,5 +1,6 @@
 # thanks to Casper for contributing commands to this.
 from castervoice.lib.imports import *
+from castervoice.lib.alphanumeric import caster_alphabet
 
 def findNthToken(text, n, direction):
     Key("c-f").execute()
