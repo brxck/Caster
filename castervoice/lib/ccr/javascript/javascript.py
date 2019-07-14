@@ -11,21 +11,21 @@ class Javascript(MergeRule):
 
         # CCR PROGRAMMING STANDARD
         SymbolSpecs.IF:
-            R(Text("if () {}") + Key("left, enter:2, up")),
+            R(Text("if () ") + Key("left, enter, up")),
         SymbolSpecs.ELSE:
-            R(Text("else {}") + Key("left, enter:2, up")),
+            R(Text("else {}") + Key("left, enter, up")),
         #
         SymbolSpecs.SWITCH:
-            R(Text("switch () {}") + Key("left, enter:2, up")),
+            R(Text("switch () {}") + Key("left, enter, up")),
         SymbolSpecs.CASE:
             R(Text("case :") + Key("left")),
         SymbolSpecs.BREAK:
-            R(Text("break;")),
+            R(Text("break")),
         SymbolSpecs.DEFAULT:
             R(Text("default: ")),
         #
         SymbolSpecs.DO_LOOP:
-            R(Text("do {}") + Key("left, enter:2")),
+            R(Text("do {}") + Key("left, enter")),
         SymbolSpecs.WHILE_LOOP:
             R(Text("while ()") + Key("left")),
         SymbolSpecs.FOR_LOOP:
@@ -50,10 +50,11 @@ class Javascript(MergeRule):
         SymbolSpecs.SYSOUT:
             R(Text("console.log()") + Key("left")),
         #
-        # (no imports in javascript)
+        SymbolSpecs.IMPORT:
+            R(Text("import ")),
         #
         SymbolSpecs.FUNCTION:
-            R(Text("function TOKEN() {};") + Key("left:2, enter") +
+            R(Text("function () {}") + Key("left:2, enter") +
               SelectiveAction(Key("enter, up"), ["AptanaStudio3.exe"])),
 	    SymbolSpecs.CLASS:
             R(Text("class  {}") + Key("left/5:3")),
@@ -75,7 +76,7 @@ class Javascript(MergeRule):
             R(Text("false")),
 
         # JavaScript specific
-        "anon funk":
+        "arrow":
             R(Text("() => {}") + Key("left:1, enter")),
         "timer":
             R(Text("setInterval()") + Key("left")),
@@ -102,9 +103,9 @@ class Javascript(MergeRule):
         "this":
             R(Text("this")),
         "try":
-            R(Text("try {}") + Key("left, enter:2, up")),
+            R(Text("try {}") + Key("left, enter, up")),
         "catch":
-            R(Text("catch(e) {}") + Key("left, enter:2, up")),
+            R(Text("catch(e) {}") + Key("left, enter, up")),
         "throw":
             R(Text("throw ")),
         "instance of":

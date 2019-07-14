@@ -191,9 +191,9 @@ class Navigation(MergeRule):
         #     finisher=Key("right"), time_in_seconds=0.1, repetitions=50 ),
 
     # keyboard shortcuts
-        'save':
+        "save":
             R(Key("c-s"), rspec="save"),
-        'slap [<nnavi50>]':
+        "slap [<nnavi50>]":
             R(Key("enter"), rspec="shock")* Repeat(extra="nnavi50"),
         # "(<mtn_dir> | <mtn_mode> [<mtn_dir>]) [(<nnavi500> | <extreme>)]":
         #     R(Function(text_utils.master_text_nav)), # this is now implemented below
@@ -207,6 +207,8 @@ class Navigation(MergeRule):
             R(Function(navigation.drop_keep_clipboard, nexus=_NEXUS), rspec="spark"),
         "whack [<splatdir>] [<nnavi10>]":
             R(Key("c-%(splatdir)s"), rspec="splat") * Repeat(extra="nnavi10"),
+        "bump [<nnavi10>]":
+            R(Key("c-delete"), rspec="bump") * Repeat(extra="nnavi10"),
         "chuck [<nnavi50>]":
             R(Key("del/5"), rspec="deli") * Repeat(extra="nnavi50"),
         "scratch [<nnavi50>]":
@@ -262,15 +264,15 @@ class Navigation(MergeRule):
         
         # keystroke commands
         "<direction> [<nnavi500>]": R(Key("%(direction)s") * Repeat(extra='nnavi500'),
-            rdescript="arrow keys"),
-        "(lease wally | latch) [<nnavi10>]": R(Key("home:%(nnavi10)s")),
-        "(ross wally | ratch) [<nnavi10>]": R(Key("end:%(nnavi10)s")),
-        "bird [<nnavi500>]": R(Key("c-left:%(nnavi500)s")),
-        "fird [<nnavi500>]": R(Key("c-right:%(nnavi500)s")),
-        "brick [<nnavi500>]": R(Key("s-left:%(nnavi500)s")),
-        "frick [<nnavi500>]": R(Key("s-right:%(nnavi500)s")),
-        "blitch [<nnavi500>]": R(Key("cs-left:%(nnavi500)s")),
-        "flitch [<nnavi500>]": R(Key("cs-right:%(nnavi500)s")),
+            rdescript="Arrow Key: %(direction)s"),
+        "(lease wally | strike) [<nnavi10>]": R(Key("home:%(nnavi10)s")),
+        "(ross wally | struck) [<nnavi10>]": R(Key("end:%(nnavi10)s")),
+        "lore [<nnavi500>]": R(Key("c-left:%(nnavi500)s")),
+        "role [<nnavi500>]": R(Key("c-right:%(nnavi500)s")),
+        "rolick [<nnavi500>]": R(Key("s-left:%(nnavi500)s")),
+        "lorick [<nnavi500>]": R(Key("s-right:%(nnavi500)s")),
+        "lorex [<nnavi500>]": R(Key("cs-left:%(nnavi500)s")),
+        "rolex [<nnavi500>]": R(Key("cs-right:%(nnavi500)s")),
         
         "<modifier> <button_dictionary_500> [<nnavi500>]":
               R(Key("%(modifier)s%(button_dictionary_500)s") * Repeat(extra='nnavi500'), 
@@ -292,13 +294,15 @@ class Navigation(MergeRule):
     # I tried to limit which things get repeated how many times in hopes that it will help prevent the bad grammar error
     # this could definitely be changed. perhaps some of these should be made non-CCR
     button_dictionary_500 = {"(tab | tabby)": "tab", "(backspace | clear)": "backspace", "(delete|deli)": "del", "(escape | cancel)": "escape", "(enter | shock)": "enter",
-    "(left | lease)": "left", "(right | ross)": "right", "(up | sauce)": "up",
-    "(down | dunce)": "down", "page (down | dunce)": "pgdown", "page (up | sauce)": "pgup", "space": "space"}
-    button_dictionary_10 = {"function {}".format(i):"f{}".format(i) for i in range(1, 10)}
+                             "(left | lease)": "left", "(right | ross)": "right", "(up | sauce)": "up",
+                             "(down | dunce)": "down", "page (down | dunce)": "pgdown", "page (up | sauce)": "pgup", "space": "space"}
+    button_dictionary_10 = {"function {}".format(
+        i): "f{}".format(i) for i in range(1, 10)}
     button_dictionary_10.update(caster_alphabet)
     button_dictionary_10.update(text_punc_dict)
     button_dictionary_1 = {"(home | lease wally | latch)": "home", "(end | ross wally | ratch)": "end", "insert": "insert", "zero": "0",
-    "one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six":"6", "seven": "7", "eight": "8", "nine": "9"}
+                           "one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": "6", "seven": "7", "eight": "8", "nine": "9"}
+    
     combined_button_dictionary = {}
     for dictionary in [button_dictionary_1, button_dictionary_10, button_dictionary_500]:
         combined_button_dictionary.update(dictionary)
