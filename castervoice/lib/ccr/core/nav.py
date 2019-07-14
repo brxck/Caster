@@ -22,11 +22,11 @@ _NEXUS = control.nexus()
 
 class NavigationNon(MergeRule): 
     mapping = {
-        "<direction> <time_in_seconds>":
-            AsynchronousAction(
-                [L(S(["cancel"], Key("%(direction)s"), consume=False))],
-                repetitions=1000,
-                blocking=False),
+        # "<direction> <time_in_seconds>":
+        #     AsynchronousAction(
+        #         [L(S(["cancel"], Key("%(direction)s"), consume=False))],
+        #         repetitions=1000,
+        #         blocking=False),
         "erase multi clipboard":
             R(Function(navigation.erase_multi_clipboard, nexus=_NEXUS)),
         "find":
