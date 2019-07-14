@@ -63,10 +63,11 @@ class VSCodeNonCcrRule(MergeRule):
         "markdown preview side":
             R(Key("c-k, v")),
         "Zen mode":
-            # note: use esc esc to exit
             R(Key("c-k, z")),
         "toggle centered":
             R(Key("c-k, c-l"), rdescript="VS Code: Toggle Centered Layout"),
+        "change theme":
+            R(Key("c-k, c-t"), rdescript="VS Code: Change Theme"),
 
         # File Management
         "copy path":
@@ -346,10 +347,10 @@ class VSCodeCcrRule(MergeRule):
         "cursor ends":
             R(Key("sa-i") * Repeat(extra='n'),
               rdescript="VS Code: Add Cursors to Line Ends"),
-        "tall cursor up":
-            R(Key("csa-pgup"), rdescript="VS Code: Add Cursors All The Way Up"),
-        "tall cursor down":
-            R(Key("csa-pgdown"), rdescript="VS Code: Add Cursors All The Way Down"),
+        # "tall cursor up":
+        #     R(Key("csa-pgup"), rdescript="VS Code: Add Cursors All The Way Up"),
+        # "tall cursor down":
+        #     R(Key("csa-pgdown"), rdescript="VS Code: Add Cursors All The Way Down"),
             
         "expand  [<n>]": R(Key("sa-right"), 
             rdescript="highlight current word(s)") * Repeat(extra='n'),
@@ -361,8 +362,9 @@ class VSCodeCcrRule(MergeRule):
         #     R(Key("ca-a") * Repeat(extra='n'),
         #       rdescript="VS Code: Select in between parable punctuation inclusive using 'brackets select' extension"
         #       )*Repeat(extra='n'),
-        "all current selection":
-            R(Key("c-l"), rdescript="VS Code: Select All Occurrences of Current Selection"),
+        
+        # "all current selection":
+        #     R(Key("cs-l"), rdescript="VS Code: Select All Occurrences of Current Selection"),
         "all current word":
             R(Key("c-f2"), rdescript="VS Code: Select All Occurrences of Current Word"),
         "select next [<n>]":
@@ -385,7 +387,7 @@ class VSCodeCcrRule(MergeRule):
         "cursor all":
             R(Key("cs-l"),
               rdescript="VS Code: Add Cursor to All Occurrences of Current Selection"),
-        "next cursor [<n>]":
+        "cursor next [<n>]":
             R(Key("c-d") * Repeat(extra='n'),
               rdescript="VS Code: Add Cursor to Next Occurrence of Current Selection"),
         "hard delete [<n>]":
@@ -421,6 +423,19 @@ class VSCodeCcrRule(MergeRule):
         "prior edit":
             R(Key("c-e, c"), rdescript="VS Code: Emmet Previous Edit Point"),
 
+        # metaGo extension
+        "hyper <letters>":
+            R(Key("a-semicolon/5, %(letters)s"), rdescript="VS Code: metaGo Go To"),
+        "hyper select <letters>":
+            R(Key("sa-semicolon/5, %(letters)s"), rdescript="VS Code: metaGo Go To & Select"),
+        "block up":
+            R(Key("a-home"), rdescript="VS Code: metaGo Move Up Block"),
+        "block down":
+            R(Key("a-home"), rdescript="VS Code: metaGo Move Down Block"),
+        "select block up":
+            R(Key("sa-home"), rdescript="VS Code: metaGo Select Up Block"),
+        "select block down":
+            R(Key("sa-end"), rdescript="VS Code: metaGo Move Up Block"),
     }
     extras = [
         Dictation("text"),
@@ -441,6 +456,7 @@ class VSCodeCcrRule(MergeRule):
             "curly": "rbrace",
             "angle": "rangle",
         }),
+        Choice("letters", caster_alphabet),
     ]
 
     defaults = {"n": 1, "mim": "", "text": ""}
