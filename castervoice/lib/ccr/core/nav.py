@@ -71,12 +71,12 @@ class NavigationNon(MergeRule):
                 nexus=_NEXUS,
                 capitalization=0,
                 spacing=0)),
-        "sure stoosh":
-            R(Key("c-c")),
-        "sure cut":
-            R(Key("c-x")),
-        "sure spark":
-            R(Key("c-v")),
+        # "sure stoosh":
+        #     R(Key("c-c")),
+        # "sure cut":
+        #     R(Key("c-x")),
+        # "sure spark":
+        #     R(Key("c-v")),
         "refresh":
             R(Key("c-r")),
         "maxiwin":
@@ -113,14 +113,18 @@ class NavigationNon(MergeRule):
         #     R(Key("wc-f4")),
         # "close all work [spaces]":
         #     R(Function(utilities.close_all_workspaces)),
-        "next work [space] [<n>]":
+        "work up [<n>]":
             R(Key("w-pgdown"))*Repeat(extra="n"),
-        "(previous | prior) work [space] [<n>]":
+        "work down [space] [<n>]":
+            R(Key("w-pgup"))*Repeat(extra="n"),
+        "send up [<n>]":
+            R(Key("w-pgdown"))*Repeat(extra="n"),
+        "send down [<n>]":
             R(Key("w-pgup"))*Repeat(extra="n"),
 
-        "go work <n>":
+        "work <n>":
             R(Key("w-%(n)d")),
-        "send work <n>":
+        "send <n>":
             R(Key("sw-%(n)d")),
         "move work <n>":
             R(Key("sw-%(n)d + w-%(n)d")),
