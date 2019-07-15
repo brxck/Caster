@@ -191,6 +191,8 @@ class Navigation(MergeRule):
         #     finisher=Key("right"), time_in_seconds=0.1, repetitions=50 ),
 
     # keyboard shortcuts
+        "meta":
+            R(Key("w"), rspec="meta"),
         "save":
             R(Key("c-s"), rspec="save"),
         "slap [<nnavi50>]":
