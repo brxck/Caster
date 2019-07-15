@@ -114,9 +114,9 @@ class NavigationNon(MergeRule):
         # "close all work [spaces]":
         #     R(Function(utilities.close_all_workspaces)),
         "next work [space] [<n>]":
-            R(Key("w-pagedown"))*Repeat(extra="n"),
+            R(Key("w-pgdown"))*Repeat(extra="n"),
         "(previous | prior) work [space] [<n>]":
-            R(Key("w-pageup"))*Repeat(extra="n"),
+            R(Key("w-pgup"))*Repeat(extra="n"),
 
         "go work <n>":
             R(Key("w-%(n)d")),
