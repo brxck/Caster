@@ -59,6 +59,7 @@ text_punc_dict = {
     "[is] less [than] [or] equal [to]":                " <= ",
     "strict":                                         " === ",
     "[is] equal to":                                   " == ",
+    "assign":                                           " = ",
     "[is] greater than":                                " > ",
     "[is] greater [than] [or] equal [to]":             " >= ",
 }
