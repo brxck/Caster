@@ -117,17 +117,15 @@ class NavigationNon(MergeRule):
             R(Key("w-pgdown"))*Repeat(extra="n"),
         "work up [<n>]":
             R(Key("w-pgup"))*Repeat(extra="n"),
-        "send up [<n>]":
-            R(Key("w-pgdown"))*Repeat(extra="n"),
         "send down [<n>]":
-            R(Key("w-pgup"))*Repeat(extra="n"),
+            R(Key("ws-pgdown"))*Repeat(extra="n"),
+        "send up [<n>]":
+            R(Key("ws-pgup"))*Repeat(extra="n"),
 
         "work <n>":
             R(Key("w-%(n)d")),
         "send <n>":
             R(Key("sw-%(n)d")),
-        "move work <n>":
-            R(Key("sw-%(n)d + w-%(n)d")),
     }
 
     extras = [
