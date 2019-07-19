@@ -113,9 +113,9 @@ class NavigationNon(MergeRule):
         #     R(Key("wc-f4")),
         # "close all work [spaces]":
         #     R(Function(utilities.close_all_workspaces)),
-        "work up [<n>]":
+        "work down [<n>]":
             R(Key("w-pgdown"))*Repeat(extra="n"),
-        "work down [space] [<n>]":
+        "work up [<n>]":
             R(Key("w-pgup"))*Repeat(extra="n"),
         "send up [<n>]":
             R(Key("w-pgdown"))*Repeat(extra="n"),
