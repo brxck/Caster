@@ -1,7 +1,7 @@
 #
 # __author__ = "lexxish"
 #
-from dragonfly import Choice
+from castervoice.lib.imports import *
 
 from castervoice.apps.shared.directions import FORWARD, RIGHT, BACK, LEFT
 from castervoice.lib.dfplus.additions import IntegerRefST
