@@ -196,7 +196,7 @@ class Navigation(MergeRule):
 
     # keyboard shortcuts
         "meta":
-            R(Key("w"), rspec="meta"),
+            R(Key("win"), rspec="meta"),
         "save":
             R(Key("c-s"), rspec="save"),
         "slap [<nnavi50>]":
