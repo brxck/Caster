@@ -198,7 +198,11 @@ class Navigation(MergeRule):
         "save":
             R(Key("c-s"), rspec="save"),
         "slap [<nnavi50>]":
-            R(Key("enter"), rspec="shock")* Repeat(extra="nnavi50"),
+            R(Key("enter"), rspec="slap") * Repeat(extra="nnavi50"),
+        "slide [<nnavi50>]":
+            R(Key("end, enter"), rspec="slide") * Repeat(extra="nnavi50"),
+        "slip [<nnavi50>]":
+            R(Key("home, enter, up"), rspec="slip") * Repeat(extra="nnavi50"),
         # "(<mtn_dir> | <mtn_mode> [<mtn_dir>]) [(<nnavi500> | <extreme>)]":
         #     R(Function(text_utils.master_text_nav)), # this is now implemented below
         "shift click":
@@ -250,9 +254,15 @@ class Navigation(MergeRule):
 
         # "hug <enclosure>":
         #     R(Function(text_utils.enclose_selected)),
-        "dredge [<nnavi10>]":
+        "flip [<nnavi10>]":
             R(Key("alt:down, tab/20:%(nnavi10)d, alt:up"),
-               rdescript="Core: switch to most recent Windows"),
+               rdescript="Core: Switch between applications"),
+        "flop [<nnavi10>]":
+            R(Key("alt:down, backtick/20:%(nnavi10)d, alt:up"),
+               rdescript="Core: Switch between application windows"),
+        "flick [<nnavi10>]":
+            R(Key("alt:down, escape/20:%(nnavi10)d, alt:up"),
+               rdescript="Core: Switch between workspace windows"),
 
         # Ccr Mouse Commands
         "kick [<nnavi3>]":
