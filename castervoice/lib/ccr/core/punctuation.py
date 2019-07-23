@@ -46,14 +46,14 @@ text_punc_dict = {
     "bar":                                                "|",
     "tilde":                                              "~",
 
-    "[open] bend":                                       "(",
-    "close bend":                                        ")",
+    "[open] bend":                                        "(",
+    "(close bend|rend)":                                  ")",
     "[open] angle":                                       "<",
-    "close angle":                                        ">",
+    "(close angle|rangle)":                               ">",
     "[open] brax":                                        "[",
-    "close brax":                                         "]",
-    "[open] curl":                                        "{",
-    "close curl":                                         "}",
+    "(close brax|brix)"                                   "]",
+    "[open] burl":                                        "{",
+    "(close burl|curl)":                                  "}",
 
     "[is] less than": " < ",
     "[is] less [than] [or] equal [to]":                " <= ",
@@ -64,12 +64,14 @@ text_punc_dict = {
     "[is] greater [than] [or] equal [to]":             " >= ",
 }
 
+
 class Punctuation(MergeRule):
     pronunciation = CCRMerger.CORE[3]
 
     mapping = {
         "[<long>] <text_punc> [<npunc>]":
-            R(Text("%(long)s" + "%(text_punc)s" + "%(long)s"))*Repeat(extra="npunc"),
+            R(Text("%(long)s" + "%(text_punc)s" + "%(long)s")) *
+        Repeat(extra="npunc"),
         # For some reason, this one doesn't work through the other function
         "[<long>] backslash [<npunc>]":
             R(Text("%(long)s" + "\\" + "%(long)s"))*Repeat(extra="npunc"),
@@ -102,5 +104,6 @@ class Punctuation(MergeRule):
         "npunc100": 1,
         "long": "",
     }
+
 
 control.global_rule(Punctuation())
