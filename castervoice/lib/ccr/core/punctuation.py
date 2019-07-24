@@ -51,7 +51,7 @@ text_punc_dict = {
     "[open] angle":                                       "<",
     "(close angle|rangle)":                               ">",
     "[open] brax":                                        "[",
-    "(close brax|brix)"                                   "]",
+    "(close brax|brix)":                                  "]",
     "[open] burl":                                        "{",
     "(close burl|curl)":                                  "}",
 
