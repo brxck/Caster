@@ -103,11 +103,11 @@ class GitBashRule(MergeRule):
 
 
 terminal_context = AppContext(executable=[
-    "\\sh.exe",
-    "\\bash.exe",
-    "\\cmd.exe",
-    "\\mintty.exe",
-    "\\powershell.exe"
+    "\\gnome-terminal",
+    "\\guake",
+    "\\cool-retro-term",
+    "\\hyper",
+    "\\git-bash.exe"
     ])
 
 jetbrains_context = AppContext(executable="idea", title="IntelliJ") \
