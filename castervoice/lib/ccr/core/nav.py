@@ -251,6 +251,10 @@ class Navigation(MergeRule):
             R(Function(textformat.prior_text_format)),
         "<word_limit> [<big>] format <textnv>":
             R(Function(textformat.partial_format_text)),
+        "nope":
+            R(Function(textformat.delete_last_text)),
+        "that was (<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]":
+            R(Function(textformat.reformat_last_text)),
 
         # "hug <enclosure>":
         #     R(Function(text_utils.enclose_selected)),
