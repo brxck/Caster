@@ -50,7 +50,9 @@ text_punc_dict = {
     "plus":                                             " + ",
     "minus":                                            " - ",
     "divide":                                           " / ",
-    "coy":                                               ", ",
+    "modulo":                                           " % ",
+    "coy":                                               ": ",
+    "boom":                                              ", ",
     "bam":                                               ". ",
     
 
