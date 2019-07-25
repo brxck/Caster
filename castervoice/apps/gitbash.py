@@ -17,7 +17,7 @@ class GitBashRule(MergeRule):
         "(git|get) add all":
             R(Text("git add -A")),
         "(git|get) commit all":
-            R(Key("%s, ;, space, %s" % (GIT_ADD_ALL, GIT_COMMIT))),
+            R(Mimic("git", "add", "all", "git", "commit")),
         "(git|get) status":
             R(Text("git status")),
         "(git|get) log":
@@ -115,12 +115,12 @@ terminal_context = AppContext(executable=[
     "cool-retro-term",
     "hyper",
     "\\git-bash.exe"
-    ])
+])
 
 jetbrains_context = AppContext(executable="idea", title="IntelliJ") \
-          | AppContext(executable="idea64", title="IntelliJ") \
-          | AppContext(executable="studio64") \
-          | AppContext(executable="pycharm")
+    | AppContext(executable="idea64", title="IntelliJ") \
+    | AppContext(executable="studio64") \
+    | AppContext(executable="pycharm")
 
 vs_code_context = AppContext(title="Visual Studio Code", executable="code")
 
