@@ -79,8 +79,10 @@ class NavigationNon(MergeRule):
         #     R(Key("c-v")),
         "refresh":
             R(Key("c-r")),
-        "maxiwin":
+        "window up":
             R(Key("w-up")),
+        "window down":
+            R(Key("w-down")),
         "move window":
             R(Key("a-space, r, a-space, m")),
         "window (left | lease) [<n>]":
@@ -95,10 +97,8 @@ class NavigationNon(MergeRule):
             R(Key("ca-tab, enter")),
         "switch (window | windows)":
             R(Key("ca-tab"))*Repeat(extra="n"),
-        "nexta [<n>]":
-            R(Key("c-pgdown"))*Repeat(extra="n"),
-        "prexta [<n>]":
-            R(Key("c-pgup"))*Repeat(extra="n"),
+        # "nexta [<n>]":    # CCR
+        # "prexta [<n>]":
         "close tab [<n>]":
             R(Key("c-w/20"))*Repeat(extra="n"),
         "elite translation <text>":
@@ -121,7 +121,6 @@ class NavigationNon(MergeRule):
             R(Key("ws-pgdown"))*Repeat(extra="n"),
         "send up [<n>]":
             R(Key("ws-pgup"))*Repeat(extra="n"),
-
         "work <n>":
             R(Key("w-%(n)d")),
         "send <n>":
@@ -192,9 +191,16 @@ class Navigation(MergeRule):
         #     AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
         #     finisher=Key("right"), time_in_seconds=0.1, repetitions=50 ),
 
+        "nexta [<nnavi10>]":
+            R(Key("c-pgdown"))*Repeat(extra="n"),
+        "prexta [<nnavi10>]":
+            R(Key("c-pgup"))*Repeat(extra="n"),
+        "quake":
+            R(Key("f12")),
+
     # keyboard shortcuts
-        "meta":
-            R(Key("win"), rspec="meta"),
+        "meta [<textnv>]":
+            R(Key("win") + Text("%(textnv)s"), rspec="meta"),
         "save":
             R(Key("c-s"), rspec="save"),
         "slap [<nnavi50>]":

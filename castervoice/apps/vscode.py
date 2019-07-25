@@ -2,6 +2,7 @@
 from castervoice.lib.imports import *
 from castervoice.lib.alphanumeric import caster_alphabet
 
+
 def findNthToken(text, n, direction):
     Key("c-f").execute()
     Text("%(text)s").execute({"text": text})
@@ -12,6 +13,7 @@ def findNthToken(text, n, direction):
         Key("enter:%(n)d").execute()
         print("no? %(n)d")
     Key('escape').execute()
+
 
 class VSCodeNonCcrRule(MergeRule):
     pronunciation = "Visual Studio Code Non Continuous"
@@ -31,7 +33,7 @@ class VSCodeNonCcrRule(MergeRule):
         # note that most of these can be turned on/off with the same command
         "[toggle] full screen":
             R(Key("f11")),
-        "toggle orientation":
+        "flip layout":
             R(Key("sa-0")),
         "zoom in [<n>]":
             R(Key("c-equal") * Repeat(extra='n')),
@@ -39,7 +41,7 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("c-minus") * Repeat(extra='n')),
         "sidebar":
             R(Key("c-b")),
-        "explorer":
+        "explore":
             R(Key("cs-e")),
         "source control":
             R(Key("cs-g")),
@@ -76,15 +78,16 @@ class VSCodeNonCcrRule(MergeRule):
         "[open] command palette":
             R(Key("cs-p"), rdescript="VS Code: Command Palette"),
         "(open file | go to [tab]) [<text>]":
-            R(Key("c-p") + Text("%(text)s"), rdescript="VS Code: Go to File without using dialogbox"),
+            R(Key("c-p") + Text("%(text)s"),
+              rdescript="VS Code: Go to File without using dialogbox"),
         "open dialogue":
             R(Key("c-o"), rdescript="VS Code: open file dialogbox"),
-        "open folder": 
+        "open folder":
             R(Key("c-k, c-o"), rdescript="VS Code: Open folder"),
         "Save and close":
             R(Key("c-s/10, c-w")),
         "new file":
-            R(Key("c-n")),
+            R(Key("ca-n")),  # advanced-new-file extension
         "new window":
             R(Key("cs-n")),
         "close window":
@@ -119,8 +122,8 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("c-enter")),
 
         # Search
-        "(search | find)":
-            R(Key("c-f")),
+
+        # "(search | find)":    # CCR
         "replace":
             R(Key("c-h")),
         "find in files":
@@ -157,12 +160,10 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("c-k, f")),
         "split editor":
             R(Key("c-backslash")),
-        "next pane":
-            R(Key("c-k, c-right")),
-        "(prior | previous | un) pane":
-            R(Key("c-k, c-right")),
-        "<nth> pane":
-            R(Key("c-%(nth)s")),
+        # CCR
+        # "next pane":
+        # "(prior | previous | un) pane":
+        # "<nth> pane":
         "shift group left":
             R(Key("c-k, left"),
               rdescript="VS Code: Shift Current Group of Tabs to the Left E.g. Swap with Pane to the Left"),
@@ -226,8 +227,7 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("c-m")),
 
         # Integrated Terminal
-        "[show] terminal":
-            R(Key("c-backtick")),
+        # "[show] terminal":    #CCR
         "new terminal":
             R(Key("cs-backtick")),
         "terminal scroll up":
@@ -303,6 +303,7 @@ class VSCodeNonCcrRule(MergeRule):
     ]
     defaults = {"n": 1, "ln2": "",  "mim": "", "text": ""}
 
+
 class VSCodeCcrRule(MergeRule):
     pronunciation = "visual studio code continuous"
     mwith = CCRMerger.CORE
@@ -314,7 +315,7 @@ class VSCodeCcrRule(MergeRule):
         # cursor/line navigation
         "scroll up [<n>]":
             R(Key("c-up") * Repeat(extra='n'),
-            rdescript="VS Code: Scroll Up One Line at a Time"),
+              rdescript="VS Code: Scroll Up One Line at a Time"),
         "scroll down [<n>]":
             R(Key("c-down") * Repeat(extra='n'),
               rdescript="VS Code: Scroll Down One Line at a Time"),
@@ -352,18 +353,18 @@ class VSCodeCcrRule(MergeRule):
         #     R(Key("csa-pgup"), rdescript="VS Code: Add Cursors All The Way Up"),
         # "tall cursor down":
         #     R(Key("csa-pgdown"), rdescript="VS Code: Add Cursors All The Way Down"),
-            
-        "expand  [<n>]": R(Key("sa-right"), 
-            rdescript="highlight current word(s)") * Repeat(extra='n'),
-        "shrink  [<n>]": R(Key("sa-left"), 
-            rdescript="shrink the previous highlighting range or unhighlight") * Repeat(extra='n'),
+
+        "expand  [<n>]": R(Key("sa-right"),
+                           rdescript="highlight current word(s)") * Repeat(extra='n'),
+        "shrink  [<n>]": R(Key("sa-left"),
+                           rdescript="shrink the previous highlighting range or unhighlight") * Repeat(extra='n'),
 
         # # Command below requires "brackets select" extension for VS code
         # "select [in] brackets [<n>]":
         #     R(Key("ca-a") * Repeat(extra='n'),
         #       rdescript="VS Code: Select in between parable punctuation inclusive using 'brackets select' extension"
         #       )*Repeat(extra='n'),
-        
+
         # "all current selection":
         #     R(Key("cs-l"), rdescript="VS Code: Select All Occurrences of Current Selection"),
         "all current word":
@@ -406,7 +407,19 @@ class VSCodeCcrRule(MergeRule):
             R(Key("a-up") * Repeat(extra='n'),
               rdescript="VS Code: Switch Line With the One Above it"),
         "match bracket":
-            R(Key("cs-backslash"), rdescript="VS Code: Jump to Matching Bracket"),
+            R(Key("cs-backslash"), rdescript="VS Code: Jump to Matching"),
+
+        # Stolen from above rule
+        "[show] terminal":
+            R(Key("c-backtick")),
+        "(search | find)":
+            R(Key("c-f")),
+        "next pane":
+            R(Key("c-k, c-right")),
+        "(prior | previous | un) pane":
+            R(Key("c-k, c-right")),
+        "<m> pane":
+            R(Key("c-%(m)s")),
 
         # Emmet
         "rip":
@@ -426,9 +439,11 @@ class VSCodeCcrRule(MergeRule):
 
         # metaGo extension
         "hyper <letters>":
-            R(Key("a-semicolon/5, %(letters)s"), rdescript="VS Code: metaGo Go To"),
+            R(Key("a-semicolon/5, %(letters)s"),
+              rdescript="VS Code: metaGo Go To"),
         "hyper select <letters>":
-            R(Key("sa-semicolon/5, %(letters)s"), rdescript="VS Code: metaGo Go To & Select"),
+            R(Key("sa-semicolon/5, %(letters)s"),
+              rdescript="VS Code: metaGo Go To & Select"),
         "block up":
             R(Key("a-home"), rdescript="VS Code: metaGo Move Up Block"),
         "block down":
