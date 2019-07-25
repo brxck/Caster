@@ -144,7 +144,6 @@ def delete_last_text():
 
 
 def reformat_last_text(capitalization, spacing):
-    delete_last_text()
     master_format_text(capitalization, spacing, TextFormat.last_text)
     print(TextFormat.last_text)
 
