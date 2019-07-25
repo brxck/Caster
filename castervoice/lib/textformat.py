@@ -1,7 +1,7 @@
 from builtins import str
 
 from castervoice.lib import settings
-from castervoice.lib.actions import Text
+from castervoice.lib.actions import Text, Key
 
 
 class TextFormat():
@@ -22,6 +22,8 @@ class TextFormat():
     4 pebble - words.with.fullstops
     5 incline - words/with/slashes
     '''
+
+    last_text = ""
 
     @classmethod
     def formatted_text(cls, capitalization, spacing, t):
@@ -49,6 +51,8 @@ class TextFormat():
                 t = "/".join(t.split(" "))
             elif spacing == 6:
                 t = "\\".join(t.split(" "))
+        
+        TextFormat.last_text = t
         return t
 
     @classmethod
@@ -133,3 +137,13 @@ def prior_text_format(big, textnv):
 def master_format_text(capitalization, spacing, textnv):
     capitalization, spacing = TextFormat.normalize_text_format(capitalization, spacing)
     Text(TextFormat.formatted_text(capitalization, spacing, str(textnv))).execute()
+
+
+def delete_last_text():
+    Key("backspace:%d" % len(TextFormat.last_text)).execute()
+
+
+def reformat_last_text(capitalization, spacing):
+    master_format_text(capitalization, spacing, TextFormat.last_text)
+    print(TextFormat.last_text)
+
