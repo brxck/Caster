@@ -25,12 +25,12 @@ text_punc_dict = {
     "quote":                                             "\"",
     "ampersand":                                          "&",
     "pound":                                              "#",
-    "doll":                                              "$",
+    "doll":                                               "$",
     "percy":                                              "%",
     "smote":                                              "'",
     "splat":                                              "*",
     "cross":                                              "+",
-    "equit":                                             "=",
+    "equit":                                              "=",
     "drip":                                               ",",
     "dash":                                               "-",
     "period | dot":                                       ".",
@@ -45,6 +45,14 @@ text_punc_dict = {
     "ticky":                                              "`",
     "bar":                                                "|",
     "tilde":                                              "~",
+    
+    "assign":                                           " = ",
+    "plus":                                             " + ",
+    "minus":                                            " - ",
+    "divide":                                           " / ",
+    "coy":                                               ", ",
+    "bam":                                               ". ",
+    
 
     "[open] bend":                                        "(",
     "(close bend|rend)":                                  ")",
@@ -59,7 +67,6 @@ text_punc_dict = {
     "[is] less [than] [or] equal [to]":                " <= ",
     "strict":                                         " === ",
     "[is] equal to":                                   " == ",
-    "assign":                                           " = ",
     "[is] greater than":                                " > ",
     "[is] greater [than] [or] equal [to]":             " >= ",
 }
@@ -81,10 +88,6 @@ class Punctuation(MergeRule):
             R(Key("tab"))*Repeat(extra="npunc"),
         "(back | shin) shock [<npunc>]":
             R(Key("s-tab"))*Repeat(extra="npunc"),
-        "coy [<npunc>]":
-            R(Text(", "))*Repeat(extra="npunc"),
-        "bam [<npunc>]":
-            R(Text(". "))*Repeat(extra="npunc"),
         "ace [<npunc100>]":
             R(Text(" "))*Repeat(extra="npunc100"),
     }
