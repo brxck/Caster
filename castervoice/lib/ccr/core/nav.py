@@ -313,7 +313,7 @@ class Navigation(MergeRule):
     # this could definitely be changed. perhaps some of these should be made non-CCR
     button_dictionary_500 = {"(tab | tabby)": "tab", "(backspace | clear)": "backspace", "(delete|deli)": "del", "(escape | cancel)": "escape", "(enter | shock)": "enter",
                              "(left | lease)": "left", "(right | ross)": "right", "(up | sauce)": "up",
-                             "(down | dunce)": "down", "page (down | dunce)": "pgdown", "page (up | sauce)": "pgup", "space": "space"}
+                             "(down | dunce)": "down", "page (down | dunce)": "pagedown", "page (up | sauce)": "pageup", "space": "space"}
     button_dictionary_10 = {"function {}".format(
         i): "f{}".format(i) for i in range(1, 10)}
     button_dictionary_10.update(caster_alphabet)
