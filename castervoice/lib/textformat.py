@@ -86,7 +86,6 @@ class TextFormat():
         self.default_spacing = default_spacing
         self.capitalization = 0
         self.spacing = 0
-        self.last_text = 0
 
     def set_text_format(self, capitalization, spacing):
         self.capitalization, self.spacing = self.normalize_text_format(
