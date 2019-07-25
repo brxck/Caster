@@ -141,7 +141,7 @@ def master_format_text(capitalization, spacing, textnv):
 
 
 def delete_last_text():
-    Key("backspace:%d" % len(TextFormat.last_text))
+    Key("backspace:%d" % len(TextFormat.last_text)).execute()
 
 
 def reformat_last_text(capitalization, spacing):
