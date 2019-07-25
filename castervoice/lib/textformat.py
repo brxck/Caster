@@ -52,7 +52,7 @@ class TextFormat():
             elif spacing == 6:
                 t = "\\".join(t.split(" "))
         
-        last_text = t
+        TextFormat.last_text = t
         return t
 
     @classmethod
