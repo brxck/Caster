@@ -7,49 +7,56 @@ def _apply(n):
 
 
 class GitBashRule(MergeRule):
-    pronunciation = "git bash"
-    GIT_ADD_ALL = "g, i, t, space, a, d, d, space, minus, A"
-    GIT_COMMIT = "g, i, t, space, c, o, m, m, i, t, space, minus, m, space, quote, quote, left"
     mapping = {
         "(git|get) base":
             Text("git "),
         "(git|get) (initialize repository|init)":
             Text("git init"),
         "(git|get) add":
-            R(Key("g, i, t, space, a, d, d, space, dot")),
+            R(Text("git add .")),
         "(git|get) add all":
-            R(Key(GIT_ADD_ALL)),
+            R(Text("git add -A")),
         "(git|get) commit all":
             R(Key("%s, ;, space, %s" % (GIT_ADD_ALL, GIT_COMMIT))),
         "(git|get) status":
-            R(Key("g, i, t, space, s, t, a, t, u, s")),
+            R(Text("git status")),
+        "(git|get) log":
+            R(Text("git log")),
+        "(git|get) log one line":
+            R(Text("git log --oneline")),
         "(git|get) commit":
-            R(Key(GIT_COMMIT)),
+            R(Text("git commit -m \"\"") + Key("left")),
         "(git|get) bug fix commit <n>":
-            R(Mimic("get", "commit") + Text("fixes #%(n)d ") + Key("backspace")),
+            R(Mimic("get", "commit") + Text("Fixes #%(n)d ") + Key("backspace")),
         "(git|get) reference commit <n>":
-            R(Mimic("get", "commit") + Text("refs #%(n)d ") + Key("backspace")),
+            R(Mimic("get", "commit") + Text("Refs #%(n)d ") + Key("backspace")),
         "(git|get) checkout":
             R(Text("git checkout ")),
         "(git|get) branch":
             R(Text("git branch ")),
+        "(git|get) checkout branch":
+            R(Text("git checkout -b ")),
         "(git|get) remote":
             R(Text("git remote ")),
         "(git|get) merge":
             R(Text("git merge ")),
         "(git|get) merge tool":
             R(Text("git mergetool")),
+        "(git|get) rebase":
+            R(Text("git rebase ")),
         "(git|get) fetch":
             R(Text("git fetch ")),
         "(git|get) push":
             R(Text("git push ")),
+        "(git|get) push origin master":
+            R(Text("git push origin master")),
         "(git|get) pull":
             R(Text("git pull ")),
         "CD up":
             R(Text("cd ..")),
         "CD":
             R(Text("cd ")),
-        "list":
+        "LS":
             R(Text("ls")),
         "make directory":
             R(Text("mkdir ")),
@@ -103,10 +110,10 @@ class GitBashRule(MergeRule):
 
 
 terminal_context = AppContext(executable=[
-    "\\gnome-terminal",
-    "\\guake",
-    "\\cool-retro-term",
-    "\\hyper",
+    "gnome-terminal",
+    "guake",
+    "cool-retro-term",
+    "hyper",
     "\\git-bash.exe"
     ])
 
