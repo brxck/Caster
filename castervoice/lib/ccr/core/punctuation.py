@@ -20,7 +20,7 @@ from castervoice.lib.dfplus.state.short import R
 # inv_dtpb = {v: k for k, v in double_text_punc_dict.iteritems()}
 
 text_punc_dict = {
-    "ace":                                                " ",
+    "haste":                                              " ",
     "bang":                                               "!",
     "quote":                                             "\"",
     "ampersand":                                          "&",
@@ -45,16 +45,16 @@ text_punc_dict = {
     "ticky":                                              "`",
     "bar":                                                "|",
     "tilde":                                              "~",
-    
+
     "assign":                                           " = ",
     "plus":                                             " + ",
     "minus":                                            " - ",
     "divide":                                           " / ",
     "modulo":                                           " % ",
     "coy":                                               ": ",
-    "boom":                                              ", ",
-    "bam":                                               ". ",
-    
+    "bam":                                               ", ",
+    "boom":                                              ". ",
+
 
     "[open] bend":                                        "(",
     "(close bend|rend)":                                  ")",
@@ -86,6 +86,9 @@ class Punctuation(MergeRule):
             R(Text("%(long)s" + "\\" + "%(long)s"))*Repeat(extra="npunc"),
         # "<double_text_punc> [<npunc>]":
         #     R(Text("%(double_text_punc)s") + Key("left"))*Repeat(extra="npunc"),
+        "[<long>] pair <text_punc>":
+            R(Text("%(text_punc)s" + "%(long)s" + "%(long)s") + \
+              Mimic("close", "%(text_punc)s")),
         "shock [<npunc>]":
             R(Key("tab"))*Repeat(extra="npunc"),
         "(back | shin) shock [<npunc>]":
