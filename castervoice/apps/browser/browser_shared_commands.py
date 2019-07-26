@@ -57,6 +57,10 @@ class BrowserSharedCommands(MergeRule):
             R(Key("c-h")),
         browser.SELECT_ADDRESS_BAR:
             R(Key("c-l")),
+        browser.PASTE_AND_GO:
+            R(Key("c-l, c-v, enter")),
+        browser.NEW_TAB_AND_GO:
+            R(Key("c-t, c-v, enter")),
         browser.SHOW_DOWNLOADS:
             R(Key("c-j")),
         browser.ADD_BOOKMARK:

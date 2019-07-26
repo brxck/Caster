@@ -30,6 +30,8 @@ TOGGLE_CARET_BROWSING = "[toggle] caret browsing"
 GO_TO_HOMEPAGE = "[go] home [page]"
 SHOW_HISTORY = "[show] history"
 SELECT_ADDRESS_BAR = "address bar"
+PASTE_AND_GO = "paste and go"
+NEW_TAB_AND_GO = "tab and go"
 SHOW_DOWNLOADS = "[show] downloads"
 ADD_BOOKMARK = "[add] bookmark"
 BOOKMARK_ALL_TABS = "bookmark all [tabs]"
@@ -52,7 +54,7 @@ SHOW_DEVELOPER_TOOLS = "[show] developer tools"
 CHECKOUT_PR = "checkout [this] pull request [locally]"
 UPDATE_PR = "update [this] pull request [locally]"
 
-DEFAULTS = {"n": 1, "m":"", "nth": ""}
+DEFAULTS = {"n": 1, "m": "", "nth": ""}
 EXTRAS = [
     Choice("nth", {
         "first": "1",
