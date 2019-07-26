@@ -23,10 +23,14 @@ class TextFormat():
     5 incline - words/with/slashes
     '''
 
-    last_text = ""
+    last_spoken = ""
+    last_formatted = ""
 
     @classmethod
     def formatted_text(cls, capitalization, spacing, t):
+
+        TextFormat.last_spoken = t
+
         if capitalization != 0:
             if capitalization == 1:
                 t = t.upper()
@@ -52,7 +56,7 @@ class TextFormat():
             elif spacing == 6:
                 t = "\\".join(t.split(" "))
         
-        TextFormat.last_text = t
+        TextFormat.last_formatted = t
         return t
 
     @classmethod
@@ -140,9 +144,9 @@ def master_format_text(capitalization, spacing, textnv):
 
 
 def delete_last_text():
-    Key("backspace:%d" % len(TextFormat.last_text)).execute()
+    Key("backspace:%d" % len(TextFormat.last_formatted)).execute()
 
 
 def reformat_last_text(capitalization, spacing):
-    master_format_text(capitalization, spacing, TextFormat.last_text)
+    master_format_text(capitalization, spacing, TextFormat.last_spoken)
 
