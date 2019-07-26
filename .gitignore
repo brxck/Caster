@@ -48,3 +48,6 @@ castervoice.egg-info
 
 # Ignore Notepad++ backup files
 **/nppBackup
+
+# Virtual Environment
+.env
