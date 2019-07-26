@@ -297,7 +297,12 @@ class Navigation(MergeRule):
         "rolick [<nnavi500>]": R(Key("s-right:%(nnavi500)s")),
         "lorex [<nnavi500>]": R(Key("cs-left:%(nnavi500)s")),
         "rolex [<nnavi500>]": R(Key("cs-right:%(nnavi500)s")),
-        
+
+        "punch [<nnavi10>]":
+            R(Key("pagedown:%(nnavi10)s")),
+        "pinch [<nnavi10>]":
+            R(Key("pageup:%(nnavi10)s"),
+
         "<modifier> <button_dictionary_500> [<nnavi500>]":
               R(Key("%(modifier)s%(button_dictionary_500)s") * Repeat(extra='nnavi500'), 
               rdescript="press modifier keys plus buttons from button_dictionary_500"),
