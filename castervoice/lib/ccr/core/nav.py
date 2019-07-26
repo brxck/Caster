@@ -293,8 +293,8 @@ class Navigation(MergeRule):
         "(ross wally | struck) [<nnavi10>]": R(Key("end:%(nnavi10)s")),
         "lore [<nnavi500>]": R(Key("c-left:%(nnavi500)s")),
         "role [<nnavi500>]": R(Key("c-right:%(nnavi500)s")),
-        "rolick [<nnavi500>]": R(Key("s-left:%(nnavi500)s")),
-        "lorick [<nnavi500>]": R(Key("s-right:%(nnavi500)s")),
+        "lorick [<nnavi500>]": R(Key("s-left:%(nnavi500)s")),
+        "rolick [<nnavi500>]": R(Key("s-right:%(nnavi500)s")),
         "lorex [<nnavi500>]": R(Key("cs-left:%(nnavi500)s")),
         "rolex [<nnavi500>]": R(Key("cs-right:%(nnavi500)s")),
         
