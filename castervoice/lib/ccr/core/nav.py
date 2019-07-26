@@ -211,6 +211,8 @@ class Navigation(MergeRule):
             R(Key("home, enter, up"), rspec="slip") * Repeat(extra="nnavi50"),
         # "(<mtn_dir> | <mtn_mode> [<mtn_dir>]) [(<nnavi500> | <extreme>)]":
         #     R(Function(text_utils.master_text_nav)), # this is now implemented below
+        "select all":
+            R(Key("c-a")),
         "shift click":
             R(Key("shift:down") + Mouse("left") + Key("shift:up")),
         "copy [<nnavi500>]":
