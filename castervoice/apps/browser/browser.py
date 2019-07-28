@@ -4,7 +4,6 @@
 from castervoice.lib.imports import *
 
 from castervoice.apps.shared.directions import FORWARD, RIGHT, BACK, LEFT
-from castervoice.lib.dfplus.additions import IntegerRefST
 
 OPEN_NEW_WINDOW = "(new window|win new)"
 OPEN_NEW_INCOGNITO_WINDOW = "(new incognito window | incognito)"
