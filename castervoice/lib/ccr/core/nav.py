@@ -303,7 +303,7 @@ class Navigation(MergeRule):
         "punch [<nnavi10>]":
             R(Key("pagedown:%(nnavi10)s")),
         "pinch [<nnavi10>]":
-            R(Key("pageup:%(nnavi10)s"),
+            R(Key("pageup:%(nnavi10)s")),
 
         "<modifier> <button_dictionary_500> [<nnavi500>]":
               R(Key("%(modifier)s%(button_dictionary_500)s") * Repeat(extra='nnavi500'), 
