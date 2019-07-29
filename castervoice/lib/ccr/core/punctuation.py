@@ -56,7 +56,6 @@ text_punc_dict = {
     "bam":                                               ", ",
     "boom":                                              ". ",
 
-
     "[open] bend":                                        "(",
     "(close bend|rend)":                                  ")",
     "[open] angle":                                       "<",
@@ -94,7 +93,7 @@ class Punctuation(MergeRule):
             R(Key("tab"))*Repeat(extra="npunc"),
         "(back | shin) shock [<npunc>]":
             R(Key("s-tab"))*Repeat(extra="npunc"),
-        "ace [<npunc100>]":
+        "void [<npunc100>]":
             R(Text(" "))*Repeat(extra="npunc100"),
     }
 
