@@ -8,91 +8,83 @@ def _apply(n):
 
 class GitBashRule(MergeRule):
     mapping = {
-        "(git|get) base":
+        "git base":
             Text("git "),
-        "(git|get) (initialize repository|init)":
+        "git (initialize repository|init)":
             Text("git init"),
-        "(git|get) add":
+        "git add":
             R(Text("git add .")),
-        "(git|get) add all":
+        "git add all":
             R(Text("git add -A")),
-        "(git|get) commit all":
+        "git commit all":
             R(Mimic("git", "add", "all", "git", "commit")),
-        "(git|get) status":
+        "git status":
             R(Text("git status")),
-        "(git|get) log":
+        "git log":
             R(Text("git log")),
-        "(git|get) log one line":
+        "git log one line":
             R(Text("git log --oneline")),
-        "(git|get) commit":
+        "git commit":
             R(Text("git commit -m \"\"") + Key("left")),
-        "(git|get) bug fix commit <n>":
+        "git bug fix commit <n>":
             R(Mimic("get", "commit") + Text("Fixes #%(n)d ") + Key("backspace")),
-        "(git|get) reference commit <n>":
+        "git reference commit <n>":
             R(Mimic("get", "commit") + Text("Refs #%(n)d ") + Key("backspace")),
-        "(git|get) checkout":
-            R(Text("git checkout ")),
-        "(git|get) branch":
+        "git checkout <branch>":
+            R(Text("git checkout %(branch)s")),
+        "git branch":
             R(Text("git branch ")),
-        "(git|get) checkout branch":
-            R(Text("git checkout -b ")),
-        "(git|get) remote":
+        "git checkout branch":
+            R(Text("git checkout -b")),
+        "git remote":
             R(Text("git remote ")),
-        "(git|get) merge":
-            R(Text("git merge ")),
-        "(git|get) merge tool":
+        "git merge <branch>":
+            R(Text("git merge %(branch)s")),
+        "git merge tool":
             R(Text("git mergetool")),
-        "(git|get) rebase":
+        "git rebase":
             R(Text("git rebase ")),
-        "(git|get) fetch":
+        "git fetch":
             R(Text("git fetch ")),
-        "(git|get) push":
-            R(Text("git push ")),
-        "(git|get) push origin master":
-            R(Text("git push origin master")),
-        "(git|get) pull":
-            R(Text("git pull ")),
-        "CD up":
-            R(Text("cd ..")),
-        "CD":
-            R(Text("cd ")),
-        "LS":
-            R(Text("ls")),
-        "make directory":
-            R(Text("mkdir ")),
-        "undo [last] commit | (git|get) reset soft head":
+        "git push <remote> <branch>":
+            R(Text("git push %(remote)s %(branch)s")),
+        "git pull <remote> <branch>":
+            R(Text("git pull %(remote)s %(branch)s")),
+
+        "undo [last] commit | git reset soft head":
             R(Text("git reset --soft HEAD~1")),
-        "(undo changes | (git|get) reset hard)":
+        "(undo changes | git reset hard)":
             R(Text("git reset --hard")),
-        "stop tracking [file] | (git|get) remove":
+        "stop tracking [file] | git remove":
             R(Text("git rm --cached ")),
-        "preview remove untracked | (git|get) clean preview":
+        "preview remove untracked | git clean preview":
             R(Text("git clean -nd")),
-        "remove untracked | (git|get) clean untracked":
+        "remove untracked | git clean untracked":
             R(Text("git clean -fd")),
-        "(git|get) visualize":
+
+        "git visualize":
             R(Text("gitk")),
-        "(git|get) visualize file":
+        "git visualize file":
             R(Text("gitk -- PATH")),
-        "(git|get) visualize all":
+        "git visualize all":
             R(Text("gitk --all")),
-        "(git|get) stash":
+        "git stash":
             R(Text("git stash")),
-        "(git|get) stash apply [<n>]":
+        "git stash apply [<n>]":
             R(Text("git stash apply") + Function(_apply)),
-        "(git|get) stash list":
+        "git stash list":
             R(Text("git stash list")),
-        "(git|get) stash branch":
+        "git stash branch":
             R(Text("git stash branch NAME")),
-        "(git|get) cherry pick":
+        "git cherry pick":
             R(Text("git cherry-pick ")),
-        "(git|get) (abort cherry pick | cherry pick abort)":
+        "git (abort cherry pick | cherry pick abort)":
             R(Text("git cherry-pick --abort")),
-        "(git|get) (GUI | gooey)":
+        "git (GUI | gooey)":
             R(Text("git gui")),
-        "(git|get) blame":
+        "git blame":
             R(Text("git blame PATH -L FIRSTLINE,LASTLINE")),
-        "(git|get) gooey blame":
+        "git gooey blame":
             R(Text("git gui blame PATH")),
         "search recursive":
             R(Text("grep -rinH \"PATTERN\" *")),
@@ -105,15 +97,23 @@ class GitBashRule(MergeRule):
     }
     extras = [
         IntegerRefST("n", 1, 10000),
+        Choice("branch", {
+            "master": "master",
+            "develop": "develop",
+        }),
+        Choice("remote", {
+            "origin": "origin",
+            "upstream": "upstream"
+        })
     ]
     defaults = {"n": 0}
 
 
 terminal_context = AppContext(executable=[
-    "gnome-terminal",
-    "guake",
-    "cool-retro-term",
-    "hyper",
+    "\\gnome-terminal",
+    "\\guake",
+    "\\cool-retro-term",
+    "\\hyper",
     "\\git-bash.exe"
 ])
 
