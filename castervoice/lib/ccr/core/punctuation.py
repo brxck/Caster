@@ -93,7 +93,7 @@ class Punctuation(MergeRule):
             R(Key("tab"))*Repeat(extra="npunc"),
         "(back | shin) shock [<npunc>]":
             R(Key("s-tab"))*Repeat(extra="npunc"),
-        "void [<npunc100>]":
+        "haste [<npunc100>]":
             R(Text(" "))*Repeat(extra="npunc100"),
     }
 
