@@ -6,6 +6,4 @@ ignored-modules=natlink,natlinkstatus
 extension-pkg-whitelist=pythoncom,wx,pydevd,win32gui
 
 [MESSAGES CONTROL]
-disable=all
-enable=E
-disable=undefined-variable
+disable=C,R,W,undefined-variable
