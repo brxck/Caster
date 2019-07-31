@@ -8,6 +8,58 @@ def _apply(n):
 
 class GitBashRule(MergeRule):
     mapping = {
+        "sudo":
+            R(Text("sudo "), rdescript="Terminal: sudo"),
+        "LS":
+            R(Text("ls "), rdescript="Terminal: ls"),
+        "CD":
+            R(Text("cd "), rdescript="Terminal: cd"),
+        "CD up":
+            R(Text("cd .."), rdescript="Terminal: cd .."),
+        "CD back":
+            R(Text("cd -"), rdescript="Terminal: cd -"),
+        "CD home":
+            R(Text("cd -"), rdescript="Terminal: cd ~"),
+        "PWD":
+            R(Text("pwd"), rdescript="Terminal: pwd"),
+        "make dir":
+            R(Text("mkdir "), rdescript="Terminal: mkdir"),
+        "touch":
+            R(Text("touch "), rdescript="Terminal: touch"),
+        "less":
+            R(Text("less "), rdescript="Terminal: less"),
+        "rim":
+            R(Text("rm "), rdescript="Terminal: rm"),
+        "rim raf":
+            R(Text("rm -rf"), rdescript="Terminal: rm -rf"),
+        "CP":
+            R(Text("cp "), rdescript="Terminal: cp"),
+        "MV":
+            R(Text("mv "), rdescript="Terminal: mv"),
+        "find":
+            R(Text("find "), rdescript="Terminal: find"),
+        "man":
+            R(Text("man "), rdescript="Terminal: man"),
+        "grep":
+            R(Text("grep "), rdescript="Terminal: grep"),
+        "history":
+            R(Key("c-r"), rdescript="Terminal: Command History"),
+        
+        "dang":
+            R(Text("fuck") + Key("enter"), rdescript="Terminal: fuck"),
+        "micro":
+            R(Text("micro"), rdescript="Terminal: micro"),
+        "tldr":
+            R(Text("tldr "), rdescript="Terminal: tldr"),
+
+        "cut":
+            R(Key("cs-x"), rdescript="Terminal: Cut"),
+        "copy":
+            R(Key("cs-c"), rdescript="Terminal: Copy"),
+        "paste":
+            R(Key("cs-v"), rdescript="Terminal: Paste"),
+
+        # git
         "git base":
             Text("git "),
         "git (initialize repository|init)":
@@ -86,14 +138,8 @@ class GitBashRule(MergeRule):
             R(Text("git blame PATH -L FIRSTLINE,LASTLINE")),
         "git gooey blame":
             R(Text("git gui blame PATH")),
-        "search recursive":
-            R(Text("grep -rinH \"PATTERN\" *")),
-        "search recursive count":
-            R(Text("grep -rinH \"PATTERN\" * | wc -l")),
-        "search recursive filetype":
-            R(Text("find . -name \"*.java\" -exec grep -rinH \"PATTERN\" {} \\;")),
-        "to file":
-            R(Text(" > FILENAME")),
+
+
     }
     extras = [
         IntegerRefST("n", 1, 10000),
@@ -109,21 +155,9 @@ class GitBashRule(MergeRule):
     defaults = {"n": 0}
 
 
-terminal_context = AppContext(executable=[
-    "\\gnome-terminal",
-    "\\guake",
-    "\\cool-retro-term",
-    "\\hyper",
-    "\\git-bash.exe"
-])
+terminal_context = AppContext(title="gnome-terminal") \
+    | AppContext(title="guake")
 
-jetbrains_context = AppContext(executable="idea", title="IntelliJ") \
-    | AppContext(executable="idea64", title="IntelliJ") \
-    | AppContext(executable="studio64") \
-    | AppContext(executable="pycharm")
-
-vs_code_context = AppContext(title="Visual Studio Code", executable="code")
-
-context = terminal_context | jetbrains_context | vs_code_context
+context = terminal_context
 
 control.ccr_app_rule(GitBashRule(), context)
