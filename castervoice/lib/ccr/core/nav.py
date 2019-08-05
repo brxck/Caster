@@ -45,13 +45,13 @@ class NavigationNon(MergeRule):
             R(Key("f6")),
         "(F nine | F9)":
             R(Key("f9")),
-        "[show] context menu":
+        "context menu":
             R(Key("s-f10")),
         "lean":
             R(Function(navigation.right_down, nexus=_NEXUS)),
         "hoist":
             R(Function(navigation.right_up, nexus=_NEXUS)),
-        "kick mid":
+        "mid kick":
             R(Function(navigation.middle_click, nexus=_NEXUS)),
         "shift right click":
             R(Key("shift:down") + Mouse("right") + Key("shift:up")),
@@ -71,20 +71,13 @@ class NavigationNon(MergeRule):
                 nexus=_NEXUS,
                 capitalization=0,
                 spacing=0)),
-        # "sure stoosh":
-        #     R(Key("c-c")),
-        # "sure cut":
-        #     R(Key("c-x")),
-        # "sure spark":
-        #     R(Key("c-v")),
+
         "refresh":
             R(Key("c-r")),
         "window up":
             R(Key("w-up")),
         "window down":
             R(Key("w-down")),
-        "move window":
-            R(Key("a-space, r, a-space, m")),
         "window (left | lease) [<n>]":
             R(Key("w-left"))*Repeat(extra="n"),
         "window (right | ross) [<n>]":
@@ -93,14 +86,12 @@ class NavigationNon(MergeRule):
             R(Key("sw-left"))*Repeat(extra="n"),
         "monitor (right | ross) [<n>]":
             R(Key("sw-right"))*Repeat(extra="n"),
-        "(next | prior) window":
-            R(Key("ca-tab, enter")),
-        "switch (window | windows)":
-            R(Key("ca-tab"))*Repeat(extra="n"),
         # "nexta [<n>]":    # CCR
         # "prexta [<n>]":
-        "close tab [<n>]":
+        "tab close[<n>]":
             R(Key("c-w/20"))*Repeat(extra="n"),
+        "tab restore":
+            R(Key("cs-t")),
         "elite translation <text>":
             R(Function(alphanumeric.elite_text)),
 
@@ -200,7 +191,7 @@ class Navigation(MergeRule):
 
     # keyboard shortcuts
         "meta [<textnv>]":
-            R(Key("win") + Text("%(textnv)s"), rspec="meta"),
+            R(Key("win/20") + Text("%(textnv)s"), rspec="meta"),
         "save":
             R(Key("c-s"), rspec="save"),
         "slap [<nnavi50>]":
