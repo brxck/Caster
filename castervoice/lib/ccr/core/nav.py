@@ -192,9 +192,9 @@ class Navigation(MergeRule):
         #     finisher=Key("right"), time_in_seconds=0.1, repetitions=50 ),
 
         "nexta [<nnavi10>]":
-            R(Key("c-pgdown"))*Repeat(extra="n"),
+            R(Key("c-pgdown"))*Repeat(extra="nnavi10"),
         "prexta [<nnavi10>]":
-            R(Key("c-pgup"))*Repeat(extra="n"),
+            R(Key("c-pgup"))*Repeat(extra="nnavi10"),
         "quake":
             R(Key("f12")),
 
