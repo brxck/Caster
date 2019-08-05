@@ -44,6 +44,13 @@ class GitBashRule(MergeRule):
             R(Text("grep "), rdescript="Terminal: grep"),
         "history":
             R(Key("c-r"), rdescript="Terminal: Command History"),
+
+        "dir home":
+            R(Text("~/"), rdescript="Terminal: Home Directory Prefix"),
+        "dir up":
+            R(Text("../"), rdescript="Terminal: Parent Directory Prefix"),
+        "dir here":
+            R(Text("./"), rdescript="Terminal: Home Directory Prefix"),
         
         "dang":
             R(Text("fuck") + Key("enter"), rdescript="Terminal: fuck"),
@@ -82,7 +89,7 @@ class GitBashRule(MergeRule):
             R(Mimic("get", "commit") + Text("Fixes #%(n)d ") + Key("backspace")),
         "git reference commit <n>":
             R(Mimic("get", "commit") + Text("Refs #%(n)d ") + Key("backspace")),
-        "git checkout <branch>":
+        "git checkout [<branch>]":
             R(Text("git checkout %(branch)s")),
         "git branch":
             R(Text("git branch ")),
@@ -90,7 +97,7 @@ class GitBashRule(MergeRule):
             R(Text("git checkout -b")),
         "git remote":
             R(Text("git remote ")),
-        "git merge <branch>":
+        "git merge [<branch>]":
             R(Text("git merge %(branch)s")),
         "git merge tool":
             R(Text("git mergetool")),
@@ -98,9 +105,9 @@ class GitBashRule(MergeRule):
             R(Text("git rebase ")),
         "git fetch":
             R(Text("git fetch ")),
-        "git push <remote> <branch>":
+        "git push [<remote>] [<branch>]":
             R(Text("git push %(remote)s %(branch)s")),
-        "git pull <remote> <branch>":
+        "git pull [<remote>] [<branch>]":
             R(Text("git pull %(remote)s %(branch)s")),
 
         "undo [last] commit | git reset soft head":
