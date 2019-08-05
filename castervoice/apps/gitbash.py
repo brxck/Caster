@@ -6,8 +6,43 @@ def _apply(n):
         Text("stash@{" + str(int(n)) + "}").execute()
 
 
+npm_commands = {
+    "base": "",
+    "install": "i",
+    "install dev": "i --save-dev",
+    "update": "up",
+    "build": "build",
+    "ci": "ci",
+    "explore": "explore",
+    "init": "init",
+    "outdated": "outdated",
+    "start": "start",
+    "uninstall": "r",
+
+    "run": "run",
+    "run develop": "run develop",
+    "run build": "run build",
+}
+
+vagrant_command_list = ["up", "resume", "provision",
+                        "reload", "ssh", "halt", "suspend", "destroy", "status"]
+
+vagrant_commands = {command: command for command in vagrant_command_list}
+
+
 class GitBashRule(MergeRule):
     mapping = {
+        "term interrupt":
+            R(Key("c-c")),
+        "term end":
+            R(Key("c-d")),
+        "term suspend":
+            R(Key("c-z")),
+        "term history":
+            R(Key("c-r"), rdescript="Terminal: Command History"),
+        "whack":
+            R(Key("c-w")),
+
         "sudo":
             R(Text("sudo "), rdescript="Terminal: sudo"),
         "LS":
@@ -42,8 +77,6 @@ class GitBashRule(MergeRule):
             R(Text("man "), rdescript="Terminal: man"),
         "grep":
             R(Text("grep "), rdescript="Terminal: grep"),
-        "history":
-            R(Key("c-r"), rdescript="Terminal: Command History"),
 
         "dir home":
             R(Text("~/"), rdescript="Terminal: Home Directory Prefix"),
@@ -51,7 +84,7 @@ class GitBashRule(MergeRule):
             R(Text("../"), rdescript="Terminal: Parent Directory Prefix"),
         "dir here":
             R(Text("./"), rdescript="Terminal: Home Directory Prefix"),
-        
+
         "dang":
             R(Text("fuck") + Key("enter"), rdescript="Terminal: fuck"),
         "micro":
@@ -66,11 +99,23 @@ class GitBashRule(MergeRule):
         "paste":
             R(Key("cs-v"), rdescript="Terminal: Paste"),
 
+        # npm
+        "NPM <npm_command>":
+            R(Text("npm %(npm_command)s ")),
+
+        # Django
+        "django manage":
+            R(Text("python manage.py ")),
+
+        # Vagrant
+        "vagrant <vagrant_command>":
+            R(Text("vagrant %(vagrant_command)s ")),
+
         # git
         "git base":
-            Text("git "),
+            R(Text("git ")),
         "git (initialize repository|init)":
-            Text("git init"),
+            R(Text("git init")),
         "git add":
             R(Text("git add .")),
         "git add all":
@@ -157,7 +202,9 @@ class GitBashRule(MergeRule):
         Choice("remote", {
             "origin": "origin",
             "upstream": "upstream"
-        })
+        }),
+        Choice("npm_command", npm_commands),
+        Choice("vagrant_command", vagrant_commands)
     ]
     defaults = {"n": 0}
 
