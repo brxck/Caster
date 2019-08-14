@@ -86,9 +86,9 @@ class Punctuation(MergeRule):
             R(Text("%(long)s" + "\\" + "%(long)s"))*Repeat(extra="npunc"),
         # "<double_text_punc> [<npunc>]":
         #     R(Text("%(double_text_punc)s") + Key("left"))*Repeat(extra="npunc"),
-        "[<long>] pair <text_punc>":
-            R(Text("%(text_punc)s" + "%(long)s" + "%(long)s") + \
-              Mimic("close", "%(text_punc)s")),
+        # "[<long>] pair <text_punc>":
+        #     R(Text("%(text_punc)s" + "%(long)s" + "%(long)s") + \
+        #       Mimic("close", "%(text_punc)s")),
         "shock [<npunc>]":
             R(Key("tab"))*Repeat(extra="npunc"),
         "(back | shin) shock [<npunc>]":

@@ -191,7 +191,7 @@ class Navigation(MergeRule):
 
     # keyboard shortcuts
         "meta [<textnv>]":
-            R(Key("win/20") + Text("%(textnv)s"), rspec="meta"),
+            R(Key("win/50") + Text("%(textnv)s"), rspec="meta"),
         "save":
             R(Key("c-s"), rspec="save"),
         "slap [<nnavi50>]":
@@ -282,8 +282,8 @@ class Navigation(MergeRule):
         # keystroke commands
         "<direction> [<nnavi500>]": R(Key("%(direction)s") * Repeat(extra='nnavi500'),
             rdescript="Arrow Key: %(direction)s"),
-        "(lease wally | strike) [<nnavi10>]": R(Key("home:%(nnavi10)s")),
-        "(ross wally | struck) [<nnavi10>]": R(Key("end:%(nnavi10)s")),
+        "strike [<nnavi10>]": R(Key("home:%(nnavi10)s")),
+        "struck [<nnavi10>]": R(Key("end:%(nnavi10)s")),
         "lore [<nnavi500>]": R(Key("c-left:%(nnavi500)s")),
         "role [<nnavi500>]": R(Key("c-right:%(nnavi500)s")),
         "lorick [<nnavi500>]": R(Key("s-left:%(nnavi500)s")),
