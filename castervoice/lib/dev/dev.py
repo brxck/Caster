@@ -221,11 +221,11 @@ class StackTest(MappingRule):
                     S(["span", "div"], close_last_rspec, use_rspec=True))
             ]),
         "html":
-            R(Text("<html>"), rspec="html spoken"),
+            R(Text("<html>")),
         "divider":
-            R(Text("<div>"), rspec="div"),
+            R(Text("<div>")),
         "span":
-            R(Text("<span>"), rspec="span"),
+            R(Text("<span>")),
         "backward seeker [<text>]":
             ContextSeeker([
                 L(
@@ -255,11 +255,11 @@ class StackTest(MappingRule):
                                finisher=Text(FINISHER_TEXT),
                                blocking=False),
         "ashes":
-            RegisteredAction(Text("ashes _ "), rspec="ashes"),
+            RegisteredAction(Text("ashes _ ")),
         "bravery":
-            RegisteredAction(Text("bravery _ "), rspec="bravery"),
+            RegisteredAction(Text("bravery _ ")),
         "charcoal <text> [<n>]":
-            R(Text("charcoal _ %(text)s"), rspec="charcoal"),
+            R(Text("charcoal _ %(text)s")),
         "test confirm action":
             ConfirmAction(
                 Key("a"), rdescript="Confirm Action Test",

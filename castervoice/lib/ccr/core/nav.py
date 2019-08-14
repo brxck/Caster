@@ -191,15 +191,15 @@ class Navigation(MergeRule):
 
     # keyboard shortcuts
         "meta [<textnv>]":
-            R(Key("win/50") + Text("%(textnv)s"), rspec="meta"),
+            R(Key("win/50") + Text("%(textnv)s")),
         "save":
-            R(Key("c-s"), rspec="save"),
+            R(Key("c-s")),
         "slap [<nnavi50>]":
-            R(Key("enter"), rspec="slap") * Repeat(extra="nnavi50"),
+            R(Key("enter")) * Repeat(extra="nnavi50"),
         "slide [<nnavi50>]":
-            R(Key("end, enter"), rspec="slide") * Repeat(extra="nnavi50"),
+            R(Key("end, enter")) * Repeat(extra="nnavi50"),
         "slip [<nnavi50>]":
-            R(Key("home, enter, up"), rspec="slip") * Repeat(extra="nnavi50"),
+            R(Key("home, enter, up")) * Repeat(extra="nnavi50"),
         # "(<mtn_dir> | <mtn_mode> [<mtn_dir>]) [(<nnavi500> | <extreme>)]":
         #     R(Function(text_utils.master_text_nav)), # this is now implemented below
         "select all":
@@ -207,29 +207,29 @@ class Navigation(MergeRule):
         "shift click":
             R(Key("shift:down") + Mouse("left") + Key("shift:up")),
         "copy [<nnavi500>]":
-            R(Function(navigation.stoosh_keep_clipboard, nexus=_NEXUS), rspec="copy"),
+            R(Function(navigation.stoosh_keep_clipboard, nexus=_NEXUS)),
         "cut [<nnavi500>]":
-            R(Function(navigation.cut_keep_clipboard, nexus=_NEXUS), rspec="cut"),
+            R(Function(navigation.cut_keep_clipboard, nexus=_NEXUS)),
         "spark [<nnavi500>] [(<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]]":
-            R(Function(navigation.drop_keep_clipboard, nexus=_NEXUS), rspec="spark"),
+            R(Function(navigation.drop_keep_clipboard, nexus=_NEXUS)),
         "whack [<splatdir>] [<nnavi10>]":
-            R(Key("c-%(splatdir)s"), rspec="splat") * Repeat(extra="nnavi10"),
+            R(Key("c-%(splatdir)s")) * Repeat(extra="nnavi10"),
         "bump [<nnavi10>]":
-            R(Key("c-delete"), rspec="bump") * Repeat(extra="nnavi10"),
+            R(Key("c-delete")) * Repeat(extra="nnavi10"),
         "chuck [<nnavi50>]":
-            R(Key("del/5"), rspec="deli") * Repeat(extra="nnavi50"),
+            R(Key("del/5")) * Repeat(extra="nnavi50"),
         "scratch [<nnavi50>]":
-            R(Key("backspace/5:%(nnavi50)d"), rspec="clear"),
+            R(Key("backspace/5:%(nnavi50)d")),
         SymbolSpecs.CANCEL:
-            R(Key("escape"), rspec="cancel"),
+            R(Key("escape")),
         "shackle":
-            R(Key("home/5, s-end"), rspec="shackle"),
+            R(Key("home/5, s-end")),
         "(tell | tau) <semi>":
-            R(Function(navigation.next_line), rspec="tell dock"),
+            R(Function(navigation.next_line)),
         "duple [<nnavi50>]":
-            R(Function(navigation.duple_keep_clipboard), rspec="duple"),
+            R(Function(navigation.duple_keep_clipboard)),
         "Kraken":
-            R(Key("c-space"), rspec="Kraken"),
+            R(Key("c-space")),
         "undo [<nnavi10>]":
             R(Key("c-z"))*Repeat(extra="nnavi10"),
         "redo [<nnavi10>]":
