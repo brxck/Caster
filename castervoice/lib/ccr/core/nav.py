@@ -20,7 +20,7 @@ _NEXUS = control.nexus()
 #     else:
 #         raise Exception("Need to deal with nonstandard pair length in double_text_punc_dict.")
 
-class NavigationNon(MergeRule): 
+class NavigationNon(MergeRule):
     mapping = {
         "clipboard erase":
             R(Function(navigation.erase_multi_clipboard, nexus=_NEXUS)),
@@ -281,7 +281,7 @@ class Navigation(MergeRule):
             R(Key("pageup:%(nnavi10)s")),
 
         "<modifier> <button_dictionary_500> [<nnavi500>]":
-              R(Key("%(modifier)s%(button_dictionary_500)s") * Repeat(extra='nnavi500'), 
+              R(Key("%(modifier)s%(button_dictionary_500)s") * Repeat(extra='nnavi500'),
               rdescript="press modifier keys plus buttons from button_dictionary_500"),
         "<modifier> <button_dictionary_10> [<nnavi10>]":
               R(Key("%(modifier)s%(button_dictionary_10)s") * Repeat(extra='nnavi10'),
@@ -315,7 +315,7 @@ class Navigation(MergeRule):
     combined_button_dictionary = {}
     for dictionary in [button_dictionary_1, button_dictionary_10, button_dictionary_500]:
         combined_button_dictionary.update(dictionary)
-    
+
     modifier_choice_object = Choice("modifier", {
             "(control | fly)": "c-", #TODO: make DRY
             "(shift | shin)": "s-",
@@ -333,10 +333,10 @@ class Navigation(MergeRule):
             "windows shift": "ws-",
             "windows alt": "wa-",
             "control windows alt shift": "cwas-",
-            "hit": "", 
+            "hit": "",
         })
     extras = [
-        
+
         IntegerRefST("nnavi10", 1, 11),
         IntegerRefST("nnavi3", 1, 4),
         IntegerRefST("nnavi50", 1, 50),
@@ -351,10 +351,10 @@ class Navigation(MergeRule):
         }),
         modifier_choice_object,
         Choice("button_dictionary_1", button_dictionary_1),
-        Choice("button_dictionary_10", button_dictionary_10), 
+        Choice("button_dictionary_10", button_dictionary_10),
         Choice("button_dictionary_500", button_dictionary_500),
         Choice("combined_button_dictionary", combined_button_dictionary),
-        
+
         Choice("capitalization", {
             "yell": 1,
             "tie": 2,

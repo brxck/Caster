@@ -3,11 +3,9 @@ Created on Oct 7, 2015
 
 @author: synkarius
 '''
-
 import os, sys, socket, time, pkg_resources, subprocess
 from pkg_resources import VersionConflict, DistributionNotFound
 from subprocess import Popen
-from castervoice.lib import settings
 
 update = None
 
@@ -18,7 +16,7 @@ def find_pip():
     if sys.platform == "win32":
         pip = os.path.join(python_scripts, "pip.exe")
         return pip
-    if sys.platform == "linux" or "linux2":
+    if sys.platform.startswith("linux"):
         pip = os.path.join(python_scripts, "pip")
         return pip
 
@@ -42,12 +40,18 @@ def internet_check(host="1.1.1.1", port=53, timeout=3):
     :param timeout: An integer
     :return: True or False
     """
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-        socket.setdefaulttimeout(timeout)
-        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
+        s.settimeout(timeout)
+        s.connect((host, port))
         return True
-    except Exception as error:
-        print(error.message)
+    except socket.error as e:
+        if e.errno == 11001:
+            print("Caster: Internet check failed to resolve CloudFire DNS")
+        if e.errno == 10051:  # Unreachable Network
+            pass
+        if e.errno not in (10051, 11001):  # Unknown Error
+            print(e.errno)
         return False
 
 
@@ -80,18 +84,21 @@ def dependency_check(command=None):
 
 
 def dep_missing():
-    # For classic: Checks for missing dependencies parsing requirements.txt
-    base = os.path.normpath(settings.SETTINGS["paths"]["BASE_PATH"] + os.sep + os.pardir)
-    requirements = os.path.join(base, "requirements.txt")
+    # Checks for missing dependencies with the classic install
+    uppath = lambda _path, n: os.sep.join(_path.split(os.sep)[:-n])
+    requirements = os.path.join(uppath(__file__, 4), "requirements.txt")
     with open(requirements) as f:
         requirements = f.read().splitlines()
     for dep in requirements:
+        dep = dep.split("==", 1)[0]
         try:
             pkg_resources.require("{}".format(dep))
         except VersionConflict:
             pass
         except DistributionNotFound as e:
-            print("\n Caster: A Dependency is missing 'pip install {0}'".format(e.req))
+            print(
+                "\n Caster: {0} dependency is missing. Use 'pip install {0}' in CMD or Terminal to install"
+                .format(e.req))
             time.sleep(15)
 
 
@@ -127,6 +134,18 @@ def dep_min_version():
             .format(pippackages))
 
 
+def online_mode():
+    # Tries to import settings on failure online_mode is true
+    try:
+        from castervoice.lib import settings
+        if settings.SETTINGS["miscellaneous"]["online_mode"] is True:
+            return True
+        else:
+            return False
+    except ImportError:
+        return True
+
+
 class DependencyMan:
     # Initializes functions
     def initialize(self):
@@ -134,11 +153,11 @@ class DependencyMan:
         if install is "classic":
             dep_min_version()
             dep_missing()
-        if settings.SETTINGS["miscellaneous"]["online_mode"]:
-            if internet_check():
+        if online_mode() == True:
+            if internet_check() == True:
+                dependency_check(command="dragonfly2")
                 if install is "pip":
                     dependency_check(command="castervoice")
-                dependency_check(command="dragonfly2")
             else:
                 print("\nCaster: Network off-line check network connection\n")
         else:
