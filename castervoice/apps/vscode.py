@@ -3,18 +3,6 @@ from castervoice.lib.imports import *
 from castervoice.lib.alphanumeric import caster_alphabet
 
 
-def findNthToken(text, n, direction):
-    Key("c-f").execute()
-    Text("%(text)s").execute({"text": text})
-    if direction == "reverse":
-        print("yeah? %(n)d")
-        Key("s-enter:%(n)d").execute()
-    else:
-        Key("enter:%(n)d").execute()
-        print("no? %(n)d")
-    Key('escape').execute()
-
-
 class VSCodeNonCcrRule(MergeRule):
     pronunciation = "Visual Studio Code Non Continuous"
     mapping = {
@@ -24,13 +12,7 @@ class VSCodeNonCcrRule(MergeRule):
         "[line] <action> <ln1> [by <ln2>]":
             R(Function(navigation.action_lines)),
 
-        "go back <n>":
-            R(Key("a-left") * Repeat(extra='n')),
-        "go forward [<n>]":
-            R(Key("a-right")) * Repeat(extra="n"),
-
         # Display
-        # note that most of these can be turned on/off with the same command
         "[toggle] full screen":
             R(Key("f11")),
         "flip layout":
@@ -50,9 +32,9 @@ class VSCodeNonCcrRule(MergeRule):
         "key mappings":
             R(Key("c-k, c-s:2")),
         "settings":
-            R(Key("a-f, p, s, enter"), rdescript="VS Code: User/workspace Settings"),
+            R(Key("a-f, p, s, enter")),
         "snippets":
-            R(Key("a-f, p, s:2, enter"), rdescript="VS Code: User Snippets"),
+            R(Key("a-f, p, s:2, enter")),
         "extensions":
             R(Key("cs-x")),
         "outline":
@@ -68,22 +50,21 @@ class VSCodeNonCcrRule(MergeRule):
         "Zen mode":
             R(Key("c-k, z")),
         "toggle centered":
-            R(Key("c-k, c-l"), rdescript="VS Code: Toggle Centered Layout"),
+            R(Key("c-k, c-l")),
         "change theme":
-            R(Key("c-k, c-t"), rdescript="VS Code: Change Theme"),
+            R(Key("c-k, c-t")),
 
         # File Management
         "copy path":
             R(Key("c-k, p")),
         "commander":
-            R(Key("cs-p"), rdescript="VS Code: Command Palette"),
+            R(Key("cs-p")),
         "go to [<text>]":
-            R(Key("c-p") + Text("%(text)s"),
-              rdescript="VS Code: Go to File without using dialogbox"),
+            R(Key("c-p") + Text("%(text)s")),
         "file open":
-            R(Key("c-o"), rdescript="VS Code: open file dialogbox"),
+            R(Key("c-o")),
         "folder open":
-            R(Key("c-k, c-o"), rdescript="VS Code: Open folder"),
+            R(Key("c-k, c-o")),
         "save and close":
             R(Key("c-s/10, c-w")),
         "file new":
@@ -100,16 +81,6 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("cs-s")),
         "save all":
             R(Key("c-k, s")),
-        "nexta [<n>]":
-            R(Key("c-pgdown") * Repeat(extra='n')),
-        "prexta [<n>]":
-            R(Key("c-pgup") * Repeat(extra='n')),
-        "tab close [<n>]":
-            R(Key("c-f4/20") * Repeat(extra='n')),
-        "tab switch [<n>]":
-            R(Key("c-tab") * Repeat(extra='n')),
-        "tab restore [<n>]":
-            R(Key("cs-t") * Repeat(extra='n')),
         "preview close":
             R(Key("space, c-z")),
         "preview pin":
@@ -134,16 +105,11 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("a-enter")),
 
         "toggle case sensitive":
-            R(Key("a-c"), rdescript="VS Code: Toggle Find Case Sensitive"),
+            R(Key("a-c")),
         "toggle regex":
-            R(Key("a-r"), rdescript="VS Code: Toggle Find Regular Expressions"),
+            R(Key("a-r")),
         "toggle whole word":
-            R(Key("a-w"), rdescript="VS Code: Toggle Find Whole Word"),
-
-        "(find | jump [to]) next <text>":
-            R(Function(findNthToken, n=1, direction="forward")),
-        "(find | jump [to]) previous <text>":
-            R(Function(findNthToken, n=1, direction="reverse")),
+            R(Key("a-w")),
         "show all symbols":
             R(Key("c-t")),
         "go to symbol":
@@ -156,17 +122,10 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("c-k, f")),
         "window split":
             R(Key("c-backslash")),
-        # CCR
-        # "next pane":
-        # "(prior | previous | un) pane":
-        # "<nth> pane":
         "group left":
-            R(Key("c-k, left"),
-              rdescript="VS Code: Shift Current Group of Tabs to the Left E.g. Swap with Pane to the Left"),
+            R(Key("c-k, left")),
         "group right":
-            R(Key("c-k, right"),
-              rdescript="VS Code: Shift Current Group of Tabs to the Right E.g. Swap with Pane to the Right"
-              ),
+            R(Key("c-k, right")),
         "<nth> tab":
             R(Key("a-%(nth)s")),
 
@@ -208,11 +167,9 @@ class VSCodeNonCcrRule(MergeRule):
         "stopper":
             R(Key("s-f5")),
         "continue":
-            R(Key("f5"), rdescript="VS Code: Start/Continue"),
+            R(Key("f5")),
         "(show hover|mouse hover|hover mouse)":
-            R(Key("c-k, c-i"),
-              rdescript="Show the little box as if you are hovering your mouse over the place where the cursor (As opposed to the mouse pointer) currently is"
-              ),
+            R(Key("c-k, c-i")),
         "[show] problems [panel]":
             R(Key("cs-m")),
         "next error":
@@ -223,7 +180,6 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("c-m")),
 
         # Integrated Terminal
-        # "[show] terminal":    #CCR
         "term new":
             R(Key("cs-backtick")),
         "term scroll up":
@@ -263,16 +219,16 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("csa-j")),
 
         # requires gitlens extension
-        # "toggle blame":
-        #     R(Key("cs-g, b")),
-        # "lens commit details":
-        #     R(Key("cs-g, c")),
-        # "lens file history":
-        #     R(Key("cs-g, h")),
-        # "lens repo status":
-        #     R(Key("cs-g, s")),
-        # "toggle git lens":
-        #     R(Key("cs-g, s-b")),
+        "toggle blame":
+            R(Key("cs-g, b")),
+        "lens commit details":
+            R(Key("cs-g, c")),
+        "lens file history":
+            R(Key("cs-g, h")),
+        "lens repo status":
+            R(Key("cs-g, s")),
+        "toggle git lens":
+            R(Key("cs-g, s-b")),
 
         # requires bookmark extension
         # "mark (prev | prior | previous)":
@@ -306,174 +262,109 @@ class VSCodeCcrRule(MergeRule):
     non = VSCodeNonCcrRule
 
     mapping = {
-        # Note: If you get the bad grammar grammar too complex error, move some of these commands into the non-CCR rule
-
-        # cursor/line navigation
+        # Scrolling
         "scroll up [<n>]":
-            R(Key("c-up") * Repeat(extra='n'),
-              rdescript="VS Code: Scroll Up One Line at a Time"),
+            R(Key("c-up") * Repeat(extra='n')),
         "scroll down [<n>]":
-            R(Key("c-down") * Repeat(extra='n'),
-              rdescript="VS Code: Scroll Down One Line at a Time"),
+            R(Key("c-down") * Repeat(extra='n')),
         "scroll page up [<n>]":
-            R(Key("a-pgup") * Repeat(extra='n'),
-              rdescript="VS Code: Scroll Up One Page Up at a Time"),
+            R(Key("a-pgup") * Repeat(extra='n')),
         "scroll page down [<n>]":
-            R(Key("a-pgdown") * Repeat(extra='n'),
-              rdescript="VS Code: Scroll Down One Page Down At a Time"),
+            R(Key("a-pgdown") * Repeat(extra='n')),
 
-        # line manipulation
+        # Line Manipulation
         "indent [<n>]":
-            R(Key("c-rbracket"), rdescript="VS Code: Indent"),
+            R(Key("c-rbracket") * Repeat(extra='n')),
         "(unindent|outdent) [<n>]":
-            R(Key("c-lbracket"), rdescript="VS Code: Unindent"),
-        "comment [line]":
-            R(Key("c-slash"), rdescript="VS Code: Line Comment"),
+            R(Key("c-lbracket") * Repeat(extra='n')),
+        "comment":
+            R(Key("c-slash")),
         "block comment":
-            R(Key("sa-a"), rdescript="VS Code: Block Comment"),
-
-        # Multi-cursor and selection
-        "soft undo":
-            R(Key("c-u"),
-              rdescript="VS Code: Soft Undo"),
-        "cursor above [<n>]":
-            R(Key("sa-up") * Repeat(extra='n'),
-              rdescript="VS Code: Insert Cursor Above"),
-        "cursor below [<n>]":
-            R(Key("sa-down") * Repeat(extra='n'),
-              rdescript="VS Code: Insert Cursor Above"),
-        "cursor ends":
-            R(Key("sa-i") * Repeat(extra='n'),
-              rdescript="VS Code: Add Cursors to Line Ends"),
-        # "tall cursor up":
-        #     R(Key("csa-pgup"), rdescript="VS Code: Add Cursors All The Way Up"),
-        # "tall cursor down":
-        #     R(Key("csa-pgdown"), rdescript="VS Code: Add Cursors All The Way Down"),
-
-        "expand  [<n>]": R(Key("sa-right"),
-                           rdescript="highlight current word(s)") * Repeat(extra='n'),
-        "shrink  [<n>]": R(Key("sa-left"),
-                           rdescript="shrink the previous highlighting range or unhighlight") * Repeat(extra='n'),
-
-        # # Command below requires "brackets select" extension for VS code
-        # "select [in] brackets [<n>]":
-        #     R(Key("ca-a") * Repeat(extra='n'),
-        #       rdescript="VS Code: Select in between parable punctuation inclusive using 'brackets select' extension"
-        #       )*Repeat(extra='n'),
-
-        # "all current selection":
-        #     R(Key("cs-l"), rdescript="VS Code: Select All Occurrences of Current Selection"),
-        "select word":
-            R(Key("c-f2"), rdescript="VS Code: Select All Occurrences of Current Word"),
-        "select next [<n>]":
-            R(Key("c-f3") * Repeat(extra='n'),
-              rdescript="VS Code: Select Next Occurrence of Current Word"),
-        "go to next [<n>]":
-            R(Key("sa-right/2, c-f3, c-left/2, escape") * Repeat(extra='n'),
-              rdescript="VS Code: Go to Next Occurrence of Current Word"),
-        # may or may not want the escape afterwards to close the find box
-        # note the above command might sometimes be off by one so you have to say one higher
-        # than what you mean e.g. if the cursor is at the beginning of the word rather
-        # than in the middle or end, you will have to say "next word two" to get to the next word
-        "select prior [<n>]":
-            R(Key("cs-f3"), rdescript="VS Code: Select Prior Occurrence of Current Word"),
-        "go to prior [<n>]":
-            R(Key("sa-right/2, cs-f3, c-left/2, escape") * Repeat(extra='n'),
-              rdescript="VS Code: Go to Prior Occurrence of Current Word"),
-        # may or may not want the escape afterwards to close the find box
-
-        "cursor all":
-            R(Key("cs-l"),
-              rdescript="VS Code: Add Cursor to All Occurrences of Current Selection"),
-        "cursor next [<n>]":
-            R(Key("c-d") * Repeat(extra='n'),
-              rdescript="VS Code: Add Cursor to Next Occurrence of Current Selection"),
-        "hard delete [<n>]":
-            R(Key("s-del"), rdescript="VS Code: Eliminates Line not Just the Text on it"),
-        "copy up [<n>]":
-            R(Key("sa-up") * Repeat(extra='n'),
-              rdescript="VS Code: Duplicate Line Above"),
-        "copy down [<n>]":
-            R(Key("sa-down") * Repeat(extra='n'),
-              rdescript="VS Code: Duplicate Line Below"),
+            R(Key("sa-a")),
+        "line delete [<n>]":
+            R(Key("s-del") * Repeat(extra='n')),
         "switch up [<n>]":
-            R(Key("a-up") * Repeat(extra='n'),
-              rdescript="VS Code: Switch Line With the One Above it"),
+            R(Key("a-up") * Repeat(extra='n')),
         "switch down [<n>]":
-            R(Key("a-down") * Repeat(extra='n'),
-              rdescript="VS Code: Switch Line With the One Below it"),
-        "match bracket":
-            R(Key("cs-backslash"), rdescript="VS Code: Jump to Matching"),
+            R(Key("a-down") * Repeat(extra='n')),
+        "copy up [<n>]":
+            R(Key("csa-up") * Repeat(extra='n')),
+        "copy down [<n>]":
+            R(Key("csa-down") * Repeat(extra='n')),
+
+        # Cursor
+        "soft undo":
+            R(Key("c-u")),
+        "cursor all":
+            R(Key("cs-l")),
+        "cursor next [<n>]":
+            R(Key("c-d") * Repeat(extra='n')),
+        "cursor up [<n>]":
+            R(Key("sa-up") * Repeat(extra='n')),
+        "cursor down [<n>]":
+            R(Key("sa-down") * Repeat(extra='n')),
+        "cursor ends":
+            R(Key("sa-i") * Repeat(extra='n')),
+        "cursor bracket":
+            R(Key("cs-backslash")),
+
+        # Selection
+        "expand [<n>]":
+            R(Key("sa-right")) * Repeat(extra='n'),
+        "shrink [<n>]":
+            R(Key("sa-left")) * Repeat(extra='n'),
 
         # Stolen from above rule
         "show terminal":
             R(Key("c-backtick")),
         "toggle terminal":
             R(Key("c-backtick:2")),
-        "find":
-            R(Key("c-f")),
-        "next pane":
+        "pane next":
             R(Key("c-k, c-right")),
-        "(prior | previous | un) pane":
+        "pane prior":
             R(Key("c-k, c-right")),
         "<m> pane":
             R(Key("c-%(m)s")),
 
         # Emmet
         "rip":
-            R(Key("s-space"), rdescript="VS Code: Emmet Expand Abbreviation"),
+            R(Key("s-space")),
         "wrap tag":
-            R(Key("c-e, w"), rdescript="VS Code: Emmet Wrap Tag"),
+            R(Key("c-e, w")),
         "update tag":
-            R(Key("c-e, e"), rdescript="VS Code: Emmet Update Tag"),
+            R(Key("c-e, e")),
         "remove tag":
-            R(Key("c-e, r"), rdescript="VS Code: Emmet Remove Tag"),
+            R(Key("c-e, r")),
         "(split|join) tag":
-            R(Key("c-e, s"), rdescript="VS Code: Emmet Split/Join Tag"),
+            R(Key("c-e, s")),
         "next edit":
-            R(Key("c-e, v"), rdescript="VS Code: Emmet Next Edit Point"),
+            R(Key("c-e, v")),
         "prior edit":
-            R(Key("c-e, c"), rdescript="VS Code: Emmet Previous Edit Point"),
+            R(Key("c-e, c")),
 
         # metaGo extension
         "hyper <letters>":
-            R(Key("a-semicolon/5, %(letters)s"),
-              rdescript="VS Code: metaGo Go To"),
+            R(Key("a-semicolon/5, %(letters)s")),
         "hyper select <letters>":
-            R(Key("sa-semicolon/5, %(letters)s"),
-              rdescript="VS Code: metaGo Go To & Select"),
-        "line select up":
-            R(Key("c-i"), rdescript="VS Code: metaGo Select Up Block"),
-        "line select down":
-            R(Key("cs-i"), rdescript="VS Code: metaGo Select Down Block"),
+            R(Key("sa-semicolon/5, %(letters)s")),
+        "select up":
+            R(Key("cs-i")),
+        "select down":
+            R(Key("c-i")),
         "block up":
-            R(Key("a-home"), rdescript="VS Code: metaGo Move Up Block"),
+            R(Key("a-home")),
         "block down":
-            R(Key("a-end"), rdescript="VS Code: metaGo Move Down Block"),
+            R(Key("a-end")),
         "block select up":
-            R(Key("sa-home"), rdescript="VS Code: metaGo Select Up Block"),
+            R(Key("sa-home")),
         "block select down":
-            R(Key("sa-end"), rdescript="VS Code: metaGo Move Up Block"),
+            R(Key("sa-end")),
     }
     extras = [
         Dictation("text"),
         Dictation("mim"),
         IntegerRefST("n", 1, 100),
         IntegerRefST("m", 1, 10),
-        Choice("between_parables", {
-            "prekris": "lparen",
-            "brax": "lbracket",
-            "curly": "lbrace",
-            "angle": "langle",
-            "single": "squote",
-            "quote": "dquote",
-        }),
-        Choice("around_parables", {
-            "prekris": "rparen",
-            "brax": "rbracket",
-            "curly": "rbrace",
-            "angle": "rangle",
-        }),
         Choice("letters", caster_alphabet),
     ]
 

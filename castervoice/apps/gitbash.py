@@ -12,8 +12,10 @@ npm_commands = {
     "outdated": "outdated",
     "run build": "run build",
     "run develop": "run develop",
+    "run dev": "run dev",
     "run": "run",
     "start": "start",
+    "test": "test",
     "uninstall": "r",
     "update": "up",
 }
@@ -21,9 +23,11 @@ npm_commands = {
 git_commands = {
     "add all": "add -A",
     "add": "add",
-    "base": " ",
+    "base": "",
     "blame": "blame",
     "branch": "branch",
+    "branch delete": "branch -d",
+    "clone": "clone",
     "checkout": "checkout",
     "checkout branch": "checkout -b",
     "cherry pick abort": "cherry-pick --abort",
@@ -55,6 +59,12 @@ git_commands = {
     "status": "status",
 }
 
+django_commands_list = ["check", "collect static", "dump data", "load data", "make migrations", "migrate",
+                        "run server", "show migrations", "start app", "start project", "test", "create super user", "change password"]
+
+django_commands = {command: command.replace(
+    " ", "") for command in django_command_list}
+
 vagrant_command_list = ["up", "resume", "provision",
                         "reload", "ssh", "halt", "suspend", "destroy", "status"]
 
@@ -73,6 +83,10 @@ class GitBashRule(MergeRule):
             R(Key("c-r")),
         "whack":
             R(Key("c-w")),
+        "undo":
+            R(Text("")),
+        "save":
+            R(Text("")),
 
         "sudo":
             R(Text("sudo ")),
@@ -84,8 +98,8 @@ class GitBashRule(MergeRule):
             R(Text("cd ..")),
         "CD back":
             R(Text("cd -")),
-        "CD home":
-            R(Text("cd -")),
+        "home":
+            R(Text("~/")),
         "PWD":
             R(Text("pwd")),
         "make dir":
@@ -136,8 +150,8 @@ class GitBashRule(MergeRule):
             R(Text("git %(git_command)s ")),
         "NPM <npm_command> ":
             R(Text("npm %(npm_command)s ")),
-        "django manage":
-            R(Text("python manage.py ")),
+        "django manage <django_command>":
+            R(Text("python manage.py %(django_command)s")),
         "vagrant <vagrant_command>":
             R(Text("vagrant %(vagrant_command)s ")),
     }
@@ -146,13 +160,15 @@ class GitBashRule(MergeRule):
         IntegerRefST("n", 1, 10000),
         Choice("git_command", git_commands),
         Choice("npm_command", npm_commands),
-        Choice("vagrant_command", vagrant_commands)
+        Choice("vagrant_command", vagrant_commands),
+        Choice("django_command", django_commands)
     ]
     defaults = {"n": 0}
 
 
 terminal_context = AppContext(title="gnome-terminal") \
-    | AppContext(title="guake")
+    | AppContext(title="guake") \
+    | AppContext(executable="kitty")
 
 context = terminal_context
 

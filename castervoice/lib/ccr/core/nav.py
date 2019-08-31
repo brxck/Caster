@@ -22,45 +22,21 @@ _NEXUS = control.nexus()
 
 class NavigationNon(MergeRule): 
     mapping = {
-        # "<direction> <time_in_seconds>":
-        #     AsynchronousAction(
-        #         [L(S(["cancel"], Key("%(direction)s"), consume=False))],
-        #         repetitions=1000,
-        #         blocking=False),
-        "erase multi clipboard":
+        "clipboard erase":
             R(Function(navigation.erase_multi_clipboard, nexus=_NEXUS)),
-        "find":
-            R(Key("c-f")),
+
         "find next [<n>]":
             R(Key("f3"))*Repeat(extra="n"),
         "find prior [<n>]":
             R(Key("s-f3"))*Repeat(extra="n"),
-        "find everywhere":
-            R(Key("cs-f")),
-        "replace":
-            R(Key("c-h")),
-        "(F to | F2)":
-            R(Key("f2")),
-        "(F six | F6)":
-            R(Key("f6")),
-        "(F nine | F9)":
-            R(Key("f9")),
+
         "context menu":
             R(Key("s-f10")),
         "lean":
             R(Function(navigation.right_down, nexus=_NEXUS)),
         "hoist":
             R(Function(navigation.right_up, nexus=_NEXUS)),
-        "mid kick":
-            R(Function(navigation.middle_click, nexus=_NEXUS)),
-        "shift right click":
-            R(Key("shift:down") + Mouse("right") + Key("shift:up")),
-        "curse <direction> [<direction2>] [<nnavi500>] [<dokick>]":
-            R(Function(navigation.curse)),
-        "scree <direction> [<nnavi500>]":
-            R(Function(navigation.wheel_scroll)),
-        "colic":
-            R(Key("control:down") + Mouse("left") + Key("control:up")),
+
         "grab [<nnavi500>]":
             R(Mouse("left") + Mouse("left") + Function(
                 navigation.stoosh_keep_clipboard,
@@ -74,36 +50,22 @@ class NavigationNon(MergeRule):
 
         "refresh":
             R(Key("c-r")),
+
+        # Window Management
         "window up":
             R(Key("w-up")),
         "window down":
             R(Key("w-down")),
-        "window (left | lease) [<n>]":
+        "window left [<n>]":
             R(Key("w-left"))*Repeat(extra="n"),
-        "window (right | ross) [<n>]":
+        "window right [<n>]":
             R(Key("w-right"))*Repeat(extra="n"),
-        "monitor (left | lease) [<n>]":
+        "monitor left [<n>]":
             R(Key("sw-left"))*Repeat(extra="n"),
-        "monitor (right | ross) [<n>]":
+        "monitor right [<n>]":
             R(Key("sw-right"))*Repeat(extra="n"),
-        # "nexta [<n>]":    # CCR
-        # "prexta [<n>]":
-        "tab close[<n>]":
-            R(Key("c-w/20"))*Repeat(extra="n"),
-        "tab restore":
-            R(Key("cs-t")),
-        "elite translation <text>":
-            R(Function(alphanumeric.elite_text)),
 
         # Workspace management
-        # "show work [spaces]":
-        #     R(Key("w-tab")),
-        # "(create | new) work [space]":
-        #     R(Key("wc-d")),
-        # "close work [space]":
-        #     R(Key("wc-f4")),
-        # "close all work [spaces]":
-        #     R(Function(utilities.close_all_workspaces)),
         "work down [<n>]":
             R(Key("w-pgdown"))*Repeat(extra="n"),
         "work up [<n>]":
@@ -186,8 +148,14 @@ class Navigation(MergeRule):
             R(Key("c-pgdown"))*Repeat(extra="nnavi10"),
         "prexta [<nnavi10>]":
             R(Key("c-pgup"))*Repeat(extra="nnavi10"),
+        "tab close [<nnavi10>]":
+            R(Key("c-w/20"))*Repeat(extra="nnavi10"),
+        "tab restore":
+            R(Key("cs-t")),
         "quake":
-            R(Key("f12")),
+            R(Key("w-q")),
+        "find":
+            R(Key("c-f")),
 
     # keyboard shortcuts
         "meta [<textnv>]":
@@ -200,8 +168,7 @@ class Navigation(MergeRule):
             R(Key("end, enter")) * Repeat(extra="nnavi50"),
         "slip [<nnavi50>]":
             R(Key("home, enter, up")) * Repeat(extra="nnavi50"),
-        # "(<mtn_dir> | <mtn_mode> [<mtn_dir>]) [(<nnavi500> | <extreme>)]":
-        #     R(Function(text_utils.master_text_nav)), # this is now implemented below
+            
         "select all":
             R(Key("c-a")),
         "shift click":
@@ -237,10 +204,10 @@ class Navigation(MergeRule):
                 (AppContext(executable=["rstudio", "foxitreader"]), Key("cs-z")*Repeat(extra="nnavi10")),
                 ])),
 
-    # text formatting
+        # text formatting
         "set [<big>] format (<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]":
             R(Function(textformat.set_text_format)),
-        "clear castervoice [<big>] formatting":
+        "clear [<big>] formatting":
             R(Function(textformat.clear_text_format)),
         "peek [<big>] format":
             R(Function(textformat.peek_text_format)),
@@ -255,8 +222,7 @@ class Navigation(MergeRule):
         "that was (<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]":
             R(Function(textformat.reformat_last_text)),
 
-        # "hug <enclosure>":
-        #     R(Function(text_utils.enclose_selected)),
+        # Window Switching
         "flip [<nnavi10>]":
             R(Key("alt:down, tab/20:%(nnavi10)d, alt:up"),
                rdescript="Core: Switch between applications"),
@@ -267,29 +233,47 @@ class Navigation(MergeRule):
             R(Key("alt:down, escape/20:%(nnavi10)d, alt:up"),
                rdescript="Core: Switch between workspace windows"),
 
-        # Ccr Mouse Commands
+        # Mouse Commands
         "kick [<nnavi3>]":
             R(Function(navigation.left_click, nexus=_NEXUS))*Repeat(extra="nnavi3"),
         "psychic":
             R(Function(navigation.right_click, nexus=_NEXUS)),
-        "(kick double|double kick)":
-            R(Function(navigation.left_click, nexus=_NEXUS)*Repeat(2)),
+        "mid kick":
+            R(Function(navigation.middle_click, nexus=_NEXUS)),
         "squat":
             R(Function(navigation.left_down, nexus=_NEXUS)),
         "bench":
             R(Function(navigation.left_up, nexus=_NEXUS)),
-        
-        # keystroke commands
-        "<direction> [<nnavi500>]": R(Key("%(direction)s") * Repeat(extra='nnavi500'),
-            rdescript="Arrow Key: %(direction)s"),
-        "strike [<nnavi10>]": R(Key("home:%(nnavi10)s")),
-        "struck [<nnavi10>]": R(Key("end:%(nnavi10)s")),
-        "lore [<nnavi500>]": R(Key("c-left:%(nnavi500)s")),
-        "role [<nnavi500>]": R(Key("c-right:%(nnavi500)s")),
-        "lorick [<nnavi500>]": R(Key("s-left:%(nnavi500)s")),
-        "rolick [<nnavi500>]": R(Key("s-right:%(nnavi500)s")),
-        "lorex [<nnavi500>]": R(Key("cs-left:%(nnavi500)s")),
-        "rolex [<nnavi500>]": R(Key("cs-right:%(nnavi500)s")),
+        "colic":
+            R(Key("control:down") + Mouse("left") + Key("control:up")),
+
+        # Keystroke Commands
+        "<direction> [<nnavi500>]":
+            R(Key("%(direction)s") * Repeat(extra='nnavi500')),
+        "strike [<nnavi10>]":
+            R(Key("home:%(nnavi10)s")),
+        "struck [<nnavi10>]":
+            R(Key("end:%(nnavi10)s")),
+        "strike out [<nnavi10>]":
+            R(Key("c-home:%(nnavi10)s")),
+        "struck out [<nnavi10>]":
+            R(Key("c-end:%(nnavi10)s")),
+        "strike select [<nnavi10>]":
+            R(Key("s-home:%(nnavi10)s")),
+        "struck select [<nnavi10>]":
+            R(Key("s-end:%(nnavi10)s")),
+        "lore [<nnavi500>]":
+            R(Key("c-left:%(nnavi500)s")),
+        "role [<nnavi500>]":
+            R(Key("c-right:%(nnavi500)s")),
+        "lorick [<nnavi500>]":
+            R(Key("s-left:%(nnavi500)s")),
+        "rolick [<nnavi500>]":
+            R(Key("s-right:%(nnavi500)s")),
+        "lorex [<nnavi500>]":
+            R(Key("cs-left:%(nnavi500)s")),
+        "rolex [<nnavi500>]":
+            R(Key("cs-right:%(nnavi500)s")),
 
         "punch [<nnavi10>]":
             R(Key("pagedown:%(nnavi10)s")),
@@ -306,7 +290,7 @@ class Navigation(MergeRule):
               R(Key("%(modifier)s%(button_dictionary_1)s"),
               rdescript="press modifiers plus buttons from button_dictionary_1, non-repeatable"),
         
-        # "key stroke [<modifier>] <combined_button_dictionary>": 
+        # "key stroke [<modifier>] <combined_button_dictionary>":
         #     R(Text('Key("%(modifier)s%(combined_button_dictionary)s")')),
 
     }
@@ -415,7 +399,6 @@ class Navigation(MergeRule):
         }),
 
     ]
-
 
     defaults = {
         "nnavi500": 1,
