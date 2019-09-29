@@ -43,7 +43,7 @@ text_punc_dict = {
     "clash":                                             "\\",
     "carrot":                                             "^",
     "flat":                                               "_",
-    "ticky":                                              "`",
+    "tick":                                               "`",
     "bar":                                                "|",
     "tilde":                                              "~",
 
@@ -60,8 +60,8 @@ text_punc_dict = {
     "(close bend|rend)":                                  ")",
     "[open] angle":                                       "<",
     "(close angle|rangle)":                               ">",
-    "[open] brax":                                        "[",
-    "(close brax|brix)":                                  "]",
+    "[open] ace":                                        "[",
+    "(close ace|race)":                                  "]",
     "[open] burl":                                        "{",
     "(close burl|curl)":                                  "}",
 

@@ -159,7 +159,7 @@ class Navigation(MergeRule):
 
     # keyboard shortcuts
         "meta [<textnv>]":
-            R(Key("win/50") + Text("%(textnv)s")),
+            R(Key("win/200") + Text("%(textnv)s")),
         "save":
             R(Key("c-s")),
         "slap [<nnavi50>]":
