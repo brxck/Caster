@@ -59,7 +59,7 @@ git_commands = {
     "status": "status",
 }
 
-django_commands_list = ["check", "collect static", "dump data", "load data", "make migrations", "migrate",
+django_command_list = ["check", "collect static", "dump data", "load data", "make migrations", "migrate",
                         "run server", "show migrations", "start app", "start project", "test", "create super user", "change password"]
 
 django_commands = {command: command.replace(
@@ -73,7 +73,7 @@ vagrant_commands = {command: command for command in vagrant_command_list}
 
 class GitBashRule(MergeRule):
     mapping = {
-        "term interrupt":
+        "term close":
             R(Key("c-c")),
         "term end":
             R(Key("c-d")),
@@ -150,10 +150,35 @@ class GitBashRule(MergeRule):
             R(Text("git %(git_command)s ")),
         "NPM <npm_command> ":
             R(Text("npm %(npm_command)s ")),
-        "django manage <django_command>":
+        "django <django_command>":
             R(Text("python manage.py %(django_command)s")),
         "vagrant <vagrant_command>":
             R(Text("vagrant %(vagrant_command)s ")),
+
+        # Kitty
+        "tab new":
+            R(Key("cs-t")),
+        "tab close":
+            R(Key("cs-q")),
+        "nexta":
+            R(Key("cs-right")),
+        "prexta":
+            R(Key("cs-left")),
+        "layout switch":
+            R(Key("cs-l")),
+        "pane new":
+            R(Key("cs-enter")),
+        "pane close":
+            R(Key("cs-w")),
+        "next pane":
+            R(Key("cs-rbracket")),
+        "prior pane":
+            R(Key("cs-lbracket")),
+
+        "pinch":
+            R(Key("cs-pageup")),
+        "punch":
+            R(Key("cs-pagedown")),
     }
 
     extras = [
