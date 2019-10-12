@@ -303,7 +303,7 @@ class VSCodeCcrRule(MergeRule):
             R(Key("sa-up") * Repeat(extra='n')),
         "cursor down [<n>]":
             R(Key("sa-down") * Repeat(extra='n')),
-        "cursor ends":
+        "cursor lines":
             R(Key("sa-i") * Repeat(extra='n')),
         "cursor bracket":
             R(Key("cs-backslash")),
@@ -347,18 +347,18 @@ class VSCodeCcrRule(MergeRule):
             R(Key("a-semicolon/5, %(letters)s")),
         "hyper select <letters>":
             R(Key("sa-semicolon/5, %(letters)s")),
-        "select up":
-            R(Key("cs-i")),
-        "select down":
-            R(Key("c-i")),
-        "block up":
-            R(Key("a-home")),
-        "block down":
-            R(Key("a-end")),
-        "block select up":
-            R(Key("sa-home")),
-        "block select down":
-            R(Key("sa-end")),
+        "select up [<n>]":
+            R(Key("cs-i") * Repeat(extra='n')),
+        "select down [<n>]":
+            R(Key("c-i") * Repeat(extra='n')),
+        "block up [<n>]":
+            R(Key("a-home") * Repeat(extra='n')),
+        "block down [<n>]":
+            R(Key("a-end") * Repeat(extra='n')),
+        "block select up [<n>]":
+            R(Key("sa-home") * Repeat(extra='n')),
+        "block select down [<n>]":
+            R(Key("sa-end") * Repeat(extra='n')),
     }
     extras = [
         Dictation("text"),

@@ -60,10 +60,13 @@ git_commands = {
 }
 
 django_command_list = ["check", "collect static", "dump data", "load data", "make migrations", "migrate",
-                        "run server", "show migrations", "start app", "start project", "test", "create super user", "change password"]
+                        "run server", "show migrations", "start app", "start project", "test", "create super user", "change password", "shell"]
 
 django_commands = {command: command.replace(
-    " ", "") for command in django_command_list}
+    " ", "") + " " for command in django_command_list}
+
+django_commands["shell plus"] = "shell_plus"
+django_commands["manage"] = ""
 
 vagrant_command_list = ["up", "resume", "provision",
                         "reload", "ssh", "halt", "suspend", "destroy", "status"]
@@ -75,7 +78,7 @@ class GitBashRule(MergeRule):
     mapping = {
         "term close":
             R(Key("c-c")),
-        "term end":
+        "term quit":
             R(Key("c-d")),
         "term suspend":
             R(Key("c-z")),
@@ -160,11 +163,11 @@ class GitBashRule(MergeRule):
             R(Key("cs-t")),
         "tab close":
             R(Key("cs-q")),
-        "nexta":
+        "nexterm":
             R(Key("cs-right")),
-        "prexta":
+        "prexterm":
             R(Key("cs-left")),
-        "layout switch":
+        "layout":
             R(Key("cs-l")),
         "pane new":
             R(Key("cs-enter")),
