@@ -2,7 +2,6 @@
 from castervoice.lib.imports import *
 from castervoice.lib.alphanumeric import caster_alphabet
 
-
 class VSCodeNonCcrRule(MergeRule):
     pronunciation = "Visual Studio Code Non Continuous"
     mapping = {
@@ -12,15 +11,20 @@ class VSCodeNonCcrRule(MergeRule):
         "[line] <action> <ln1> [by <ln2>]":
             R(Function(navigation.action_lines)),
 
+        "go back <n>":
+            R(Key("a-left")*Repeat(extra='n')),
+        "go forward [<n>]":
+            R(Key("a-right"))*Repeat(extra="n"),
+
         # Display
         "[toggle] full screen":
             R(Key("f11")),
         "flip layout":
             R(Key("sa-0")),
         "zoom in [<n>]":
-            R(Key("c-equal") * Repeat(extra='n')),
+            R(Key("c-equal")*Repeat(extra='n')),
         "zoom out [<n>]":
-            R(Key("c-minus") * Repeat(extra='n')),
+            R(Key("c-minus")*Repeat(extra='n')),
         "sidebar":
             R(Key("c-b")),
         "explore":
@@ -103,7 +107,6 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("s-f3")),
         "select all occurrences":
             R(Key("a-enter")),
-
         "toggle case sensitive":
             R(Key("a-c")),
         "toggle regex":
@@ -154,10 +157,10 @@ class VSCodeNonCcrRule(MergeRule):
         # Debugging
         "debug":
             R(Key("cs-d")),
-        "[toggle] breakpoint":
+        "[toggle] break point":
             R(Key("f9")),
         "step over [<n>]":
-            R(Key("f10/50") * Repeat(extra='n')),
+            R(Key("f10/50")*Repeat(extra='n')),
         "step into":
             R(Key("f11")),
         "step out [of]":
@@ -212,7 +215,6 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("c-k, c-j")),
         "toggle word wrap":
             R(Key("a-z")),
-
         "run this line":
             R(Key("csa-l")),
         "join line":
@@ -253,7 +255,8 @@ class VSCodeNonCcrRule(MergeRule):
                 "sixth": "6",
             }),
     ]
-    defaults = {"n": 1, "ln2": "",  "mim": "", "text": ""}
+    defaults = {"n": 1, "ln2": "", "mim": "", "text": ""}
+
 
 
 class VSCodeCcrRule(MergeRule):

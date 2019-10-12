@@ -9,16 +9,7 @@ from castervoice.lib.ccr.standard import SymbolSpecs
 from castervoice.lib.ccr.core.punctuation import text_punc_dict
 from castervoice.lib.alphanumeric import caster_alphabet
 
-
 _NEXUS = control.nexus()
-
-# for key, value in double_text_punc_dict.items():
-#     if len(value) == 2:
-#         double_text_punc_dict[key] = value[0] + "~" + value[1]
-#     elif len(value) == 4:
-#         double_text_punc_dict[key] = value[0:1] + "~" + value[2:3]
-#     else:
-#         raise Exception("Need to deal with nonstandard pair length in double_text_punc_dict.")
 
 class NavigationNon(MergeRule):
     mapping = {
@@ -120,30 +111,6 @@ class Navigation(MergeRule):
     pronunciation = CCRMerger.CORE[1]
 
     mapping = {
-    # "periodic" repeats whatever comes next at 1-second intervals until "terminate"
-    # or "escape" (or your SymbolSpecs.CANCEL) is spoken or 100 tries occur
-        # "periodic":
-        #     ContextSeeker(forward=[L(S(["cancel"], lambda: None),
-        #     S(["*"], lambda fnparams: UntilCancelled(Mimic(*filter(lambda s: s != "periodic", fnparams)), 1).execute(),
-        #     use_spoken=True))]),
-    # VoiceCoder-inspired -- these should be done at the IDE level
-        # "fill <target>":
-        #     R(Key("escape, escape, end"), show=False) +
-        #     AsynchronousAction([L(S(["cancel"], Function(context.fill_within_line, nexus=_NEXUS)))],
-        #     time_in_seconds=0.2, repetitions=50 ),
-        # "jump in":
-        #     AsynchronousAction([L(S(["cancel"], context.nav, ["right", "(~[~{~<"]))],
-        #     time_in_seconds=0.1, repetitions=50),
-        # "jump out":
-        #     AsynchronousAction([L(S(["cancel"], context.nav, ["right", ")~]~}~>"]))],
-        #     time_in_seconds=0.1, repetitions=50),
-        # "jump back":
-        #     AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
-        #     time_in_seconds=0.1, repetitions=50),
-        # "jump back in":
-        #     AsynchronousAction([L(S(["cancel"], context.nav, ["left", "(~[~{~<"]))],
-        #     finisher=Key("right"), time_in_seconds=0.1, repetitions=50 ),
-
         "nexta [<nnavi10>]":
             R(Key("c-pgdown"))*Repeat(extra="nnavi10"),
         "prexta [<nnavi10>]":
@@ -200,9 +167,12 @@ class Navigation(MergeRule):
         "undo [<nnavi10>]":
             R(Key("c-z"))*Repeat(extra="nnavi10"),
         "redo [<nnavi10>]":
-            R(ContextAction(default=Key("c-y")*Repeat(extra="nnavi10"), actions=[
-                (AppContext(executable=["rstudio", "foxitreader"]), Key("cs-z")*Repeat(extra="nnavi10")),
-                ])),
+            R(
+                ContextAction(default=Key("c-y")*Repeat(extra="nnavi10"),
+                              actions=[
+                                  (AppContext(executable=["rstudio", "foxitreader"]),
+                                   Key("cs-z")*Repeat(extra="nnavi10")),
+                              ])),
 
         # text formatting
         "set [<big>] format (<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]":
@@ -277,82 +247,20 @@ class Navigation(MergeRule):
             R(Key("pagedown:%(nnavi10)s")),
         "pinch [<nnavi10>]":
             R(Key("pageup:%(nnavi10)s")),
-
-        "<modifier> <button_dictionary_500> [<nnavi500>]":
-              R(Key("%(modifier)s%(button_dictionary_500)s") * Repeat(extra='nnavi500'),
-              rdescript="press modifier keys plus buttons from button_dictionary_500"),
-        "<modifier> <button_dictionary_10> [<nnavi10>]":
-              R(Key("%(modifier)s%(button_dictionary_10)s") * Repeat(extra='nnavi10'),
-              rdescript="press modifier keys plus buttons from button_dictionary_10"),
-        "<modifier> <button_dictionary_1>":
-              R(Key("%(modifier)s%(button_dictionary_1)s"),
-              rdescript="press modifiers plus buttons from button_dictionary_1, non-repeatable"),
-        
-        # "key stroke [<modifier>] <combined_button_dictionary>":
-        #     R(Text('Key("%(modifier)s%(combined_button_dictionary)s")')),
-
     }
-    tell_commands_dict = {"dock": ";", "doc": ";", "sink": "", "com": ",", "deck": ":"}
-    tell_commands_dict.update(text_punc_dict)
 
-    # I tried to limit which things get repeated how many times in hopes that it will help prevent the bad grammar error
-    # this could definitely be changed. perhaps some of these should be made non-CCR
-    button_dictionary_500 = {"(tab | tabby)": "tab", "(backspace | clear)": "backspace", "(delete|deli)": "del", "(escape | cancel)": "escape", "(enter | shock)": "enter",
-                             "(left | lease)": "left", "(right | ross)": "right", "(up | sauce)": "up",
-                             "(down | dunce)": "down", "page (down | dunce)": "pagedown", "page (up | sauce)": "pageup", "space": "space"}
-    button_dictionary_10 = {"function {}".format(
-        i): "f{}".format(i) for i in range(1, 10)}
-    button_dictionary_10.update(caster_alphabet)
-    button_dictionary_10.update(text_punc_dict)
-    longhand_punctuation_names = {"minus": "hyphen", "hyphen":"hyphen", "comma": "comma",
-        "deckle": "colon", "colon": "colon", "slash": "slash", "backslash": "backslash"}
-    button_dictionary_10.update(longhand_punctuation_names)
-    button_dictionary_1 = {"(home | lease wally | latch)": "home", "(end | ross wally | ratch)": "end", "insert": "insert", "zero": "0",
-                           "one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": "6", "seven": "7", "eight": "8", "nine": "9"}
-    
-    combined_button_dictionary = {}
-    for dictionary in [button_dictionary_1, button_dictionary_10, button_dictionary_500]:
-        combined_button_dictionary.update(dictionary)
-
-    modifier_choice_object = Choice("modifier", {
-            "(control | fly)": "c-", #TODO: make DRY
-            "(shift | shin)": "s-",
-            "alt": "a-",
-            "(control shift | que)": "cs-",
-            "control alt": "ca-",
-            "(shift alt | alt shift)": "sa-",
-            "(control alt shift | control shift alt)": "csa-", # control must go first
-            "windows": "w-", # windows should go before alt/shift
-            "control windows": "cw-",
-            "control windows alt": "cwa-",
-            "control windows shift": "cws-",
-            "windows shift alt": "wsa-",
-            "windows alt shift": "was-",
-            "windows shift": "ws-",
-            "windows alt": "wa-",
-            "control windows alt shift": "cwas-",
-            "hit": "",
-        })
     extras = [
-
         IntegerRefST("nnavi10", 1, 11),
         IntegerRefST("nnavi3", 1, 4),
         IntegerRefST("nnavi50", 1, 50),
         IntegerRefST("nnavi500", 1, 500),
         Dictation("textnv"),
-        # Choice("enclosure", double_text_punc_dict),
         Choice("direction", {
             "dunce": "down",
             "sauce": "up",
             "lease": "left",
             "ross": "right",
         }),
-        modifier_choice_object,
-        Choice("button_dictionary_1", button_dictionary_1),
-        Choice("button_dictionary_10", button_dictionary_10),
-        Choice("button_dictionary_500", button_dictionary_500),
-        Choice("combined_button_dictionary", combined_button_dictionary),
-
         Choice("capitalization", {
             "yell": 1,
             "tie": 2,
@@ -371,7 +279,6 @@ class Navigation(MergeRule):
                 "dissent": 6,
                 "descent": 6
             }),
-        Choice("semi", tell_commands_dict),
         Choice("word_limit", {
             "single": 1,
             "double": 2,
@@ -395,7 +302,6 @@ class Navigation(MergeRule):
             "lease": "backspace",
             "ross": "delete",
         }),
-
     ]
 
     defaults = {
