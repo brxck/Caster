@@ -158,8 +158,6 @@ class Navigation(MergeRule):
             R(Key("escape")),
         "shackle":
             R(Key("home/5, s-end")),
-        "(tell | tau) <semi>":
-            R(Function(navigation.next_line)),
         "duple [<nnavi50>]":
             R(Function(navigation.duple_keep_clipboard)),
         "Kraken":
