@@ -267,6 +267,25 @@ class Navigation(MergeRule):
         "hit": "",
     })
 
+    # I tried to limit which things get repeated how many times in hopes that it will help prevent the bad grammar error
+    # this could definitely be changed. perhaps some of these should be made non-CCR
+    button_dictionary_500 = {"(tab | tabby)": "tab", "(backspace | clear)": "backspace", "(delete|deli)": "del", "(escape | cancel)": "escape", "(enter | shock)": "enter",
+                             "(left | lease)": "left", "(right | ross)": "right", "(up | sauce)": "up",
+                             "(down | dunce)": "down", "page (down | dunce)": "pagedown", "page (up | sauce)": "pageup", "space": "space"}
+    button_dictionary_10 = {"function {}".format(
+        i): "f{}".format(i) for i in range(1, 10)}
+    button_dictionary_10.update(caster_alphabet)
+    button_dictionary_10.update(text_punc_dict)
+    longhand_punctuation_names = {"minus": "hyphen", "hyphen":"hyphen", "comma": "comma",
+        "deckle": "colon", "colon": "colon", "slash": "slash", "backslash": "backslash"}
+    button_dictionary_10.update(longhand_punctuation_names)
+    button_dictionary_1 = {"(home | lease wally | latch)": "home", "(end | ross wally | ratch)": "end", "insert": "insert", "zero": "0",
+                           "one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": "6", "seven": "7", "eight": "8", "nine": "9"}
+    
+    combined_button_dictionary = {}
+    for dictionary in [button_dictionary_1, button_dictionary_10, button_dictionary_500]:
+        combined_button_dictionary.update(dictionary)
+
     extras = [
         IntegerRefST("nnavi10", 1, 11),
         IntegerRefST("nnavi3", 1, 4),
