@@ -11,6 +11,7 @@ from castervoice.lib.alphanumeric import caster_alphabet
 
 _NEXUS = control.nexus()
 
+
 class NavigationNon(MergeRule):
     mapping = {
         "clipboard erase":
@@ -23,10 +24,6 @@ class NavigationNon(MergeRule):
 
         "context menu":
             R(Key("s-f10")),
-        "lean":
-            R(Function(navigation.right_down, nexus=_NEXUS)),
-        "hoist":
-            R(Function(navigation.right_up, nexus=_NEXUS)),
 
         "grab [<nnavi500>]":
             R(Mouse("left") + Mouse("left") + Function(
@@ -124,7 +121,7 @@ class Navigation(MergeRule):
         "find":
             R(Key("c-f")),
 
-    # keyboard shortcuts
+        # keyboard shortcuts
         "meta [<textnv>]":
             R(Key("win/200") + Text("%(textnv)s")),
         "save":
@@ -135,7 +132,7 @@ class Navigation(MergeRule):
             R(Key("end, enter")) * Repeat(extra="nnavi50"),
         "slip [<nnavi50>]":
             R(Key("home, enter, up")) * Repeat(extra="nnavi50"),
-            
+
         "select all":
             R(Key("c-a")),
         "shift click":
@@ -170,7 +167,7 @@ class Navigation(MergeRule):
                               actions=[
                                   (AppContext(executable=["rstudio", "foxitreader"]),
                                    Key("cs-z")*Repeat(extra="nnavi10")),
-                              ])),
+                ])),
 
         # text formatting
         "set [<big>] format (<capitalization> <spacing> | <capitalization> | <spacing>) [(bow|bowel)]":
@@ -193,17 +190,18 @@ class Navigation(MergeRule):
         # Window Switching
         "flip [<nnavi10>]":
             R(Key("alt:down, tab/20:%(nnavi10)d, alt:up"),
-               rdescript="Core: Switch between applications"),
+              rdescript="Core: Switch between applications"),
         "flop [<nnavi10>]":
             R(Key("alt:down, backtick/20:%(nnavi10)d, alt:up"),
-               rdescript="Core: Switch between application windows"),
+              rdescript="Core: Switch between application windows"),
         "flick [<nnavi10>]":
             R(Key("alt:down, escape/20:%(nnavi10)d, alt:up"),
-               rdescript="Core: Switch between workspace windows"),
+              rdescript="Core: Switch between workspace windows"),
 
         # Mouse Commands
         "kick [<nnavi3>]":
-            R(Function(navigation.left_click, nexus=_NEXUS))*Repeat(extra="nnavi3"),
+            R(Function(navigation.left_click, nexus=_NEXUS)) * \
+        Repeat(extra="nnavi3"),
         "psychic":
             R(Function(navigation.right_click, nexus=_NEXUS)),
         "mid kick":
@@ -248,14 +246,14 @@ class Navigation(MergeRule):
     }
 
     modifier_choice_object = Choice("modifier", {
-        "(control | fly)": "c-", #TODO: make DRY
+        "(control | fly)": "c-",  # TODO: make DRY
         "(shift | shin)": "s-",
         "alt": "a-",
         "(control shift | que)": "cs-",
         "control alt": "ca-",
         "(shift alt | alt shift)": "sa-",
-        "(control alt shift | control shift alt)": "csa-", # control must go first
-        "windows": "w-", # windows should go before alt/shift
+        "(control alt shift | control shift alt)": "csa-",  # control must go first
+        "windows": "w-",  # windows should go before alt/shift
         "control windows": "cw-",
         "control windows alt": "cwa-",
         "control windows shift": "cws-",
@@ -276,12 +274,12 @@ class Navigation(MergeRule):
         i): "f{}".format(i) for i in range(1, 10)}
     button_dictionary_10.update(caster_alphabet)
     button_dictionary_10.update(text_punc_dict)
-    longhand_punctuation_names = {"minus": "hyphen", "hyphen":"hyphen", "comma": "comma",
-        "deckle": "colon", "colon": "colon", "slash": "slash", "backslash": "backslash"}
+    longhand_punctuation_names = {"minus": "hyphen", "hyphen": "hyphen", "comma": "comma",
+                                  "deckle": "colon", "colon": "colon", "slash": "slash", "backslash": "backslash"}
     button_dictionary_10.update(longhand_punctuation_names)
     button_dictionary_1 = {"(home | lease wally | latch)": "home", "(end | ross wally | ratch)": "end", "insert": "insert", "zero": "0",
                            "one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": "6", "seven": "7", "eight": "8", "nine": "9"}
-    
+
     combined_button_dictionary = {}
     for dictionary in [button_dictionary_1, button_dictionary_10, button_dictionary_500]:
         combined_button_dictionary.update(dictionary)
