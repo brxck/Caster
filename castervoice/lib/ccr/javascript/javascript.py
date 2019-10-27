@@ -5,6 +5,7 @@ Created on Sep 2, 2015
 '''
 from castervoice.lib.imports import *
 
+
 class Javascript(MergeRule):
 
     mapping = {
@@ -56,7 +57,7 @@ class Javascript(MergeRule):
         SymbolSpecs.FUNCTION:
             R(Text("function () {}") + Key("left:2, enter") +
               SelectiveAction(Key("enter, up"), ["AptanaStudio3.exe"])),
-	    SymbolSpecs.CLASS:
+            SymbolSpecs.CLASS:
             R(Text("class  {}") + Key("left/5:3")),
         #
         SymbolSpecs.COMMENT:
@@ -78,43 +79,21 @@ class Javascript(MergeRule):
         # JavaScript specific
         "arrow":
             R(Text("() => {}") + Key("left:1, enter")),
-        "timer":
-            R(Text("setInterval()") + Key("left")),
-        "timeout":
-            R(Text("setTimeout()") + Key("left")),
-        "document":
-            R(Text("document")),
         "index of":
             R(Text("indexOf()") + Key("left")),
-        "has own property":
-            R(Text("hasOwnProperty()") + Key("left")),
-        "length":
-            R(Text("length")),
-        "self":
-            R(Text("self")),
-        "push":
-            R(Text("push")),
+        "this":
+            R(Text("this")),
         "inner HTML":
             R(Text("innerHTML")),
         "new new":
             R(Text("new ")),
-        "continue":
-            R(Text("continue")),
-        "this":
-            R(Text("this")),
-        "try":
-            R(Text("try {}") + Key("left, enter, up")),
-        "catch":
-            R(Text("catch(e) {}") + Key("left, enter, up")),
         "throw":
             R(Text("throw ")),
-        "instance of":
-            R(Text("instanceof ")),
         "var":
             R(Text("var ")),
         "const":
             R(Text("const ")),
-        "Let":
+        "let":
             R(Text("let ")),
         "shell iffae":
             R(Text("else if ()") + Key("left")),
