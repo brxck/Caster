@@ -8,8 +8,9 @@ Created on Oct 17, 2015
 class SymbolSpecs(object):
     IF = "iffae"
     ELSE = "shells"
+    IF_ELSE = "if shells"
 
-    SWITCH = "switch"
+    SWITCH = "switchy"
     CASE = "case of"
     BREAK = "breaker"
     DEFAULT = "default"
@@ -19,28 +20,31 @@ class SymbolSpecs(object):
     FOR_LOOP = "for loop"
     FOR_EACH_LOOP = "for each"
 
-    TO_INTEGER = "convert to integer"
-    TO_FLOAT = "convert to floating point"
-    TO_STRING = "convert to string"
+    REDUCE = "op reduce"
+    MAP = "op map"
+    FILTER = "op filter"
+
+    TO_INTEGER = "to int"
+    TO_FLOAT = "to float"
+    TO_STRING = "to string"
 
     AND = "lodge and"
     OR = "lodge or"
     NOT = "lodge not"
 
-    SYSOUT = "print to console"
+    SYSOUT = "sysout"
 
     IMPORT = "import"
 
-    FUNCTION = "function"
+    FUNCTION = "func"
+    LAMBDA = "lam"
     CLASS = "class"
 
-    COMMENT = "add comment"
-    LONG_COMMENT = "long comment"
-
-    NULL = "value not"
+    DOCSTRING = "docstring"
 
     RETURN = "return"
 
+    NULL = "value not"
     TRUE = "value true"
     FALSE = "value false"
 
