@@ -6,101 +6,109 @@ Created on Sep 2, 2015
 from castervoice.lib.imports import *
 
 
+def Snippet(prefix):
+        return Text(prefix) + Pause("50") + Key("tab")
+
+
 class Javascript(MergeRule):
 
     mapping = {
-
-        # CCR PROGRAMMING STANDARD
         SymbolSpecs.IF:
-            R(Text("if () ") + Key("left, enter, up")),
+            Snippet("if"),
         SymbolSpecs.ELSE:
-            R(Text("else {}") + Key("left, enter, up")),
-        #
-        SymbolSpecs.SWITCH:
-            R(Text("switch () {}") + Key("left, enter, up")),
-        SymbolSpecs.CASE:
-            R(Text("case :") + Key("left")),
-        SymbolSpecs.BREAK:
-            R(Text("break")),
-        SymbolSpecs.DEFAULT:
-            R(Text("default: ")),
-        #
-        SymbolSpecs.DO_LOOP:
-            R(Text("do {}") + Key("left, enter")),
-        SymbolSpecs.WHILE_LOOP:
-            R(Text("while ()") + Key("left")),
-        SymbolSpecs.FOR_LOOP:
-            R(Text("for (var i=0; i<TOKEN; i++)")),
-        SymbolSpecs.FOR_EACH_LOOP:
-            R(Text("for (TOKEN in TOKEN)")),
-        #
-        SymbolSpecs.TO_INTEGER:
-            R(Text("parseInt()") + Key("left")),
-        SymbolSpecs.TO_FLOAT:
-            R(Text("parseFloat()") + Key("left")),
-        SymbolSpecs.TO_STRING:
-            R(Key("dquote, dquote, plus")),
-        #
-        SymbolSpecs.AND:
-            R(Text(" && ")),
-        SymbolSpecs.OR:
-            R(Text(" || ")),
-        SymbolSpecs.NOT:
-            R(Text("!")),
-        #
-        SymbolSpecs.SYSOUT:
-            R(Text("console.log()") + Key("left")),
-        #
-        SymbolSpecs.IMPORT:
-            R(Text("import ")),
-        #
-        SymbolSpecs.FUNCTION:
-            R(Text("function () {}") + Key("left:2, enter") +
-              SelectiveAction(Key("enter, up"), ["AptanaStudio3.exe"])),
-            SymbolSpecs.CLASS:
-            R(Text("class  {}") + Key("left/5:3")),
-        #
-        SymbolSpecs.COMMENT:
-            R(Text("//")),
-        SymbolSpecs.LONG_COMMENT:
-            R(Text("/**/") + Key("left,left")),
-        #
-        SymbolSpecs.NULL:
-            R(Text("null")),
-        #
-        SymbolSpecs.RETURN:
-            R(Text("return ")),
-        #
-        SymbolSpecs.TRUE:
-            R(Text("true")),
-        SymbolSpecs.FALSE:
-            R(Text("false")),
+            Snippet("ifelse"),
 
-        # JavaScript specific
+        SymbolSpecs.SWITCH:
+            Snippet("switch"),
+        SymbolSpecs.CASE:
+            Text("case :") + Key("left")),
+        SymbolSpecs.BREAK:
+            Text("break"),
+        SymbolSpecs.DEFAULT:
+            Text("default: "),
+
+        SymbolSpecs.DO_LOOP:
+            Snippet("dowhile"),
+        SymbolSpecs.WHILE_LOOP:
+            Snippet("while"),
+        SymbolSpecs.FOR_LOOP:
+            Snippet("for"),
+        SymbolSpecs.FOR_EACH_LOOP:
+            Snippet("fre"),
+        "for in loop":
+            Snippet("fin"),
+        "for of loop":
+            Snippet("fof"),
+
+        SymbolSpecs.TO_INTEGER:
+            Text("parseInt()") + Key("left"),
+        SymbolSpecs.TO_FLOAT:
+            Text("parseFloat()") + Key("left"),
+        SymbolSpecs.TO_STRING:
+            Key("dquote, dquote, plus"),
+
+        SymbolSpecs.REDUCE:
+            Text(".reduce()") + Key("left"),
+        SymbolSpecs.MAP:
+            Text(".map()") + Key("left"),
+        SymbolSpecs.FILTER:
+            Text(".filter()") + Key("left"),
+
+        SymbolSpecs.AND:
+            Text(" && "),
+        SymbolSpecs.OR:
+            Text(" || "),
+        SymbolSpecs.NOT:
+            Text("!"),
+
+        SymbolSpecs.SYSOUT:
+            Snippet("clg"),
+
+        SymbolSpecs.IMPORT:
+            Snippet("imp"),
+
+        SymbolSpecs.FUNCTION:
+            Snippet("function"),
         "arrow":
-            R(Text("() => {}") + Key("left:1, enter")),
-        "index of":
-            R(Text("indexOf()") + Key("left")),
+            Snippet("anfn"),
+
+        SymbolSpecs.CLASS:
+            Text("class  {}") + Key("left/5:3"),
+
+        SymbolSpecs.NULL:
+            Text("null"),
+
+        SymbolSpecs.RETURN:
+            Text("return "),
+
+        SymbolSpecs.TRUE:
+            Text("true"),
+        SymbolSpecs.FALSE:
+            Text("false"),
+
+        "destruct":
+            Snippet("dob"),
+        "destruct array":
+            Snippet("dar"),
+
         "this":
-            R(Text("this")),
+            Text("this"),
         "inner HTML":
-            R(Text("innerHTML")),
+            Text("innerHTML"),
         "new new":
-            R(Text("new ")),
+            Text("new "),
         "throw":
-            R(Text("throw ")),
+            Text("throw "),
         "var":
-            R(Text("var ")),
+            Text("var "),
         "const":
-            R(Text("const ")),
+            Text("const "),
         "let":
-            R(Text("let ")),
-        "shell iffae":
-            R(Text("else if ()") + Key("left")),
+            Text("let "),
         "a sink":
-            R(Text("async ")),
+            Text("async "),
         "await":
-            R(Text("await ")),
+            Text("await "),
     }
 
     extras = []
