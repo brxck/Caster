@@ -2,6 +2,8 @@
 
 from __future__ import print_function, unicode_literals
 
+from ctypes import cdll
+import struct
 import io
 import json
 import os
@@ -20,12 +22,13 @@ import win32clipboard
 from castervoice.lib.clipboard import Clipboard
 
 from _winreg import (CloseKey, ConnectRegistry, HKEY_CLASSES_ROOT,
-    HKEY_CURRENT_USER, OpenKey, QueryValueEx)
+                     HKEY_CURRENT_USER, OpenKey, QueryValueEx)
 
 from dragonfly import Window, Key
 
 try:  # Style C -- may be imported into Caster, or externally
-    BASE_PATH = os.path.realpath(__file__).rsplit(os.path.sep + "castervoice", 1)[0]
+    BASE_PATH = os.path.realpath(__file__).rsplit(
+        os.path.sep + "castervoice", 1)[0]
     if BASE_PATH not in sys.path:
         sys.path.append(BASE_PATH)
 finally:
@@ -35,8 +38,36 @@ finally:
 # checked to see when a new file name had appeared
 FILENAME_PATTERN = re.compile(r"[/\\]([\w_ ]+\.[\w]+)")
 
-import struct
-from ctypes import cdll
+
+# https://github.com/mrob95/pyVirtualDesktopAccessor
+# Source: https://github.com/Ciantic/VirtualDesktopAccessor
+try:
+    if struct.calcsize("P")*8 == 32:
+        vda = cdll.LoadLibrary(
+            BASE_PATH + "/castervoice/bin/VirtualDesktopAccessor32.dll")
+    else:
+        vda = cdll.LoadLibrary(
+            BASE_PATH + "/castervoice/bin/VirtualDesktopAccessor64.dll")
+except Exception as e:
+    print("Virtual desktop accessor loading failed with '%s'" % str(e))
+
+
+def move_current_window_to_desktop(n=0, follow=False):
+    wndh = Window.get_foreground().handle
+    vda.MoveWindowToDesktopNumber(wndh, n-1)
+    if follow:
+        vda.GoToDesktopNumber(n-1)
+
+
+def go_to_desktop_number(n):
+    vda.GoToDesktopNumber(n-1)
+
+
+def close_all_workspaces():
+    total = vda.GetDesktopCount()
+    go_to_desktop_number(total)
+    Key("wc-f4/10:" + str(total-1)).execute()
+
 
 def window_exists(classname, windowname):
     try:
@@ -98,6 +129,7 @@ def load_toml_file(path):
     except Exception:
         simple_log(True)
     return result
+
 
 def save_json_file(data, path):
     try:
@@ -168,6 +200,7 @@ def reboot(wsr=False):
     print(popen_parameters)
     Popen(popen_parameters)
 
+
 def default_browser_command():
     '''
     Tries to get default browser command, returns either a space delimited
@@ -175,12 +208,12 @@ def default_browser_command():
     '''
     browser_class = 'Software\\Microsoft\\Windows\\Shell\\Associations\\UrlAssociations\\https\\UserChoice'
     try:
-        reg = ConnectRegistry(None,HKEY_CURRENT_USER)
+        reg = ConnectRegistry(None, HKEY_CURRENT_USER)
         key = OpenKey(reg, browser_class)
         value, t = QueryValueEx(key, 'ProgId')
         CloseKey(key)
         CloseKey(reg)
-        reg = ConnectRegistry(None,HKEY_CLASSES_ROOT)
+        reg = ConnectRegistry(None, HKEY_CLASSES_ROOT)
         key = OpenKey(reg, '%s\\shell\\open\\command' % value)
         path, t = QueryValueEx(key, None)
     except WindowsError:
@@ -200,14 +233,15 @@ def clear_log():
         import natlink
         windows = Window.get_all_windows()
         matching = [w for w in windows
-        if b"Messages from Python Macros" in w.title]
+                    if b"Messages from Python Macros" in w.title]
         if matching:
             handle = (matching[0].handle)
             rt_handle = win32gui.FindWindowEx(handle, None, "RICHEDIT", None)
             win32gui.SetWindowText(rt_handle, "")
             return
     except Exception as e:
-        print (e)
+        print(e)
+
 
 def get_clipboard_formats():
     '''
@@ -219,6 +253,7 @@ def get_clipboard_formats():
         formats.append(f)
         f = win32clipboard.EnumClipboardFormats(f)
     return formats
+
 
 def get_selected_files(folders=False):
     '''
@@ -232,6 +267,7 @@ def get_selected_files(folders=False):
     cb.copy_to_system()
     return files
 
+
 def get_clipboard_files(folders=False):
     '''
     Enumerate clipboard content and return files either directly copied or
@@ -243,7 +279,8 @@ def get_clipboard_files(folders=False):
     if win32clipboard.CF_HDROP in f:
         files = win32clipboard.GetClipboardData(win32clipboard.CF_HDROP)
     elif win32clipboard.CF_UNICODETEXT in f:
-        files = [win32clipboard.GetClipboardData(win32clipboard.CF_UNICODETEXT)]
+        files = [win32clipboard.GetClipboardData(
+            win32clipboard.CF_UNICODETEXT)]
     elif win32clipboard.CF_TEXT in f:
         files = [win32clipboard.GetClipboardData(win32clipboard.CF_TEXT)]
     elif win32clipboard.CF_OEMTEXT in f:
