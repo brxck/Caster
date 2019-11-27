@@ -6,9 +6,9 @@ Created on Oct 17, 2015
 
 
 class SymbolSpecs(object):
-    IF = "iffae"
+    IF = "iffy"
     ELSE = "shells"
-    IF_ELSE = "if shells"
+    ELSE_IF = "shells if"
 
     SWITCH = "switchy"
     CASE = "case of"

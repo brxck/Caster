@@ -1,6 +1,20 @@
-# thanks to Casper for contributing commands to this.
 from castervoice.lib.imports import *
 from castervoice.lib.alphanumeric import caster_alphabet
+
+
+def Snippet(*args):
+    """Uses SnipSnap VS Code extension to insert arbitrary snippet"""
+    if len(args) > 1:
+        text = r"\n".join(args)
+    else:
+        text = args[0]
+    return Key("c-k, cs-s") + Pause("10") + Text(text) + Key("enter")
+
+
+def EditorSnippet(prefix):
+    """Activate editor snippet using prefix expansion"""
+    return Text(prefix) + Pause("10") + Key("tab")
+
 
 class VSCodeNonCcrRule(MergeRule):
     pronunciation = "Visual Studio Code Non Continuous"
@@ -73,6 +87,8 @@ class VSCodeNonCcrRule(MergeRule):
             R(Key("c-s/10, c-w")),
         "file new":
             R(Key("ca-n")),  # advanced-new-file extension
+        "tab new":
+            R(Key("c-t")),
         "window new":
             R(Key("cs-n")),
         "window close":
@@ -258,7 +274,6 @@ class VSCodeNonCcrRule(MergeRule):
     defaults = {"n": 1, "ln2": "", "mim": "", "text": ""}
 
 
-
 class VSCodeCcrRule(MergeRule):
     pronunciation = "visual studio code continuous"
     mwith = CCRMerger.CORE
@@ -285,7 +300,7 @@ class VSCodeCcrRule(MergeRule):
         "block comment":
             R(Key("sa-a")),
         "line delete [<n>]":
-            R(Key("s-del") * Repeat(extra='n')),
+            R(Key("cs-k") * Repeat(extra='n')),
         "switch up [<n>]":
             R(Key("a-up") * Repeat(extra='n')),
         "switch down [<n>]":
@@ -306,7 +321,7 @@ class VSCodeCcrRule(MergeRule):
             R(Key("sa-up") * Repeat(extra='n')),
         "cursor down [<n>]":
             R(Key("sa-down") * Repeat(extra='n')),
-        "cursor lines":
+        "cursor (lines|line)":
             R(Key("sa-i") * Repeat(extra='n')),
         "cursor bracket":
             R(Key("cs-backslash")),

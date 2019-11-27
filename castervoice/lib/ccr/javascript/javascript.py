@@ -1,51 +1,46 @@
-'''
-Created on Sep 2, 2015
-
-@author: synkarius
-'''
 from castervoice.lib.imports import *
-
-
-def Snippet(prefix):
-        return Text(prefix) + Pause("50") + Key("tab")
+from castervoice.apps.vscode import Snippet, EditorSnippet
 
 
 class Javascript(MergeRule):
 
     mapping = {
         SymbolSpecs.IF:
-            Snippet("if"),
+            EditorSnippet("if"),
         SymbolSpecs.ELSE:
-            Snippet("ifelse"),
+            Snippet(r" else {$0}"),
+        SymbolSpecs.ELSE_IF:
+            Snippet(r" else if (${1:condition}) {$0}"),
 
         SymbolSpecs.SWITCH:
-            Snippet("switch"),
+            EditorSnippet("switch"),
         SymbolSpecs.CASE:
-            Text("case :") + Key("left")),
+            Snippet(r"case ${1:value}:", r"$2", r"break"),
         SymbolSpecs.BREAK:
             Text("break"),
         SymbolSpecs.DEFAULT:
             Text("default: "),
 
         SymbolSpecs.DO_LOOP:
-            Snippet("dowhile"),
+            EditorSnippet("dowhile"),
         SymbolSpecs.WHILE_LOOP:
-            Snippet("while"),
+            EditorSnippet("while"),
         SymbolSpecs.FOR_LOOP:
-            Snippet("for"),
+            Snippet(
+                r"for (let ${1:i} = 0; $1 ${3|<,<=,>,>=|} ${2:limit}; $1++) {$0}"),
         SymbolSpecs.FOR_EACH_LOOP:
-            Snippet("fre"),
+            EditorSnippet("fre"),
         "for in loop":
-            Snippet("fin"),
+            EditorSnippet("fin"),
         "for of loop":
-            Snippet("fof"),
+            EditorSnippet("fof"),
 
         SymbolSpecs.TO_INTEGER:
             Text("parseInt()") + Key("left"),
         SymbolSpecs.TO_FLOAT:
             Text("parseFloat()") + Key("left"),
         SymbolSpecs.TO_STRING:
-            Key("dquote, dquote, plus"),
+            Text("String()") + Key("left"),
 
         SymbolSpecs.REDUCE:
             Text(".reduce()") + Key("left"),
@@ -62,18 +57,18 @@ class Javascript(MergeRule):
             Text("!"),
 
         SymbolSpecs.SYSOUT:
-            Snippet("clg"),
+            EditorSnippet("clg"),
 
         SymbolSpecs.IMPORT:
-            Snippet("imp"),
+            EditorSnippet("imp"),
 
         SymbolSpecs.FUNCTION:
-            Snippet("function"),
+            EditorSnippet("function"),
         "arrow":
-            Snippet("anfn"),
+            EditorSnippet("anfn"),
 
         SymbolSpecs.CLASS:
-            Text("class  {}") + Key("left/5:3"),
+            Text("class {}") + Key("left"),
 
         SymbolSpecs.NULL:
             Text("null"),
@@ -87,9 +82,9 @@ class Javascript(MergeRule):
             Text("false"),
 
         "destruct":
-            Snippet("dob"),
+            EditorSnippet("dob"),
         "destruct array":
-            Snippet("dar"),
+            EditorSnippet("dar"),
 
         "this":
             Text("this"),
@@ -115,4 +110,5 @@ class Javascript(MergeRule):
     defaults = {}
 
 
-control.global_rule(Javascript(ID=200))
+context = AppContext(title="Visual Studio Code", executable="code")
+control.ccr_app_rule(Javascript(ID=100), context)
