@@ -8,20 +8,8 @@ from castervoice.lib.dfplus.merge.ccrmerger import CCRMerger
 from castervoice.lib.dfplus.merge.mergerule import MergeRule
 from castervoice.lib.dfplus.state.short import R
 
-# double_text_punc_dict = {
-#     "quotes":                            "\"\"",
-#     "smotes":                              "''",
-#     "tickris":                             "``",
-#     "parens":                              "()",
-#     "brax":                                "[]",
-#     "curl":                                "{}",
-#     "angle":                               "<>",
-# }
-
-# inv_dtpb = {v: k for k, v in double_text_punc_dict.iteritems()}
-
 text_punc_dict = {
-    "haste":                                              " ",
+    "slam":                                              " ",
     "bang":                                               "!",
     "quote":                                             "\"",
     "amper":                                              "&",
@@ -32,18 +20,18 @@ text_punc_dict = {
     "splat":                                              "*",
     "cross":                                              "+",
     "equit":                                              "=",
-    "drip":                                               ",",
+    "dit":                                               ",",
     "dash":                                               "-",
     "period | dot":                                       ".",
     "slash":                                              "/",
     "cat":                                                ":",
     "semi":                                               ";",
-    "quest":                                              "?",
+    "quell":                                              "?",
     "insta":                                              "@",
     "clash":                                             "\\",
-    "carrot":                                            "^",
+    "carrot":                                             "^",
     "flat":                                               "_",
-    "quirk":                                              "`",
+    "smite":                                              "`",
     "bar":                                                "|",
     "wave":                                               "~",
 
@@ -53,7 +41,7 @@ text_punc_dict = {
     "divide":                                           " / ",
     "modulo":                                           " % ",
     "coy":                                               ": ",
-    "bam":                                               ", ",
+    "drip":                                              ", ",
     "boom":                                              ". ",
 
     "bend":                                               "(",
@@ -91,22 +79,10 @@ class Punctuation(MergeRule):
         # For some reason, this one doesn't work through the other function
         "[<long>] backslash [<npunc>]":
             R(Text("%(long)s" + "\\" + "%(long)s"))*Repeat(extra="npunc"),
-        # "<double_text_punc> [<npunc>]":
-        #     R(Text("%(double_text_punc)s") + Key("left"))*Repeat(extra="npunc"),
-        # "[<long>] pair <text_punc>":
-        #     R(Text("%(text_punc)s" + "%(long)s" + "%(long)s") + \
-        #       Mimic("close", "%(text_punc)s")),
-        "shock [<npunc>]":
-            R(Key("tab"))*Repeat(extra="npunc"),
-        "(back | shin) shock [<npunc>]":
-            R(Key("s-tab"))*Repeat(extra="npunc"),
-        "haste [<npunc100>]":
-            R(Text(" "))*Repeat(extra="npunc100"),
     }
 
     extras = [
         IntegerRefST("npunc", 0, 10),
-        IntegerRefST("npunc100", 0, 100),
         Choice(
             "long", {
                 "long": " ",
@@ -116,7 +92,6 @@ class Punctuation(MergeRule):
     ]
     defaults = {
         "npunc": 1,
-        "npunc100": 1,
         "long": "",
     }
 
