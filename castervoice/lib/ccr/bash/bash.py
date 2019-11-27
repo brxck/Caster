@@ -48,14 +48,13 @@ class Bash(MergeRule):
             R(Text("echo ")),
         #
         SymbolSpecs.IMPORT:
-            R(Text(". /path/to/functions")),  # (top of file, under #!/bin/bash)
+            # (top of file, under #!/bin/bash)
+            R(Text(". /path/to/functions")),
         #
         SymbolSpecs.FUNCTION:
             R(Text("TOKEN(){}") + Key("left, enter/5:2")),
         # classes?
         #
-        SymbolSpecs.COMMENT:
-            R(Text("# ")),
         # no multiline comment in bash
         #
         SymbolSpecs.NULL:
