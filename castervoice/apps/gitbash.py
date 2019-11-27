@@ -60,7 +60,7 @@ git_commands = {
 }
 
 django_command_list = ["check", "collect static", "dump data", "load data", "make migrations", "migrate",
-                        "run server", "show migrations", "start app", "start project", "test", "create super user", "change password", "shell"]
+                       "run server", "show migrations", "start app", "start project", "test", "create super user", "change password", "shell"]
 
 django_commands = {command: command.replace(
     " ", "") + " " for command in django_command_list}
@@ -163,19 +163,19 @@ class GitBashRule(MergeRule):
             R(Key("cs-t")),
         "tab close":
             R(Key("cs-q")),
-        "nexterm":
+        "nexta":
             R(Key("cs-right")),
-        "prexterm":
+        "prexta":
             R(Key("cs-left")),
         "layout":
             R(Key("cs-l")),
-        "pane new":
+        "term new":
             R(Key("cs-enter")),
-        "pane close":
+        "term close":
             R(Key("cs-w")),
-        "next pane":
+        "nexterm":
             R(Key("cs-rbracket")),
-        "prior pane":
+        "prexterm":
             R(Key("cs-lbracket")),
 
         "pinch":
