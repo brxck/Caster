@@ -126,6 +126,8 @@ class Navigation(MergeRule):
             R(Key("win/200") + Text("%(textnv)s")),
         "save":
             R(Key("c-s")),
+        "shock [<nnavi50>]":
+            R(Key("tab")) * Repeat(extra="nnavi50"),
         "slap [<nnavi50>]":
             R(Key("enter")) * Repeat(extra="nnavi50"),
         "slide [<nnavi50>]":
