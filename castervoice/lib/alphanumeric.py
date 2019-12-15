@@ -24,12 +24,12 @@ caster_alphabet = {
             "Quebec"  : "q",
             "ram"     : "r",
             "soy"     : "s",
-            "tango"   : "t",
+            "tang"   : "t",
             "ubiq"    : "u",
             "van"     : "v",
             "whisk"   : "w",
             "x-ray"   : "x",
-            "yankee"  : "y",
+            "yank"  : "y",
             "Zulu"    : "z",
         }
 
