@@ -4,7 +4,6 @@ Created on Sep 1, 2015
 @author: synkarius
 '''
 from castervoice.lib.imports import *
-from dragonfly.actions.action_mimic import Mimic
 from castervoice.lib.ccr.standard import SymbolSpecs
 from castervoice.lib.ccr.core.punctuation import text_punc_dict
 from castervoice.lib.alphanumeric import caster_alphabet
@@ -12,24 +11,26 @@ from castervoice.lib.alphanumeric import caster_alphabet
 _NEXUS = control.nexus()
 
 
-class NavigationNon(MergeRule):
+class Navigation(MergeRule):
+    pronunciation = CCRMerger.CORE[1]
+
     mapping = {
         "clipboard erase":
-            R(Function(navigation.erase_multi_clipboard, nexus=_NEXUS)),
+        R(Function(navigation.erase_multi_clipboard, nexus=_NEXUS)),
 
-        "find next [<n>]":
-            R(Key("f3"))*Repeat(extra="n"),
-        "find prior [<n>]":
-            R(Key("s-f3"))*Repeat(extra="n"),
+        "find next [<nnavi10>]":
+            R(Key("f3"))*Repeat(extra="nnavi10"),
+        "find prior [<nnavi10>]":
+            R(Key("s-f3"))*Repeat(extra="nnavi10"),
 
         "context menu":
             R(Key("s-f10")),
 
-        "grab [<nnavi500>]":
+        "grab [<nnavi10>]":
             R(Mouse("left") + Mouse("left") + Function(
                 navigation.stoosh_keep_clipboard,
                 nexus=_NEXUS)),
-        "drop [<nnavi500>]":
+        "drop [<nnavi10>]":
             R(Mouse("left") + Mouse("left") + Function(
                 navigation.drop_keep_clipboard,
                 nexus=_NEXUS,
@@ -44,70 +45,29 @@ class NavigationNon(MergeRule):
             R(Key("w-up")),
         "window down":
             R(Key("w-down")),
-        "window left [<n>]":
-            R(Key("w-left"))*Repeat(extra="n"),
-        "window right [<n>]":
-            R(Key("w-right"))*Repeat(extra="n"),
-        "monitor left [<n>]":
-            R(Key("sw-left"))*Repeat(extra="n"),
-        "monitor right [<n>]":
-            R(Key("sw-right"))*Repeat(extra="n"),
+        "window left [<nnavi10>]":
+            R(Key("w-left"))*Repeat(extra="nnavi10"),
+        "window right [<nnavi10>]":
+            R(Key("w-right"))*Repeat(extra="nnavi10"),
+        "monitor left [<nnavi10>]":
+            R(Key("sw-left"))*Repeat(extra="nnavi10"),
+        "monitor right [<nnavi10>]":
+            R(Key("sw-right"))*Repeat(extra="nnavi10"),
 
         # Workspace management
-        "work down [<n>]":
-            R(Key("w-pgdown"))*Repeat(extra="n"),
-        "work up [<n>]":
-            R(Key("w-pgup"))*Repeat(extra="n"),
-        "send down [<n>]":
-            R(Key("ws-pgdown"))*Repeat(extra="n"),
-        "send up [<n>]":
-            R(Key("ws-pgup"))*Repeat(extra="n"),
-        "work <n>":
-            R(Key("w-%(n)d")),
-        "send <n>":
-            R(Key("sw-%(n)d")),
-    }
+        "work down [<nnavi10>]":
+            R(Key("w-pgdown"))*Repeat(extra="nnavi10"),
+        "work up [<nnavi10>]":
+            R(Key("w-pgup"))*Repeat(extra="nnavi10"),
+        "send down [<nnavi10>]":
+            R(Key("ws-pgdown"))*Repeat(extra="nnavi10"),
+        "send up [<nnavi10>]":
+            R(Key("ws-pgup"))*Repeat(extra="nnavi10"),
+        "work <nnavi10>":
+            R(Key("w-%(nnavi10)d")),
+        "send <nnavi10>":
+            R(Key("sw-%(nnavi10)d")),
 
-    extras = [
-        Dictation("text"),
-        Dictation("mim"),
-        IntegerRefST("n", 1, 50),
-        IntegerRefST("nnavi500", 1, 500),
-        Choice("time_in_seconds", {
-            "super slow": 5,
-            "slow": 2,
-            "normal": 0.6,
-            "fast": 0.1,
-            "superfast": 0.05
-        }),
-        navigation.get_direction_choice("direction"),
-        navigation.get_direction_choice("direction2"),
-        navigation.TARGET_CHOICE,
-        Choice("dokick", {
-            "kick": 1,
-            "psychic": 2
-        }),
-        Choice("wm", {
-            "ex": 1,
-            "tie": 2
-        }),
-    ]
-    defaults = {
-        "n": 1,
-        "mim": "",
-        "nnavi500": 1,
-        "direction2": "",
-        "dokick": 0,
-        "text": "",
-        "wm": 2
-    }
-
-
-class Navigation(MergeRule):
-    non = NavigationNon
-    pronunciation = CCRMerger.CORE[1]
-
-    mapping = {
         "nexta [<nnavi10>]":
             R(Key("c-pgdown"))*Repeat(extra="nnavi10"),
         "prexta [<nnavi10>]":
