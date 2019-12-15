@@ -79,5 +79,4 @@ class Python(MergeRule):
     }
 
 
-context = AppContext(title="Visual Studio Code", executable="code")
-control.ccr_app_rule(Python(ID=100), context)
+control.global_rule(Python(ID=100))

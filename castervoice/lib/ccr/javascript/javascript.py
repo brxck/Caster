@@ -110,5 +110,4 @@ class Javascript(MergeRule):
     defaults = {}
 
 
-context = AppContext(title="Visual Studio Code", executable="code")
-control.ccr_app_rule(Javascript(ID=100), context)
+control.global_rule(Javascript(ID=200))
