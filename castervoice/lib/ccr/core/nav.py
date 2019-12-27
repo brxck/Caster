@@ -54,6 +54,14 @@ class Navigation(MergeRule):
         "monitor right [<nnavi10>]":
             R(Key("sw-right"))*Repeat(extra="nnavi10"),
 
+        # Rofi: switching and launching
+        "launch [<textnv>]":
+            R(Key("w-r") + Pause("10") + Text("%(textnv)s")),
+        "switch [<textnv>]":
+            R(Key("w-w") + Pause("10") + Text("%(textnv)s")),
+        "rofi [<textnv>]":
+            R(Key("w-e") + Pause("10") + Text("%(textnv)s")),
+
         # Workspace management
         "work down [<nnavi10>]":
             R(Key("w-pgdown"))*Repeat(extra="nnavi10"),
