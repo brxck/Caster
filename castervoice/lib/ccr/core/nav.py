@@ -55,22 +55,20 @@ class Navigation(MergeRule):
             R(Key("sw-right"))*Repeat(extra="nnavi10"),
 
         # Rofi: switching and launching
-        "launch [<textnv>]":
+        "window launch [<textnv>]":
             R(Key("w-r") + Pause("10") + Text("%(textnv)s")),
-        "switch [<textnv>]":
+        "window switch [<textnv>]":
             R(Key("w-w") + Pause("10") + Text("%(textnv)s")),
-        "rofi [<textnv>]":
-            R(Key("w-e") + Pause("10") + Text("%(textnv)s")),
 
         # Workspace management
-        "work down [<nnavi10>]":
-            R(Key("w-pgdown"))*Repeat(extra="nnavi10"),
-        "work up [<nnavi10>]":
-            R(Key("w-pgup"))*Repeat(extra="nnavi10"),
-        "send down [<nnavi10>]":
-            R(Key("ws-pgdown"))*Repeat(extra="nnavi10"),
-        "send up [<nnavi10>]":
-            R(Key("ws-pgup"))*Repeat(extra="nnavi10"),
+        "work (down|right) [<nnavi10>]":
+            R(Key("ca-right"))*Repeat(extra="nnavi10"),
+        "work (up|left) [<nnavi10>]":
+            R(Key("ca-left"))*Repeat(extra="nnavi10"),
+        "send (down|right) [<nnavi10>]":
+            R(Key("csa-right"))*Repeat(extra="nnavi10"),
+        "send (up|left) [<nnavi10>]":
+            R(Key("csa-left"))*Repeat(extra="nnavi10"),
         "work <nnavi10>":
             R(Key("w-%(nnavi10)d")),
         "send <nnavi10>":
@@ -90,7 +88,7 @@ class Navigation(MergeRule):
             R(Key("c-f")),
 
         # keyboard shortcuts
-        "meta [<textnv>]":
+        "meta key [<textnv>]":
             R(Key("win/200") + Text("%(textnv)s")),
         "save":
             R(Key("c-s")),
@@ -127,7 +125,7 @@ class Navigation(MergeRule):
             R(Key("home/5, s-end")),
         "duple [<nnavi50>]":
             R(Function(navigation.duple_keep_clipboard)),
-        "Kraken":
+        "kraken":
             R(Key("c-space")),
         "undo [<nnavi10>]":
             R(Key("c-z"))*Repeat(extra="nnavi10"),
@@ -187,9 +185,9 @@ class Navigation(MergeRule):
             R(Key("c-home:%(nnavi10)s")),
         "struck out [<nnavi10>]":
             R(Key("c-end:%(nnavi10)s")),
-        "strike select [<nnavi10>]":
+        "strikex [<nnavi10>]":
             R(Key("s-home:%(nnavi10)s")),
-        "struck select [<nnavi10>]":
+        "struckex [<nnavi10>]":
             R(Key("s-end:%(nnavi10)s")),
         "lore [<nnavi500>]":
             R(Key("c-left:%(nnavi500)s")),
