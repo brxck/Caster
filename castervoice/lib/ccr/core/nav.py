@@ -150,15 +150,12 @@ class Navigation(MergeRule):
             R(Function(textformat.reformat_last_text)),
 
         # Window Switching
-        "flip [<nnavi10>]":
-            R(Key("alt:down, tab/20:%(nnavi10)d, alt:up"),
+        "flip [<textnv>]":
+            R(Key("w:e") + Text("%(textnv)s"),
               rdescript="Core: Switch between applications"),
-        "flop [<nnavi10>]":
-            R(Key("alt:down, backtick/20:%(nnavi10)d, alt:up"),
-              rdescript="Core: Switch between application windows"),
-        "flick [<nnavi10>]":
-            R(Key("alt:down, escape/20:%(nnavi10)d, alt:up"),
-              rdescript="Core: Switch between workspace windows"),
+        "launch [<nnavi10>]":
+            R(Key("w:r") + Text("%(textnv)s"),
+              rdescript="Core: Launch new application"),
 
         # Mouse Commands
         "kick [<nnavi3>]":
