@@ -51,6 +51,7 @@ castervoice.egg-info
 
 # Virtual Environment
 .env
+.venv
 
 # Aenea config
 aenea.json
