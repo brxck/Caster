@@ -13,7 +13,7 @@ class SymbolSpecs(object):
     SWITCH = "switchy"
     CASE = "case of"
     BREAK = "breaker"
-    DEFAULT = "default"
+    DEFAULT = "defraud"
 
     DO_LOOP = "do loop"
     WHILE_LOOP = "while loop"
@@ -34,15 +34,15 @@ class SymbolSpecs(object):
 
     SYSOUT = "sysout"
 
-    IMPORT = "import"
+    IMPORT = "impose"
 
     FUNCTION = "func"
-    LAMBDA = "lam"
-    CLASS = "class"
+    LAMBDA = "lamb"
+    CLASS = "grass"
 
     DOCSTRING = "docstring"
 
-    RETURN = "return"
+    RETURN = "jedi"
 
     NULL = "value not"
     TRUE = "value true"
