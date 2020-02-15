@@ -363,7 +363,7 @@ class VSCodeCcrRule(MergeRule):
         # metaGo extension
         "hyper <letters>":
             R(Key("a-semicolon/5, %(letters)s")),
-        "hyper select <letters>":
+        "hyperex <letters>":
             R(Key("sa-semicolon/5, %(letters)s")),
         "select up [<n>]":
             R(Key("cs-i") * Repeat(extra='n')),
