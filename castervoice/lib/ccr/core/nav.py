@@ -151,11 +151,9 @@ class Navigation(MergeRule):
 
         # Window Switching
         "flip [<textnv>]":
-            R(Key("w:e") + Text("%(textnv)s"),
-              rdescript="Core: Switch between applications"),
-        "launch [<nnavi10>]":
-            R(Key("w:r") + Text("%(textnv)s"),
-              rdescript="Core: Launch new application"),
+            R(Key("w-e") + Text("%(textnv)s")),
+        "launch [<textnv>]":
+            R(Key("w-r") + Text("%(textnv)s")),
 
         # Mouse Commands
         "kick [<nnavi3>]":
