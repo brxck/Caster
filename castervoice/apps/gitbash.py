@@ -138,7 +138,7 @@ class GitBashRule(MergeRule):
         "cut": R(Key("cs-x")),
         "copy": R(Key("cs-c")),
         "spark": R(Key("cs-v")),
-        "lore": R(Key("a-b"), 
+        "lore": R(Key("a-b")), 
         "role": R(Key("a-f")),
         "clear": R(Key("c-l")),
         "clear left": R(Key("c-u")),
