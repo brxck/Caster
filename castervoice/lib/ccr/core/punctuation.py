@@ -9,7 +9,7 @@ from castervoice.lib.dfplus.merge.mergerule import MergeRule
 from castervoice.lib.dfplus.state.short import R
 
 text_punc_dict = {
-    "slam":                                               " ",
+    "void":                                               " ",
     "bang":                                               "!",
     "quote":                                             "\"",
     "amper":                                              "&",
