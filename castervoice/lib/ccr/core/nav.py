@@ -157,9 +157,11 @@ class Navigation(MergeRule):
 
         # Window Switching
         "flip [<textnv>]":
-            R(Key("w-e") + Text("%(textnv)s")),
+            R(Key("w-e") + Pause("10") + Text("%(textnv)s")),
         "launch [<textnv>]":
-            R(Key("w-r") + Text("%(textnv)s")),
+            R(Key("w-r") + Pause("10") + Text("%(textnv)s")),
+        "flop":
+            R(Key("a-tab")),
 
         # Mouse Commands
         "kick [<nnavi3>]":
