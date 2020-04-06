@@ -55,3 +55,4 @@ castervoice.egg-info
 
 # Aenea config
 aenea.json
+server_state.json

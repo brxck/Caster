@@ -22,7 +22,7 @@ text_punc_dict = {
     "equit":                                              "=",
     "dit":                                                ",",
     "dash":                                               "-",
-    "period | dot":                                       ".",
+    "dot":                                                ".",
     "slash":                                              "/",
     "cat":                                                ":",
     "semi":                                               ";",
